@@ -1,0 +1,49 @@
+# Behavior Notes & Known Limitations
+
+This document outlines key behavior details, recommendations, and known limitations of the Airflow Copilot agent to help you understand how it operates and what to expect during usage.
+
+## 🔍 Important Behavior Notes
+
+- **Airflow Version Support:**
+  Airflow Copilot is designed around the Airflow **2.5.1 REST API**. While most functionality works across versions **2.5 to 2.11**, some **latest API endpoints introduced in newer versions may not be supported yet.**
+
+- **Large API Responses & Token Limits:**
+  Airflow REST responses, especially for DAG runs and task logs, can be **very large**. This may cause token overflows when using models with strict limits. We recommend using robust providers like **OpenAI** or **Google AI** for better handling of large responses.
+
+- **User Creation Behavior:**
+  The Copilot supports **creating new users and assigning roles**. However, if a password is **not provided**, it generates one automatically. Depending on model behavior, the password **may or may not be returned** reliably in the response.
+
+- **First-Time Slowness & History Refresh:**
+  The assistant might respond slowly during initial use, especially without context. It is highly recommended to **refresh history** when starting a new session. Refer to [Refresh History](../architecture/refresh_history.md) for details.
+
+- **Trust but Verify:**
+  Occasionally, the AI may claim that an action (e.g., disabling a DAG) was performed, even if it wasn’t successful. Always **verify critical actions** by asking the Copilot for confirmation (e.g., "Is DAG `xyz` disabled?").
+
+- **Message Timing:**
+  Avoid sending multiple messages back-to-back. Wait for the assistant to respond, as it begins processing immediately after receiving input. **Sending too many messages at once may confuse the context**.
+
+- **Recommended Practice: Refresh History:**
+  Before starting a new task or conversation, it is a good practice to **refresh history** so that the assistant has the relevant context available.
+
+---
+
+## 🚫 Known Limitations
+
+- **Only Microsoft Teams as Channel Support:**
+  Current version of copilot only support conversion through Microsoft Teams. In futher there will be more channel will be added.
+
+- **DAG Deletion Not Supported:**
+  For safety reasons, Copilot **does not support DAG deletion**. It will recommend **disabling DAGs instead**.
+
+- **Changing DAG Schedule or Tags:**
+  The Airflow REST API does **not currently support updating DAG schedule intervals or tags**. As a workaround, you can use **Airflow Variables** in your DAG code to define the schedule, and let Copilot update the variable value to reflect the change.
+
+- **Only v1 API Used:**
+  Copilot uses only the **v1 REST API**. Airflow's v2 API is not yet supported.
+
+- **Partial Compatibility with Older Versions:**
+  While Copilot works well with versions **2.5 to 2.11**, some features may behave differently or be **partially supported** on older versions.
+
+---
+
+> 📝 If you encounter inconsistent behavior, especially on older Airflow versions or with custom setups, consider submitting feedback or filing an issue to help us improve.

@@ -1,0 +1,106 @@
+site_name: Airflow Copilot
+site_description: >
+  Documentation for Airflow Copilot – an intelligent assistant for Apache Airflow.
+
+# ─────────── Theme ───────────
+theme:
+  name: material
+
+  # brand
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+
+  # built‑in UX extras
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.footer          # prev/next links & social icons
+    - search.highlight
+    - search.suggest
+    - toc.follow
+
+  # colour palette – must be INSIDE “theme”
+  palette:
+    # Light
+    - scheme: default
+      primary: '#D4E1F5'         # Airflow navy
+      accent:  '#FF5252'         # Airflow red
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    # Dark
+    - scheme: slate
+      primary: '#017CEE'         # Airflow blue
+      accent:  '#FF7565'         # warm red
+      toggle:
+        icon: material/white-balance-sunny
+        name: Switch to light mode
+
+  # (optional) force GitHub mark instead of generic “git” icon
+  icon:
+    repo: fontawesome/brands/github
+
+# GitHub repo link → puts the icon in the header
+repo_url: https://github.com/<your‑handle>/<your‑repo>
+repo_name: GitHub               # label next to the icon
+
+# footer
+copyright: "© 2025 Nikhil Suthar • Open source under the MIT License"
+
+extra:
+  social:                       # icons next to the copyright
+    - icon: fontawesome/brands/github
+      link: https://github.com/<your‑handle>/<your‑repo>
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/nikhil-suthar/
+
+# custom CSS
+extra_css:
+  - assets/extra.css
+
+# markdown extras
+markdown_extensions:
+  - attr_list
+  - pymdownx.superfences
+  - admonition
+  - def_list
+# navigation (unchanged – truncated here for brevity)
+nav:
+  - 🏠 Home: index.md
+
+  - 🚀 Quick Start:
+      - 1. Prerequisites: quickstart/before_we_start.md
+      - 2. Create Azure Bot (Microsoft Teams): quickstart/azure_bot.md
+      - 3. Upload to Microsoft Teams: quickstart/upload_teams_app.md
+      - 4. Run Copilot Locally: quickstart/getting_started.md
+      - Agent Behavior & Tips: quickstart/agent-behavior.md
+
+  - 🧠 Architecture:
+      - Overview: architecture/architecture.md
+      - Agent Workflow: architecture/agent.md
+      - Summarization Strategy: architecture/summarization.md
+      - Supported API Capabilities: architecture/supported_apis.md
+      - Airflow Authentication Methods: architecture/airflow_auth_type.md
+      - Refresh History Logic: architecture/refresh_history.md
+
+  - ⚙️ Configuration:
+      - Environment Variables: configuration/environment_variables.md
+
+  - 📘 User Guide:
+      - Chat Interactions: howto/chat.md
+      - DAG & Task Management: howto/task_management.md
+      - Alerts & Notifications: howto/notifications.md
+      - User Management: howto/user_management.md
+
+  - 🚢 Deployment:
+      - Docker Setup: deployment/docker-deployment.md
+      - Serverless (AWS Lambda): deployment/aws-deployment.md
+  - 🤝🏼 Contributions: contributing.md
+  - 🔭 Future Plans: roadmap.md
+
+
+plugins:
+  - search
+  - mermaid2
+

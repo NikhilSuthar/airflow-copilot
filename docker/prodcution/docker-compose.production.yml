@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  copilot:
+    build: .
+    container_name: copilot
+    restart: unless-stopped
+    environment:
+      # --- LLM / AI Model Configuration ---
+      LLM_MODEL_PROVIDER_NAME: groq
+      LLM_MODEL_NAME: llama-3.1-8b-instant
+      GROQ_API_KEY: sk-xxx...
+
+      # --- Postgres Checkpointer ---
+      DB_URI: postgresql://airflow:airflow@your-db-host:5432/lang_memory?sslmode=disable
+
+      # --- Azure Bot Credentials (only for chat auth) ---
+      MICROSOFT_APP_ID: your-bot-app-id
+      MICROSOFT_APP_PASSWORD: your-bot-secret
+
+      # --- Airflow Backend Configuration ---
+      AIRFLOW_BASE_URL: https://your-airflow-domain.com/api/v1
+      AIRFLOW_AUTH_STRATEGY: centralized
+      AIRFLOW_USER_NAME: admin
+      AIRFLOW_USER_PASSWORD: admin
+
+      # --- Summarization Logic ---
+      MIN_MSG_TO_SUMMARIZE: 10
+      MIN_MSG_TO_RETAIN: 10
+      FERNET_SECRET_KEY: 0YVdBuq5j6vEr-SfWkRZTsYkE_LdLrTQSLrHwUdwrKY=
+
+    ports:
+      - "3978:3978"  # Internal port exposed to reverse proxy / ingress
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3978/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

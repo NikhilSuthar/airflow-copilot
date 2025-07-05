@@ -1,0 +1,120 @@
+version: "3.9"
+
+#############################
+# 0)  GLOBAL .env  (optional)
+#############################
+# If you want to move any secrets out of the file, create an
+# .env next to this compose and Docker Compose will load it
+# automatically.  Everything defined below overrides .env.
+# -----------------------------------------------------------
+
+services:
+#############################################################################
+# 1)  COPILOT  – FastAPI + LangGraph agent
+#############################################################################
+  copilot:
+    build: .
+    container_name: copilot
+    restart: unless-stopped
+
+    # Uncomment ONE of these, not both
+    # depends_on: [postgres]    # ← when you run the embedded DB (block A)
+    depends_on: [db-init]       # ← when you point to an external DB (block B)
+
+    ports:
+      - "3978:3978"
+
+    environment:
+      # ---------- LLM / model ----------
+      LLM_MODEL_PROVIDER_NAME: Google_Genai
+      LLM_MODEL_NAME: gemini-2.5-flash
+      GROQ_API_KEY: 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
+      GOOGLE_GENAI_API_KEY: AIzaSyCcwLWPXayY2y8D6LacsSfgrME9QM6lrNI
+
+      # ---------- Database ----------
+      # 👉 host.docker.internal works on Docker Desktop (Mac/Win).
+      #    On Linux use the host’s LAN IP or your own Postgres service name.
+      DB_URI: postgresql://airflow:airflow@host.docker.internal:5432/airflow_copilot?sslmode=disable
+      
+      # ---------- Azure Bot credentials ----------
+      MICROSOFT_APP_ID:       1da6ff2a-f6a6-464a-9342-f6b74f298ddb
+      MICROSOFT_APP_PASSWORD: CSc8Q~Bx-mroX.hpCo.Z-BsRIRXZfo1xcKalfdpJ
+      MICROSOFT_APP_TENANT_ID: aca26e5d-ba03-45fa-ab45-7093db9ff2f2
+
+      # ---------- Airflow ----------
+      AIRFLOW_BASE_URL: http://host.docker.internal:8080/api/v1
+      AIRFLOW_AUTH_STRATEGY: centralized
+      AIRFLOW_USER_NAME: admin
+      AIRFLOW_USER_PASSWORD: admin
+
+      # ---------- Summarisation ----------
+      MIN_MSG_TO_SUMMARIZE: 5
+      MIN_MSG_TO_RETAIN:   5
+
+      # ---------- Fernet (only used in per‑user auth) ----------
+      FERNET_SECRET_KEY: 0YVdBuq5j6vEr-SfWkRZTsYkE_LdLrTQSLrHwUdwrKY=
+
+#############################################################################
+# 2‑A)  EMBEDDED POSTGRES  (commented – enable if you need it)
+#############################################################################
+#  postgres:
+#    image: postgres:16
+#    restart: unless-stopped
+#    environment:
+#      POSTGRES_USER:     airflow
+#      POSTGRES_PASSWORD: airflow
+#      POSTGRES_DB:       airflow_copilot
+#    ports:
+#      - "5432:5432"          # expose only if you need host access
+#    volumes:
+#      - ./src/docker/scripts/init.sql:/docker-entrypoint-initdb.d/10-init.sql:ro
+#      - pgdata:/var/lib/postgresql/data
+
+#############################################################################
+# 2‑B)  ONE‑SHOT SCHEMA INIT against *external* Postgres
+#############################################################################
+  db-init:
+    image: postgres:16           # only need psql client
+    restart: "no"
+    environment:
+      DB_URI: ${DB_URI:-postgresql://airflow:airflow@host.docker.internal:5432/airflow_copilot}
+    command: >
+      bash -c "
+        echo '🏁 Running schema init...' &&
+        psql \"$${DB_URI}\" -f /init/init.sql &&
+        echo '✅ Schema init finished.'"
+    volumes:
+      - ./src/docker/scripts/init.sql:/init/init.sql:ro
+
+#############################################################################
+# 3)  PUBLIC URL (ngrok)
+#############################################################################
+  ngrok:
+    image: ngrok/ngrok:latest
+    depends_on: [copilot]
+    command: http copilot:3978 --log stdout
+    environment:
+      NGROK_AUTHTOKEN: 2xGEWp7ASQoOFQ1MD9nkBZo3hjf_7vSK3KowZAshrsie3TiR3
+    ports:
+      - "4040:4040"
+
+#############################################################################
+# 4)  ONE‑SHOT BOT ENDPOINT PATCH
+#############################################################################
+  bot-updater:
+    build: .
+    depends_on: [ngrok]
+    entrypoint: ["/usr/local/bin/update_bot.sh"]
+    restart: "no"
+    environment:
+      NGROK_API: http://ngrok:4040/api/tunnels
+      BOT_NAME: Airflow-Copilot
+      RESOURCE_GROUP: my-rg
+
+      # Use the SAME SPN the bot already has, keeps life simple
+      AZURE_CLIENT_ID: 19a4bb97-eb7a-43e1-b608-9e6349866f85
+      AZURE_TENANT_ID: aca26e5d-ba03-45fa-ab45-7093db9ff2f2
+      AZURE_CLIENT_SECRET: Cwq8Q~jXjCtgdH1OJ4ZkWPqfP3P~d06KnP64iaH2
+
+volumes:
+  pgdata:

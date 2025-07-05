@@ -1,0 +1,163 @@
+Below is a practical release roadmap you can follow to ship Airflow Copilot as an open‑source project and make deployment dead‑simple for three audiences:
+
+Audience	“One‑liner” experience you want to give	 What you publish
+Python developers
+(extending the agent, importing tools)	pip install airflow‑copilot	A versioned PyPI package
+Container users / on‑prem teams	docker run ghcr.io/your‑org/airflow-copilot	An OCI image (Docker Hub or GHCR)
+Serverless adopters (AWS)	sam deploy --guided or cdk deploy	Open‑source IaC templates (SAM / CDK) + a small Lambda layer zip
+
+Below I outline how to structure the repo, automate builds, and version each artefact so you can tick all three boxes without duplicating effort.
+
+1 · Repository Layout
+text
+Copy
+Edit
+airflow-copilot/
+├── src/airflow_copilot/     # Python package
+│   └── ...                  # agent, tools, settings, docs code
+├── docs/                    # MkDocs site (published to GitHub Pages)
+├── Dockerfile               # container build
+├── templates/               # serverless IaC (SAM/CloudFormation or CDK)
+│   ├── sam-template.yaml
+│   └── lambda_layer/        # stripped zip with deps only
+├── pyproject.toml           # Poetry (or setup.cfg) for PyPI build
+├── mkdocs.yml               # documentation config
+├── .github/
+│   └── workflows/           # CI (build / test / publish)
+└── LICENSE
+One repo – three distribution channels.
+
+2 · Package to PyPI
+Keep import‑safe code under src/airflow_copilot/ (which you already have).
+
+Add a minimal CLI (python -m airflow_copilot serve) that starts the FastAPI server; this lets people run it after pip install ….
+
+Use Poetry (since you already have a pyproject.toml) to build:
+
+bash
+Copy
+Edit
+poetry build     # produces wheel + sdist
+poetry publish   # uploads to PyPI (needs API token)
+Tag versions via Git (v0.3.0) – GitHub Action triggers build → test → publish.
+
+3 · Publish an OCI image
+Dockerfile (best practice)
+Dockerfile
+Copy
+Edit
+FROM python:3.11-slim AS base
+WORKDIR /app
+
+# runtime deps
+COPY pyproject.toml poetry.lock ./
+RUN pip install --no-cache-dir poetry \
+ && poetry export -f requirements.txt --without-hashes | pip install -r /dev/stdin
+
+COPY src/ ./src
+EXPOSE 8081
+CMD ["python", "-m", "airflow_copilot", "serve"]
+Why poetry export? – keeps final image lean (no Poetry runtime).
+
+Build & push automatically
+yaml
+Copy
+Edit
+# .github/workflows/docker.yml
+name: Docker
+on:
+  push:
+    tags: ["v*.*.*"]     # build only on version tags
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          docker buildx build --push \
+            --tag ghcr.io/${{ github.repository }}:${GITHUB_REF_NAME#refs/tags/} \
+            --tag ghcr.io/${{ github.repository }}:latest .
+(Change to Docker Hub if you prefer.)
+
+4 · AWS Serverless Option
+Choose an IaC flavour
+AWS SAM template – fastest for many users:
+
+Lambda (Python 3.11 runtime)
+
+API Gateway (HTTP API → FastAPI)
+
+RDS PostgreSQL (optional / separate stack)
+
+S3 bucket for docs / static
+
+CDK (Typescript or Python) – more extensible; same resources.
+
+Template snippet (SAM):
+
+yaml
+Copy
+Edit
+Resources:
+  CopilotApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: airflow_copilot.lambda_handler
+      Runtime: python3.11
+      MemorySize: 1024
+      Timeout: 30
+      Environment:
+        Variables:
+          DB_URI: !Ref PostgresSecret   # Secrets Manager / RDS proxy
+          LLM_MODEL_PROVIDER_NAME: "openai"
+          MICROSOFT_APP_ID:  ...
+      Events:
+        HttpRoute:
+          Type: HttpApi
+          Properties:
+            Path: /copilot/{proxy+}
+            Method: ANY
+✅ Commit the template + README_serverless.md so users can run sam build && sam deploy –guided.
+
+5 · CI Matrix (one click)
+Step	Runs on	Artefact
+pytest + isort + ruff	ubuntu‑latest	✅ Tests
+Publish wheel/sdist to PyPI	tag push	PyPI
+Build & push Docker image	tag push	ghcr.io
+(Optional) SAM build & publish Lambda layer	tag push	AWS Serverless Application Repo
+
+6 · Docs tweaks
+Landing page → badges:
+
+md
+Copy
+Edit
+![PyPI](https://img.shields.io/pypi/v/airflow-copilot)
+![Docker pulls](https://img.shields.io/docker/pulls/yourorg/airflow-copilot)
+![GitHub stars](https://img.shields.io/github/stars/yourorg/airflow-copilot)
+Separate Deploy section:
+
+Docker → docker run -p 8081:8081 ghcr.io/...
+
+Kubernetes → K8s manifest / Helm chart (optional)
+
+AWS SAM → quick tutorial
+
+✅ Summary Checklist
+Goal	What you do
+Library	poetry publish – users pip install airflow-copilot
+Container	Build & push image on Git tag (GH Actions)
+Serverless	Include SAM / CDK templates + optional Lambda layer zip
+Docs	MkDocs Material (already set) + badges + quick‑start
+License	MIT or Apache‑2.0 in LICENSE file
+Community	CONTRIBUTING.md + GitHub Discussions / Issues
+
+Start by adding repo_url to mkdocs.yml; push your first tag (v0.1.0) and the CI will take care of the rest. 🚀

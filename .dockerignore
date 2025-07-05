@@ -1,0 +1,11 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite
+*.db
+.git
+.gitignore
+.env
+.docker-compose-local

@@ -1,0 +1,93 @@
+version: "3.9"
+
+services:
+  ###########################################################################
+  # 1) Copilot – FastAPI + LangGraph agent
+  ###########################################################################
+  copilot:
+    build: .
+    container_name: copilot
+    restart: unless-stopped
+    depends_on: [db-init]          # run after schema bootstrap
+    ports:
+      - "3978:3978"
+    environment:
+      # --- LLM / model ---
+      LLM_MODEL_PROVIDER_NAME: Google_Genai
+      LLM_MODEL_NAME: ${LLM_MODEL_NAME}
+      GOOGLE_GENAI_API_KEY: ${GOOGLE_GENAI_API_KEY}
+
+      # --- Database ---
+      DB_URI: postgresql://airflow:airflow@host.docker.internal:5432/airflow?sslmode=disable
+
+      # --- Azure Bot ---
+      MICROSOFT_APP_ID:       ${MICROSOFT_APP_ID}
+      MICROSOFT_APP_PASSWORD: ${MICROSOFT_APP_PASSWORD}
+      MICROSOFT_APP_TENANT_ID: ${MICROSOFT_APP_TENANT_ID}
+
+      # --- Airflow REST API ---
+      AIRFLOW_BASE_URL: http://host.docker.internal:8080/api/v1
+      AIRFLOW_AUTH_STRATEGY: centralized
+      AIRFLOW_USER_NAME: airflow
+      AIRFLOW_USER_PASSWORD: airflow
+
+      # --- Summarisation ---
+      MIN_MSG_TO_SUMMARIZE: 10
+      MIN_MSG_TO_RETAIN: 10
+
+      # --- Fernet ---
+      FERNET_SECRET_KEY: 0YVdBuq5j6vEr-SfWkRZTsYkE_LdLrTQSLrHwUdwrKY=
+    networks: [airflow]
+
+  ###########################################################################
+  # 2) One‑shot schema init (external Postgres)
+  ###########################################################################
+  db-init:
+    image: postgres:16                 # contains psql client
+    entrypoint: ["/bin/bash", "/init_db.sh"]
+    restart: "no"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      DB_URI: postgresql://airflow:airflow@host.docker.internal:5432/airflow?sslmode=disable
+    volumes:
+      - ./docker/scripts/init_db.sh:/init_db.sh:ro   # your shell script
+      - ./docker/scripts/init.sql:/init.sql:ro       # schema file
+    networks: [airflow]
+
+  ###########################################################################
+  # 3) Public tunnel via ngrok
+  ###########################################################################
+  ngrok:
+    image: ngrok/ngrok:latest
+    depends_on: [copilot]
+    command: http copilot:3978 --log stdout
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+    ports:
+      - "4040:4040"
+    networks: [airflow]
+
+  ###########################################################################
+  # 4) One‑shot Azure bot endpoint updater
+  ###########################################################################
+  bot-updater:
+    build: .
+    depends_on: [ngrok]
+    entrypoint: ["/usr/local/bin/update_bot.sh"]
+    restart: "no"
+    environment:
+      NGROK_API: http://ngrok:4040/api/tunnels
+      BOT_NAME: Airflow-Copilot
+      RESOURCE_GROUP: my-rg
+      AZURE_CLIENT_ID: ${AZURE_CLIENT_ID}
+      AZURE_TENANT_ID: ${AZURE_TENANT_ID}
+      AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET}
+    networks: [airflow]
+
+volumes:
+  pgdata:
+
+networks:
+  airflow:
+    driver: bridge

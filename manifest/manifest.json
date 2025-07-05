@@ -1,0 +1,63 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "1da6ff2a-f6a6-464a-9342-f6b74f298ddb",
+    "developer": {
+      "name": "Airflow-Copilot",
+      "websiteUrl": "https://www.microsoft.com",
+      "privacyUrl": "https://www.teams.com/privacy",
+      "termsOfUseUrl": "https://www.teams.com/termsofuser"
+    },
+    "icons": {
+      "outline": "outline.png",
+      "color": "color.png"
+    },
+    "name": {
+      "short": "Airflow-Copilot",
+      "full": "Apache Airflow Assistant for Teams"
+    },
+  "description": {
+    "short": "Interact with Airflow via Teams.",
+    "full": "This Assistant lets you manage Apache Airflow via MS Teams using natural language and LLM Models."
+  },
+    "accentColor": "#F1FFFA",
+    "bots": [
+      {
+        "botId": "1da6ff2a-f6a6-464a-9342-f6b74f298ddb",
+        "scopes": [
+          "personal",
+          "groupChat",
+          "team"
+        ],
+        "isNotificationOnly": false,
+        "supportsCalling": false,
+        "supportsVideo": false,
+        "supportsFiles": false,
+          "commandLists": [
+          {
+            "scopes": [
+              "personal",
+              "groupChat",
+              "team"
+            ],
+            "commands": [
+		        {
+              "title": "Refresh History",
+              "description": "Deletes your chat history with the copilot to make it faster."
+            },
+            {
+              "title": "Update My Airflow Credential",
+              "description": "Update the Airflow credential.(Applicable with per_user Auth type only)"
+            }
+            ]
+          }
+        ]
+      }
+    ],
+    "permissions": [
+      "identity",
+      "messageTeamMembers"
+    ],
+    "validDomains": ["www.airflow-copilot.com"]
+  }

@@ -1,0 +1,68 @@
+/* ───────── Brand colours via CSS variables ───────── */
+:root {
+  /* Light mode overrides */
+  --md-primary-fg-color: #2C2C2C;  /* light mode primary */
+  --md-accent-fg-color:  #DAA520;  /* light mode accent */
+}
+[data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link {
+  color: #8b670a !important;           /* Airflow navy text */
+  background-color: #e1e1df !important;/* subtle blue highlight */
+}
+
+[data-md-color-scheme="slate"] {
+  /* Dark mode overrides (slightly brighter so they pop) */
+  --md-primary-fg-color: #004D61;  /* dark mode primary */
+  --md-accent-fg-color:  #FF7565;  /* dark mode accent */
+}
+
+/* ───────── Sidebar level‑1 (section headers) ───────── */
+.md-sidebar--primary .md-nav__item > .md-nav__link {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Sidebar nested items */
+.md-sidebar--primary .md-nav__item .md-nav__item .md-nav__link {
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+/* Hover + active states pull from the accent variable */
+.md-nav__link:hover:not(.md-nav__link--active) {
+  color: var(--md-accent-fg-color);
+}
+
+.md-nav__item--active > .md-nav__link,
+.md-nav__item--active > .md-nav__link:hover {
+  color: #fff;
+  background: hsla(0,0%,100%,0.05);   /* subtle highlight */
+  border-left: 3px solid var(--md-accent-fg-color);
+}
+
+/* Top nav / tabs */
+.md-tabs__link {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0.7rem 1.1rem;
+}
+
+/* Active tab uses accent colour */
+.md-tabs__link--active {
+  color: #fff;
+  border-bottom: 2px solid var(--md-accent-fg-color);
+}
+
+/* Logo hover spin – kept because it’s fun :-) */
+.md-header__button--logo img {
+  transition: transform 0.6s ease-in-out;
+}
+.md-header__button--logo:hover img {
+  transform: rotate(360deg);
+}
+
+/* Utility: centre images with the .center-img class */
+.md-content img.center-img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 420px;
+}
