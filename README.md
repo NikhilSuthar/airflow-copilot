@@ -4,12 +4,12 @@
 **Chat‑driven orchestration for Apache Airflow inside Microsoft Teams**
 
 [![Docker](https://img.shields.io/docker/pulls/thedatacarpenter/airflow-copilot)](https://hub.docker.com/r/thedatacarpenter/airflow-copilot)
-[![License](    )](LICENSE)
+[![License](https://img.shields.io/github/license/NikhilSuthar/airflow-copilot)](LICENSE)
 
 </div>
 
 
-<img src="docs/assets/AirflowCopilotLogo.svg" height="110" alt="Airflow Copilot logo">
+<img src="docs/assets/AirflowCopilot.svg" height="110" alt="Airflow Copilot logo">
 
 ## ✨ Why Copilot?
 
