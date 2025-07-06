@@ -1,175 +1,153 @@
-# 📦 Airflow Copilot – Deployment Guide
 
-Run Copilot in production with durable storage, secrets management, and automated upgrades.
+# 🚀 Production Deployment — Kubernetes Setup for Airflow Copilot
 
-* **Quick links:** [Architecture](#1-architecture) · [Docker Compose](#2-production-compose-file) · [Publishing images](#3-publishing-a-new-image) · [Security](#4-security-best-practices) · [Scaling](#5-scaling--observability)
-
----
-
-## 1. Architecture
-
-```
-copilot ──▶ Airflow API
-   │
-   ├─▶ Postgres  (conversation store)
-   └─▶ Redis*    (optional caching)
-
-ngrok*  ─▶ public URL → Azure Bot Framework  
-*optional in development
-```
+This guide covers how to deploy **Airflow Copilot** for production using **Kubernetes**, **Azure Bot Service**, and a cloud-hosted **PostgreSQL** database. It is a hardened and scalable alternative to the local Docker + ngrok setup.
 
 ---
 
-## 2. Production Compose file
+## 🗺️ Architecture Overview
 
-Create `docker-compose.yml` and keep it under version control (**without** secrets).
+| Aspect            | **Local (Dev)**                                   | **Production (K8s)**                              |
+|-------------------|---------------------------------------------------|---------------------------------------------------|
+| Orchestrator      | Docker Compose                                    | Kubernetes (Deployment / StatefulSet)             |
+| Public URL        | Ngrok tunnel                                      | Ingress / LoadBalancer                            |
+| Storage backend   | Docker‑volume Postgres (ephemeral)                | Managed DB (RDS, CloudSQL) or in‑cluster StatefulSet |
+| Scaling           | Single container                                  | Horizontal Pod Autoscaler (HPA)                   |
+| Secrets           | `.env` file                                       | Kubernetes Secrets (sealed or external vault)     |
+| Logging           | Container logs                                    | Centralised (ELK / Loki / CloudWatch)             |
+
+---
+
+### 📦 Production Architecture (conceptual)
+
+![Production Deployment](../assets/production-docker-arch.svg)
+
+- Airflow and Copilot run as independent pods in Kubernetes.
+- Azure Bot Service sends messages to a public FastAPI endpoint (deployed via Ingress/LoadBalancer).
+- PostgreSQL stores conversation states and summaries (hosted e.g., on RDS, CloudSQL, or Azure Database for PostgreSQL).
+- Supported LLMs: OpenAI, Gemini (Google), Anthropic, Groq.
+
+---
+
+## 🧰 Prerequisites
+
+- Azure Bot App + Teams Channel (must point to public endpoint)
+- PostgreSQL (Cloud-hosted or managed DB)
+- Kubernetes Cluster (AKS, GKE, EKS, or Minikube for testing)
+- Docker Registry (GHCR, DockerHub, etc.)
+- TLS certificate (optional but recommended for production)
+- Domain for HTTPS endpoint (optional but ideal)
+- Prepared `.env` values as Kubernetes secrets (see below)
+
+---
+
+## 📦 Kubernetes Resources
+
+You need the following manifests:
+
+### 1. Deployment (FastAPI + Copilot Agent)
 
 ```yaml
-version: "3.9"
-
-volumes:
-  pgdata:
-
-services:
-  copilot:
-    image: <your-dockerhub-username>/airflow-copilot:1.2.0  # pin an exact tag
-    restart: unless-stopped
-    user: "1001:1001"               # non‑root
-    env_file:                       # store secrets outside Git
-      - copilot.env
-    ports:
-      - "3978:3978"
-    depends_on:
-      - postgres
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3978/healthz"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-
-  postgres:
-    image: postgres:16
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: lang_memory
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  # --- Development‑only: expose Copilot on the internet ---
-  ngrok:
-    image: ngrok/ngrok:latest
-    command: http copilot:3978
-    environment:
-      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
-    ports:
-      - "4040:4040"
-
-  # --- Automatically update Azure Bot endpoint when ngrok URL changes ---
-  bot-updater:
-    image: <your-dockerhub-username>/airflow-copilot:1.2.0
-    entrypoint: ["/usr/local/bin/update_bot.sh"]
-    depends_on:
-      - ngrok
-    environment:
-      NGROK_API: http://ngrok:4040/api/tunnels
-      AZURE_CLIENT_ID: ${MICROSOFT_APP_ID}
-      AZURE_CLIENT_SECRET: ${MICROSOFT_APP_PASSWORD}
-      AZURE_TENANT_ID: ${MICROSOFT_APP_TENANT_ID}
-      AZURE_SUBSCRIPTION_ID: ${AZURE_SUBSCRIPTION_ID}
-      BOT_NAME: AirflowCopilot
-      RESOURCE_GROUP: my-rg
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-copilot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: copilot
+  template:
+    metadata:
+      labels:
+        app: copilot
+    spec:
+      containers:
+        - name: copilot
+          image: thedatacarpenter/airflow-copilot:latest
+          ports:
+            - containerPort: 3978
+          envFrom:
+            - secretRef:
+                name: copilot-env
 ```
 
-### `copilot.env` (template)
+### 2. Service
 
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: copilot-service
+spec:
+  type: ClusterIP
+  selector:
+    app: copilot
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3978
 ```
-# LLM
-LLM_MODEL_PROVIDER_NAME=Google_GenAi
-LLM_MODEL_NAME=gemini-2.5-flash
-GOOGLE_GENAI_API_KEY=<api key>
 
-# Database
-DB_URI=postgresql://airflow:airflow@postgres:5432/airflow
+### 3. Ingress (Optional with cert-manager)
 
-# Airflow
-AIRFLOW_BASE_URL=http://host.docker.internal:8080/api/v1
-AIRFLOW_AUTH_STRATEGY=centralized
-AIRFLOW_USER_NAME=airflow
-AIRFLOW_USER_PASSWORD=airflow
-
-# Azure Bot
-MICROSOFT_APP_ID=<...>
-MICROSOFT_APP_PASSWORD=<...>
-MICROSOFT_APP_TENANT_ID=<...>
-
-# Copilot summarisation
-MIN_MSG_TO_SUMMARIZE=10
-MIN_MSG_TO_RETAIN=10
-FERNET_SECRET_KEY=<32-byte-base64>
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: copilot-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+    - host: copilot.yourdomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: copilot-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - copilot.yourdomain.com
+      secretName: copilot-tls
 ```
 
 ---
 
-### Launch
+## 🔐 Secrets Management
+
+Create Kubernetes secret with required environment variables:
 
 ```bash
-docker compose pull          # fetch latest images
-docker compose up -d         # start in detached mode
+kubectl create secret generic copilot-env   --from-literal=GOOGLE_GENAI_API_KEY=...   --from-literal=OPENAI_API_KEY=...   --from-literal=FERNET_SECRET_KEY=...   --from-literal=DB_URI=postgresql://...   --from-literal=MICROSOFT_APP_ID=...   --from-literal=MICROSOFT_APP_PASSWORD=...   --from-literal=MICROSOFT_APP_TENANT_ID=...   --from-literal=AZURE_CLIENT_ID=...   --from-literal=AZURE_CLIENT_SECRET=...
 ```
 
-Check health:
-
-```bash
-docker compose ps
-docker compose logs -f copilot
-```
+> 💡 Tip: You can also use Sealed Secrets, HashiCorp Vault, or AWS/GCP secret managers for more secure secret handling.
 
 ---
 
-## 3. Publishing a new image (maintainers)
+## 🛠️ Bot Endpoint Update
 
-```bash
-docker build -t airflow-copilot .
-docker tag   airflow-copilot <your-dockerhub-username>/airflow-copilot:1.2.0
-docker push  <your-dockerhub-username>/airflow-copilot:1.2.0
-```
+Ensure Azure Bot is updated with the **public HTTPS endpoint** of your Copilot FastAPI service (e.g. `https://copilot.yourdomain.com`). You can update this manually via Azure Portal or automate via a script.
 
 ---
 
-## 4. Security best practices
+## 🚨 Best Practices
 
-| Area | Recommendation |
-|------|----------------|
-| **Secrets** | Store in `.env`, Docker secrets, or a vault – never in Git. |
-| **TLS** | Terminate HTTPS via Traefik/Nginx in front of Copilot. |
-| **User IDs** | Run containers as non‑root (`user: "1001:1001"`). |
-| **Upgrades** | Pin image tags, track CVEs, and rebuild when base images patch. |
-| **Backups** | Snapshot Postgres volume or enable WAL archiving. |
+- Enable autoscaling on Kubernetes based on CPU or memory.
+- Use persistent cloud PostgreSQL for data durability.
+- Mount volumes for logs or debugging if required.
+- Use observability tools like Prometheus/Grafana for metrics.
 
 ---
 
-## 5. Scaling & observability
+## ✅ Final Notes
 
-* **Horizontal scaling** – stateless replicas behind a load balancer (state in Postgres).  
-* **Metrics** – Prometheus‑friendly endpoint at `/metrics` (port 3979).  
-* **Logs** – JSON to stdout; route to Fluentd, Loki, or Elastic.  
-* **Autoscaling** – KEDA with custom metrics or CPU threshold.
-
----
-
-## 6. Troubleshooting
-
-| Symptom | Possible fix |
-|---------|--------------|
-| `HTTP 401` from Airflow | Verify `AIRFLOW_AUTH_STRATEGY` and credentials. |
-| Slow responses | Increase Gunicorn workers (`GUNICORN_WORKERS=4`). |
-| “Tunnel not found” in bot updater | Ensure `ngrok` is healthy and port 3978 is exposed. |
-
----
-
-### Useful links
-
-* Azure Bot channel registration → <https://learn.microsoft.com/azure/bot-service/>  
-* Airflow REST API reference → <https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html>
+- No ngrok or localhost-based tunnels required in production.
+- You can use cloud DNS for routing Azure Bot to Copilot API.
+- Copilot persists conversation summaries for continuity.
+- All Airflow interactions happen over REST API.

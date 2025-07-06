@@ -4,7 +4,7 @@ After creating your Azure Bot, follow the steps below to connect it to the Airfl
 
 ---
 
-## 1 — App‑Level Deployment Options
+## 1: App‑Level Deployment Options
 
 | Deployment | Who can do it | Visibility |
 |------------|---------------|------------|
@@ -13,7 +13,7 @@ After creating your Azure Bot, follow the steps below to connect it to the Airfl
 
 ---
 
-## 2 — Link the Azure Bot to the Teams Manifest
+## 2: Link the Azure Bot to the Teams Manifest
 
 1. Locate the **Microsoft App ID** from the Azure Bot you created earlier.  
    *(See [Create Azure Bot](../quickstart/azure_bot.md) if you need a refresher.)*
@@ -35,7 +35,7 @@ After creating your Azure Bot, follow the steps below to connect it to the Airfl
 
 ---
 
-## 3 — Upload the App to Microsoft Teams
+## 3: Upload the App to Microsoft Teams
 
 > **Note:** Uploading custom apps may be disabled on tightly‑managed tenants. Check with your Teams admin if the options below are missing.
 

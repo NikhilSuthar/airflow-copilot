@@ -1,48 +1,34 @@
-# -------- 1️⃣ Base image + system deps ----------
-FROM python:3.11-slim-bullseye
+# ---------- 1️⃣ Base Image ----------
+FROM python:3.11-slim
 
-# Update system packages to latest versions to reduce vulnerabilities
-RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
-
-ENV PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
-
+ENV PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
 WORKDIR /app
 
-# 🔧 Install system tools (curl is needed!)
-# 🔧 Install system tools and Azure CLI
+# ---------- 2️⃣ System + Azure CLI ----------
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      ca-certificates \
-      curl \
-      apt-transport-https \
-      lsb-release \
-      gnupg && \
-    curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null && \
-    AZ_REPO=$(lsb_release -cs) && \
-    echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" \
+      curl ca-certificates gnupg lsb-release && \
+    curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | \
+      gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] \
+      https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" \
       > /etc/apt/sources.list.d/azure-cli.list && \
-    apt-get update && \
-    apt-get install -y azure-cli && \
-    apt-get upgrade -y && \
+    apt-get update && apt-get install -y --no-install-recommends azure-cli && \
+    apt-get purge --auto-remove -y curl gnupg lsb-release && \
     rm -rf /var/lib/apt/lists/*
 
-
-# -------- 2️⃣ Python deps ----------
+# ---------- 3️⃣ Python Deps ----------
 COPY requirements.txt .
-RUN pip install --upgrade pip \
- && pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# -------- 3️⃣ App code ----------
+# ---------- 4️⃣ App Code ----------
 COPY src/ ./src
 ENV PYTHONPATH="/app/src:${PYTHONPATH}"
 
-# -------- 4️⃣ Script ----------
-COPY docker/scripts/update_bot.sh /usr/local/bin/update_bot.sh
-RUN chmod +x /usr/local/bin/update_bot.sh
-COPY docker/scripts/init_db.sh /usr/local/bin/init_db.sh
-RUN chmod +x /usr/local/bin/init_db.sh
-COPY docker/scripts/init.sql /usr/local/bin/init.sql
-RUN chmod +x /usr/local/bin/init.sql
-# -------- 5️⃣ Start app ----------
+# ---------- 5️⃣ Support Scripts ----------
+COPY docker/scripts/ /usr/local/bin/
+RUN chmod +x /usr/local/bin/*.sh
+
+# ---------- 6️⃣ Entrypoint ----------
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["uvicorn", "airflow_copilot.app.app:app", "--host", "0.0.0.0", "--port", "3978"]

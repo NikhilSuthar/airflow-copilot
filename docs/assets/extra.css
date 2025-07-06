@@ -2,8 +2,24 @@
 :root {
   /* Light mode overrides */
   --md-primary-fg-color: #2C2C2C;  /* light mode primary */
-  --md-accent-fg-color:  #DAA520;  /* light mode accent */
+  --md-accent-fg-color:  #DAA520;
+ --md-code-font-size: 0.80rem;
+   /* light mode accent */
 }
+.md-typeset pre code[class*="yaml"] {
+  font-size: 0.75rem;   /* tweak to taste */
+}
+/* Justify all paragraph text inside article body */
+.md-content__inner p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+.md-content__inner li {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+
 [data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link {
   color: #8b670a !important;           /* Airflow navy text */
   background-color: #e1e1df !important;/* subtle blue highlight */
@@ -11,7 +27,7 @@
 
 [data-md-color-scheme="slate"] {
   /* Dark mode overrides (slightly brighter so they pop) */
-  --md-primary-fg-color: #004D61;  /* dark mode primary */
+  --md-primary-fg-color: #3c707c;  /* dark mode primary */
   --md-accent-fg-color:  #FF7565;  /* dark mode accent */
 }
 

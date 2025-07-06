@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-copilot
+  namespace: airflow-copilot
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: airflow-copilot
+  template:
+    metadata:
+      labels:
+        app: airflow-copilot
+    spec:
+      containers:
+        - name: airflow-copilot
+          image: thedatacarpenter/airflow-copilot:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3978
+          envFrom:
+            - secretRef:
+                name: airflow-copilot-env
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3978
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3978
+            initialDelaySeconds: 15
+            periodSeconds: 10

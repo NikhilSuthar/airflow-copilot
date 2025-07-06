@@ -1,0 +1,67 @@
+# docker-compose.prod.yml  – production stack
+version: "3.9"
+
+# ───── reusable anchor that mounts the real secrets file ─────
+x-env: &envfile
+  env_file: .env            # ← use your populated .env (not .env.example)
+
+networks:
+  airflow: {}
+
+services:
+  copilot:
+    image: thedatacarpenter/airflow-copilot:1.0.0
+    <<: *envfile
+    ports:
+      - "3978:3978"
+
+    environment:
+      # -------- LLM (choose ONE provider in .env) --------
+      LLM_MODEL_PROVIDER_NAME: ${LLM_MODEL_PROVIDER_NAME}
+      LLM_MODEL_NAME:          ${LLM_MODEL_NAME}
+
+      # Provider‑specific keys (only one will be used by Copilot)
+      OPENAI_API_KEY:          ${OPENAI_API_KEY}
+      GOOGLE_GENAI_API_KEY:    ${GOOGLE_GENAI_API_KEY}
+      GROQ_API_KEY:            ${GROQ_API_KEY}
+      ANTHROPIC_API_KEY:       ${ANTHROPIC_API_KEY}
+
+      # Summarisation (leave empty to let the app fall back internally)
+      SUMMARIZATION_LLM_MODEL_PROVIDER_NAME: ${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}
+      SUMMARIZATION_LLM_MODEL_NAME:          ${SUMMARIZATION_LLM_MODEL_NAME}
+
+      # -------- Thresholds --------
+      MIN_MSG_TO_SUMMARIZE: ${MIN_MSG_TO_SUMMARIZE:-10}
+      MIN_MSG_TO_RETAIN:    ${MIN_MSG_TO_RETAIN:-10}
+
+      # -------- Airflow --------
+      AIRFLOW_AUTH_STRATEGY: ${AIRFLOW_AUTH_STRATEGY:-centralized}
+      AIRFLOW_BASE_URL:      ${AIRFLOW_BASE_URL}
+      AIRFLOW_USER_NAME:     ${AIRFLOW_USER_NAME}
+      AIRFLOW_USER_PASSWORD: ${AIRFLOW_USER_PASSWORD}
+
+      # -------- Database --------
+      DB_URI: ${DB_URI}
+
+      # -------- Azure Bot --------
+      MICROSOFT_APP_ID:       ${MICROSOFT_APP_ID}
+      MICROSOFT_APP_PASSWORD: ${MICROSOFT_APP_PASSWORD}
+
+      # -------- Security --------
+      FERNET_SECRET_KEY: ${FERNET_SECRET_KEY}
+
+    depends_on: [db-init]
+    networks: [airflow]
+
+  # one‑shot Postgres schema bootstrap
+  db-init:
+    image: postgres:16
+    <<: *envfile
+    entrypoint: ["/bin/bash", "/init_db.sh"]
+    environment:
+      DB_URI: ${DB_URI}
+    volumes:
+      - ./docker/scripts/init_db.sh:/init_db.sh:ro
+      - ./docker/scripts/init.sql:/init.sql:ro
+    restart: "no"
+    networks: [airflow]

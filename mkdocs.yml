@@ -61,19 +61,20 @@ extra_css:
 
 # markdown extras
 markdown_extensions:
-  - attr_list
+  - pymdownx.snippets
   - pymdownx.superfences
   - admonition
+  - attr_list
   - def_list
 # navigation (unchanged – truncated here for brevity)
 nav:
   - 🏠 Home: index.md
 
   - 🚀 Quick Start:
-      - 1. Prerequisites: quickstart/before_we_start.md
-      - 2. Create Azure Bot (Microsoft Teams): quickstart/azure_bot.md
-      - 3. Upload to Microsoft Teams: quickstart/upload_teams_app.md
-      - 4. Run Copilot Locally: quickstart/getting_started.md
+      - Before you begin: quickstart/before_we_start.md
+      - Create Azure Bot (Microsoft Teams): quickstart/azure_bot.md
+      - Install App in Microsoft Teams: quickstart/upload_app.md
+      - Getting Started: quickstart/getting_started.md
       - Agent Behavior & Tips: quickstart/agent-behavior.md
 
   - 🧠 Architecture:
@@ -94,7 +95,8 @@ nav:
       - User Management: howto/user_management.md
 
   - 🚢 Deployment:
-      - Docker Setup: deployment/docker-deployment.md
+      - Deployment Overview: deployment/deployment.md
+      - Using Docker Setup: deployment/test.md
       - Serverless (AWS Lambda): deployment/aws-deployment.md
   - 🤝🏼 Contributions: contributing.md
   - 🔭 Future Plans: roadmap.md

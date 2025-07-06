@@ -1,0 +1,13 @@
+# airflow-copilot-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: copilot-service
+spec:
+  type: ClusterIP
+  selector:
+    app: copilot
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3978

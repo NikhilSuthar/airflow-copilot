@@ -8,7 +8,7 @@ This document outlines key behavior details, recommendations, and known limitati
   Airflow Copilot is designed around the Airflow **2.5.1 REST API**. While most functionality works across versions **2.5 to 2.11**, some **latest API endpoints introduced in newer versions may not be supported yet.**
 
 - **Large API Responses & Token Limits:**
-  Airflow REST responses, especially for DAG runs and task logs, can be **very large**. This may cause token overflows when using models with strict limits. We recommend using robust providers like **OpenAI** or **Google AI** for better handling of large responses.
+  Airflow REST responses, especially for DAG runs and task logs, can be **very large**. This may cause token overflows when using models with strict limits (such as free model on `Groq`). We recommend using robust providers like **OpenAI** or **Google AI** for better handling of large responses.
 
 - **User Creation Behavior:**
   The Copilot supports **creating new users and assigning roles**. However, if a password is **not provided**, it generates one automatically. Depending on model behavior, the password **may or may not be returned** reliably in the response.
