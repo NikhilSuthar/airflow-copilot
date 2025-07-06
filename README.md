@@ -1,81 +1,84 @@
-# Airflow Copilot 🛸
+<div align="center">
 
-Chat‑first assistant for **Apache Airflow**. Run, monitor, and debug DAGs straight from Microsoft Teams using natural language.
 
-[![Docker](https://img.shields.io/badge/Run%20with-Docker-blue)](deployment/docker-deployment.md)
-[![License](https://img.shields.io/github/license/your-org/airflow-copilot)](license.md)
 
----
 
-## Why Copilot?
+# Airflow Copilot  
+**Chat‑driven orchestration for Apache Airflow inside Microsoft Teams**
 
-| Pain | Copilot solution |
-|------|------------------|
-| Endless UI clicks to trigger or re‑run tasks | `@copilot trigger sales_daily` |
-| Digging through logs for a failing task | `@copilot show last‑error for load_sales_data` |
-| On‑call at 3 AM | Ask in Teams—no VPN, no browser tabs |
+[![CI](https://github.com/NikhilSuthar/airflow-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/NikhilSuthar/airflow-copilot/actions)
+[![Docker](https://img.shields.io/docker/pulls/thedatacarpenter/airflow-copilot)](https://hub.docker.com/r/thedatacarpenter/airflow-copilot)
+[![License](https://img.shields.io/github/license/NikhilSuthar/airflow-copilot)](LICENSE)
+
+</div>
 
 ---
 
-## Quick Start (Local)
+<img src="docs/assets/AirflowCopilot.png" height="110" alt="Airflow Copilot logo">
+
+## ✨ Why Copilot?
+
+- **Conversational control** — trigger DAGs, view runs, pause/resume schedules, inspect logs.
+- **LLM‑powered intelligence** — plug in OpenAI · Gemini · Claude · Groq.
+- **RBAC aware** — honours Airflow permissions when calling its REST API.
+- **Persistent memory** — summaries & checkpoints stored in PostgreSQL (LangGraph).
+- **Deployment parity** — same image on Docker Compose, Kubernetes, ECS.
+
+---
+
+## 🚀 Quick Start (local)
+
+> Full guide → **[`docs/quickstart/getting_started.md`](docs/quickstart/getting_started.md)**
 
 ```bash
-# 1. Clone
-git clone https://github.com/your-org/airflow-copilot.git
+# Clone & copy env template
+git clone https://github.com/NikhilSuthar/airflow-copilot.git
 cd airflow-copilot
+cp .env.example .env            # fill in keys / secrets
 
-# 2. Spin up Airflow (optional if you already have one)
-#    See https://airflow.apache.org/docs/...
-
-# 3. Launch Copilot stack
-docker compose -f docker-copilot-compose.yml up -d
+# Launch Copilot + ngrok + bot‑updater
+docker compose -f docker-compose.local.yml up -d
 ```
 
-Then open Teams, upload the `manifest.zip`, and say:
-
-```
-Hi Copilot, list dags
-```
-
-More details → **[Quick Start guide](docs/quickstart/getting_started.md)**
+1. Ensure Airflow (≥ 2.5) is reachable at `${AIRFLOW_BASE_URL}`  
+2. Ngrok publishes an HTTPS tunnel  
+3. *bot‑updater* patches the Azure Bot endpoint automatically  
+4. Open **Microsoft Teams** → chat with **Airflow Copilot** 🚀
 
 ---
 
-## Architecture in 30 sec
+## 🧠 Architecture
 
-```
-Teams  ──▶ Azure Bot Service ──▶ Copilot (FastAPI + LangGraph + LLM)
-                           ▲
-                           └── Airflow REST / PostgreSQL
-```
+![Architecture](docs/assets/quick-start-arch.svg)
 
-- **LangGraph** stores memory & summaries in PostgreSQL  
-- **Azure Bot** handles OAuth & message delivery  
-- **Ngrok** (dev) or reverse proxy (prod) exposes Copilot
-
-Full write‑up → [Architecture docs](docs/architecture/architecture.md)
+Read the deep dive → **[`docs/architecture/architecture.md`](docs/architecture/architecture.md)**
 
 ---
 
-## Configuration
+## 📦 Deployment Options
 
-| Env Var | Purpose |
-|---------|---------|
-| `LLM_MODEL_PROVIDER_NAME` | `OpenAI`, `Google_GenAI`, `Groq`, `Anthropic` |
-| `AIRFLOW_BASE_URL` | Your Airflow REST endpoint |
-| `FERNET_SECRET_KEY` | 32‑byte key for user tokens |
+| Mode | Guide | Best For |
+|------|-------|----------|
+| Docker Compose (local) | [`docs/quickstart/getting_started.md`](docs/quickstart/getting_started.md) | Dev / PoC |
+| Docker Compose (prod)  | [`docs/deployment/deployment.md`](docs/deployment/deployment.md#docker) | Small teams |
+| Kubernetes             | [`docs/deployment/deployment.md`](docs/deployment/deployment.md#kubernetes) | Cloud & scale |
 
-Complete list → [Environment variables](docs/configuration/environment_variables.md)
-
----
-
-## Contributing
-
-PRs & issues welcome!  
-See [CONTRIBUTING](docs/contributing.md) for setup, style guide, and roadmap.
+Each mode uses the **same `.env`**. Bring your own DB & TLS.
 
 ---
 
-## License
+## ⚙️ Configuration
 
-Apache 2.0 — see [LICENSE](docs/license.md).
+All runtime settings are environment variables.  
+See the reference → **[`docs/configuration/environment_variables.md`](docs/configuration/environment_variables.md)**
+
+
+---
+
+## 📄 License
+
+Licensed under the **MIT** License © 2025 Nikhil Suthar.
+
+---
+
+_🚀 Automate smarter. Collaborate better. — **Copilot**_

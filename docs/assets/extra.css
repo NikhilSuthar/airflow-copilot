@@ -82,3 +82,16 @@
   margin: 1rem auto;
   max-width: 420px;
 }
+
+/* Optional: smaller headline in header */
+.md-header__title {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Optional: slightly smaller body text */
+:root {
+  --md-typeset-font-size: 0.95rem;
+}
+
+

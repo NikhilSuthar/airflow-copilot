@@ -1,108 +1,110 @@
-site_name: Airflow Copilot
+site_name: Airflow Copilot
 site_description: >
-  Documentation for Airflow Copilot – an intelligent assistant for Apache Airflow.
+  Conversational agent for Apache Airflow, fully driven from Microsoft Teams.
 
-# ─────────── Theme ───────────
 theme:
   name: material
 
-  # brand
+  # ── Brand ─────────────────────────────────────────────
   logo: assets/logo.png
   favicon: assets/favicon.png
 
-  # built‑in UX extras
+  # ── Global Fonts ──────────────────────────────────────
+  font:
+    text: Roboto
+    code: JetBrains Mono
+
+  # ── Built‑in UX extras ────────────────────────────────
   features:
-    - navigation.sections
-    - navigation.expand
+    # - navigation.sections        # group headlines
+    - navigation.expand          # auto‑expand active section
+    - navigation.top             # ⬅ adds the collapsible side‑drawer button
     - navigation.footer          # prev/next links & social icons
     - search.highlight
     - search.suggest
     - toc.follow
 
-  # colour palette – must be INSIDE “theme”
+  # ── Colour palette ────────────────────────────────────
   palette:
-    # Light
-    - scheme: default
-      primary: '#D4E1F5'         # Airflow navy
-      accent:  '#FF5252'         # Airflow red
+    - scheme: default            # light
+      primary: "#017CEE"         # Airflow blue
+      accent:  "#FF5252"         # Airflow red
       toggle:
         icon: material/weather-night
-        name: Switch to dark mode
-
-    # Dark
-    - scheme: slate
-      primary: '#017CEE'         # Airflow blue
-      accent:  '#FF7565'         # warm red
+        name: Switch to dark mode
+    - scheme: slate              # dark
+      primary: "#017CEE"
+      accent:  "#FF7565"
       toggle:
         icon: material/white-balance-sunny
-        name: Switch to light mode
+        name: Switch to light mode
 
-  # (optional) force GitHub mark instead of generic “git” icon
+  # Force GitHub icon instead of generic “git”
   icon:
     repo: fontawesome/brands/github
 
-# GitHub repo link → puts the icon in the header
-repo_url: https://github.com/<your‑handle>/<your‑repo>
-repo_name: GitHub               # label next to the icon
+# ── GitHub repo (adds icon on header) ───────────────────
+repo_url: https://github.com/NikhilSuthar/airflow-copilot
+repo_name: GitHub
 
-# footer
-copyright: "© 2025 Nikhil Suthar • Open source under the MIT License"
-
+# ── Footer social icons ─────────────────────────────────
 extra:
-  social:                       # icons next to the copyright
+  social:
     - icon: fontawesome/brands/github
-      link: https://github.com/<your‑handle>/<your‑repo>
+      link: https://github.com/NikhilSuthar/airflow-copilot
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/nikhil-suthar/
 
-# custom CSS
+copyright: "© 2025 Nikhil Suthar • MIT License"
+
+# ── Custom CSS ──────────────────────────────────────────
 extra_css:
   - assets/extra.css
 
-# markdown extras
+# ── Markdown extensions ─────────────────────────────────
 markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - admonition
   - attr_list
   - def_list
-# navigation (unchanged – truncated here for brevity)
+
+# ── Navigation ──────────────────────────────────────────
 nav:
   - 🏠 Home: index.md
 
-  - 🚀 Quick Start:
+  - 🚀 Quick Start:
       - Before you begin: quickstart/before_we_start.md
-      - Create Azure Bot (Microsoft Teams): quickstart/azure_bot.md
-      - Install App in Microsoft Teams: quickstart/upload_app.md
-      - Getting Started: quickstart/getting_started.md
-      - Agent Behavior & Tips: quickstart/agent-behavior.md
+      - Create Azure Bot:  quickstart/azure_bot.md
+      - Install in Teams:  quickstart/upload_app.md
+      - Getting Started:   quickstart/getting_started.md
+      - Agent Behaviour:   quickstart/agent-behavior.md
 
   - 🧠 Architecture:
-      - Overview: architecture/architecture.md
-      - Agent Workflow: architecture/agent.md
-      - Summarization Strategy: architecture/summarization.md
-      - Supported API Capabilities: architecture/supported_apis.md
-      - Airflow Authentication Methods: architecture/airflow_auth_type.md
-      - Refresh History Logic: architecture/refresh_history.md
+      - Overview:          architecture/architecture.md
+      - Agent Workflow:    architecture/agent.md
+      - Summarisation:     architecture/summarization.md
+      - Supported APIs:    architecture/supported_apis.md
+      - Airflow Auth:      architecture/airflow_auth_type.md
+      - Refresh History:   architecture/refresh_history.md
 
   - ⚙️ Configuration:
-      - Environment Variables: configuration/environment_variables.md
+      - Environment Variables: configuration/environment_variables.md
 
   - 📘 User Guide:
-      - Chat Interactions: howto/chat.md
-      - DAG & Task Management: howto/task_management.md
-      - Alerts & Notifications: howto/notifications.md
-      - User Management: howto/user_management.md
+      - Chat Basics:       howto/chat.md
+      - DAG / Task Ops:    howto/task_management.md
+      - Alerts & Notify:   howto/notifications.md
+      - User Mgmt:         howto/user_management.md
 
   - 🚢 Deployment:
-      - Deployment Overview: deployment/deployment.md
-      - Using Docker Setup: deployment/test.md
-      - Serverless (AWS Lambda): deployment/aws-deployment.md
-  - 🤝🏼 Contributions: contributing.md
-  - 🔭 Future Plans: roadmap.md
+      - Overview:          deployment/deployment.md
+      - Docker (local / prod): deployment/test.md
+      - AWS(Serverless):        deployment/aws-deployment.md
 
+  - 🤝 Contribute: contributing.md
+  - 🔭 Roadmap:   roadmap.md
 
 plugins:
   - search
   - mermaid2
-
