@@ -1,20 +1,15 @@
 <div align="center">
 
-
-
-
 # Airflow Copilot  
 **Chat‑driven orchestration for Apache Airflow inside Microsoft Teams**
 
-[![CI](https://github.com/NikhilSuthar/airflow-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/NikhilSuthar/airflow-copilot/actions)
 [![Docker](https://img.shields.io/docker/pulls/thedatacarpenter/airflow-copilot)](https://hub.docker.com/r/thedatacarpenter/airflow-copilot)
-[![License](https://img.shields.io/github/license/NikhilSuthar/airflow-copilot)](LICENSE)
+[![License](    )](LICENSE)
 
 </div>
 
----
 
-<img src="docs/assets/AirflowCopilot.png" height="110" alt="Airflow Copilot logo">
+<img src="docs/assets/AirflowCopilotLogo.svg" height="110" alt="Airflow Copilot logo">
 
 ## ✨ Why Copilot?
 

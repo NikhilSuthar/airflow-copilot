@@ -75,7 +75,19 @@
 .md-header__button--logo:hover img {
   transform: rotate(360deg);
 }
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 2.0rem;          /* ← choose the size you like */
+  /* width: auto;          /* keep aspect ratio (optional) */
+}
 
+/* Optional: shrink again on narrow screens */
+@media (max-width: 600px) {
+  .md-header__button.md-logo img,
+  .md-header__button.md-logo svg {
+    height: 2 rem;
+  }
+}
 /* Utility: centre images with the .center-img class */
 .md-content img.center-img {
   display: block;

@@ -1,3 +1,5 @@
+
+# 🏋️ Supported Capabilities
 **Airflow Copilot** is designed to assist with **informational and on-demand operations** in Apache Airflow. It enables users to query metadata, trigger DAGs, inspect task details, and more — all without directly accessing the Airflow UI.
 
 > **Security-first Design**:

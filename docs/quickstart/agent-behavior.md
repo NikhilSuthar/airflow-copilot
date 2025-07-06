@@ -1,4 +1,4 @@
-# Behavior Notes & Known Limitations
+# 🚨 Behavior Notes & Known Limitations
 
 This document outlines key behavior details, recommendations, and known limitations of the Airflow Copilot agent to help you understand how it operates and what to expect during usage.
 

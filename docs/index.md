@@ -1,10 +1,10 @@
-# 🧠 Welcome to **Airflow Copilot**
+# 🌱 Welcome to **Airflow Copilot**
 
 A conversational AI assistant that lets you **run, monitor, and manage Apache Airflow** directly from Microsoft Teams — powered by **LLMs** and the **Airflow REST API**.
 
-![Airflow Copilot banner](assets/AirflowCopilot.png)
+![Airflow Copilot banner](assets/AirflowCopilotLogo.svg)
 
----
+
 
 ## ✨ What is Airflow Copilot?
 

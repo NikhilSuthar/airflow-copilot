@@ -1,4 +1,4 @@
-site_name: Airflow Copilot
+site_name: ''
 site_description: >
   Conversational agent for Apache Airflow, fully driven from Microsoft Teams.
 
@@ -6,7 +6,7 @@ theme:
   name: material
 
   # ── Brand ─────────────────────────────────────────────
-  logo: assets/logo.png
+  logo: assets/AirflowCopilotLogoThumb.svg
   favicon: assets/favicon.png
 
   # ── Global Fonts ──────────────────────────────────────
@@ -73,33 +73,32 @@ markdown_extensions:
 nav:
   - 🏠 Home: index.md
 
-  - 🚀 Quick Start:
+  - 🚀 Getting Started:
       - Before you begin: quickstart/before_we_start.md
       - Create Azure Bot:  quickstart/azure_bot.md
-      - Install in Teams:  quickstart/upload_app.md
-      - Getting Started:   quickstart/getting_started.md
+      - Install App in Teams:  quickstart/upload_app.md
+      - Quick Start:   quickstart/getting_started.md
       - Agent Behaviour:   quickstart/agent-behavior.md
 
-  - 🧠 Architecture:
-      - Overview:          architecture/architecture.md
+  - 🏰 Architecture:
+      - System Overview:          architecture/architecture.md
       - Agent Workflow:    architecture/agent.md
-      - Summarisation:     architecture/summarization.md
-      - Supported APIs:    architecture/supported_apis.md
-      - Airflow Auth:      architecture/airflow_auth_type.md
-      - Refresh History:   architecture/refresh_history.md
+      - Summarization Logic:     architecture/summarization.md
+      - Supported Capabilities:    architecture/supported_apis.md
+      - Airflow Auth Strategies:      architecture/airflow_auth_type.md
+      - Refresh History:   architecture/refresh_history.md
 
   - ⚙️ Configuration:
-      - Environment Variables: configuration/environment_variables.md
+      - Environment Variables: configuration/environment_variables.md
 
   - 📘 User Guide:
       - Chat Basics:       howto/chat.md
-      - DAG / Task Ops:    howto/task_management.md
+      - DAG / Task Ops:    howto/task_management.md
       - Alerts & Notify:   howto/notifications.md
-      - User Mgmt:         howto/user_management.md
+      - User Mgmt:         howto/user_management.md
 
   - 🚢 Deployment:
-      - Overview:          deployment/deployment.md
-      - Docker (local / prod): deployment/test.md
+      - Docker (Local & Prod): deployment/deployment.md
       - AWS(Serverless):        deployment/aws-deployment.md
 
   - 🤝 Contribute: contributing.md
