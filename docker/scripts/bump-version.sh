@@ -43,10 +43,7 @@ git push origin "$NEW_VERSION"
 # Create release branch and push
 git checkout -b "$RELEASE_BRANCH"
 git push origin "$RELEASE_BRANCH"
-
-# Export version for workflow
-echo "NEW_VERSION=$NEW_VERSION" >> "$GITHUB_ENV"
-echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
-echo "$NEW_VERSION" > VERSION
-
 echo "✅ Created tag $NEW_VERSION and branch $RELEASE_BRANCH"
+echo "$NEW_VERSION"
+
+
