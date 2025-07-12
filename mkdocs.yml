@@ -1,4 +1,6 @@
 site_name: ''
+site_url: https://thedatacarpenter.com/airflow-copilot/
+use_directory_urls: true
 site_description: >
   Conversational agent for Apache Airflow, fully driven from Microsoft Teams.
 
