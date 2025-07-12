@@ -1,9 +1,9 @@
 
-# 🐳 Docker Usage Guide
+# 🐳 Airflow-Copilot Docker Usage Guide
 
 This guide explains how to run the **Airflow Copilot** using Docker.
 
-The Airflow Copilot is a GenAI-powered assistant that interacts with Apache Airflow environments. You can run it easily using Docker, either locally or in the cloud.
+The **Airflow Copilot** is a GenAI-powered assistant that interacts with Apache Airflow environments. You can run it easily using Docker, either locally or in the cloud.
 
 For in-depth configuration and deployment instructions, refer to:
 - 📘 [Getting Started Guide](https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started)

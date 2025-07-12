@@ -8,8 +8,9 @@
 
 </div>
 
-
+<div align="center">
 <img src="docs/assets/AirflowCopilotLogo.svg" height="110" alt="Airflow Copilot logo">
+</div>
 
 ## ✨ Why Copilot?
 
