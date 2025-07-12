@@ -28,8 +28,8 @@ jobs:
       - name: Bump Version and Create Tag/Branch
         id: export
         run: |
-          chmod +x scripts/bump-version.sh
-          ./scripts/bump-version.sh ${{ github.event.inputs.version_type }}
+          chmod +x docker/scripts/bump-version.sh
+          ./docker/scripts/bump-version.sh ${{ github.event.inputs.version_type }}
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
   build-docker:
