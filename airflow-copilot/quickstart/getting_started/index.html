@@ -1347,8 +1347,8 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">      </span><span class="c1"># Provider keys (enable the one you use)</span>
 <span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
 <span class="w">      </span><span class="nt">GOOGLE_GENAI_API_KEY</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${GOOGLE_GENAI_API_KEY}</span>
-<span class="w">      </span><span class="nt">GROQ_API_KEY</span><span class="p">:</span><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">${GROQ_API_KEY}</span>
-<span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w">       </span><span class="l l-Scalar l-Scalar-Plain">${ANTHROPIC_API_KEY}</span>
+<span class="w">      </span><span class="c1"># GROQ_API_KEY:            ${GROQ_API_KEY}</span>
+<span class="w">      </span><span class="c1"># ANTHROPIC_API_KEY:       ${ANTHROPIC_API_KEY}</span>
 
 <span class="w">      </span><span class="c1"># Thresholds</span>
 <span class="w">      </span><span class="nt">MIN_MSG_TO_SUMMARIZE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_SUMMARIZE:-10}</span>
@@ -1384,8 +1384,7 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">    </span><span class="nt">extra_hosts</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;host.docker.internal:host-gateway&quot;</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span>
-
+<span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span><span class="w"> </span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./docker/scripts/init_db.sh:/init_db.sh:ro</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./docker/scripts/init.sql:/init.sql:ro</span>
@@ -1422,8 +1421,7 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">      </span><span class="nt">AZURE_CLIENT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_ID:-${MICROSOFT_APP_ID}}</span>
 <span class="w">      </span><span class="nt">AZURE_TENANT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_TENANT_ID}</span>
 <span class="w">      </span><span class="nt">AZURE_CLIENT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_SECRET:-${MICROSOFT_APP_PASSWORD}}</span>
-
-<span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span><span class="w">  </span>
 </code></pre></div>
 </details></p>
 <hr />
