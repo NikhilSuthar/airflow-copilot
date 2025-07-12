@@ -71,7 +71,7 @@ jobs:
       - name: Install MkDocs
         run: |
           pip install --upgrade pip
-          pip install mkdocs mkdocs-material
+          pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin
 
       - name: Build Docs
         run: mkdocs build
