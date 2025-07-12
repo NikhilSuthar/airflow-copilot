@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/contributing/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/contributing/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/roadmap/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/roadmap/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/architecture/agent/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/architecture/agent/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/architecture/airflow_auth_type/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/architecture/airflow_auth_type/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/architecture/architecture/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/architecture/architecture/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/architecture/refresh_history/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/architecture/refresh_history/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/architecture/summarization/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/architecture/summarization/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/architecture/supported_apis/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/architecture/supported_apis/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/configuration/environment_variables/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/configuration/environment_variables/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/deployment/deployment/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/deployment/deployment/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/quickstart/agent-behavior/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/agent-behavior/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/quickstart/azure_bot/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/azure_bot/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/quickstart/before_we_start/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/before_we_start/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/quickstart/getting_started/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
     <url>
-         <loc>https://nikhilsuthar.github.io/airflow-copilot/quickstart/upload_app/</loc>
+         <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/upload_app/</loc>
          <lastmod>2025-07-12</lastmod>
     </url>
 </urlset>
