@@ -1,4 +1,6 @@
-site_name: ''
+site_name: Airflow Copilot
+site_url: https://nikhilsuthar.github.io/airflow-copilot/
+use_directory_urls: true
 site_description: >
   Conversational agent for Apache Airflow, fully driven from Microsoft Teams.
 
