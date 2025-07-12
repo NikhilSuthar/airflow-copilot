@@ -33,6 +33,9 @@ Copilot will intelligently track execution outcomes and proactively notify the u
 ### 5. ✉️ Email Notification Integration
 Enable direct email support for DAG status updates, alerts, and action confirmations. This allows users to receive updates even outside their chat interface.
 
+### 6. 🔑 Allow per user LLM Key and Model
+Currently the LLM Key is centralised that can be bottelneck for some case so plan it to provide deployment as BYOK (Bring you own Key).
+
 ---
 
 ## 💡 Have a Feature Request?
