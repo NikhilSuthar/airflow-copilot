@@ -8,6 +8,9 @@ on:
         required: true
         default: 'patch'
 
+permissions:
+  contents: write  # ✅ Required to push tags and branches
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -18,7 +21,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Fetch all tags
+          fetch-depth: 0  # Fetch all tags for versioning
 
       - name: Set up Git
         run: |
@@ -28,7 +31,7 @@ jobs:
       - name: Bump Version and Create Tag/Branch
         id: export
         run: |
-          chmod +x  docker/scripts/bump-version.sh
+          chmod +x docker/scripts/bump-version.sh
           ./docker/scripts/bump-version.sh ${{ github.event.inputs.version_type }}
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
@@ -83,6 +86,7 @@ jobs:
   create-release:
     needs: release
     runs-on: ubuntu-latest
+
     steps:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -91,6 +95,5 @@ jobs:
           name: Release ${{ needs.release.outputs.new_version }}
           body: |
             🚀 New version released automatically via CI/CD.
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
