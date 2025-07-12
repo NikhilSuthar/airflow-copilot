@@ -1,5 +1,5 @@
 site_name: Airflow Copilot
-site_url: https://nikhilsuthar.github.io/airflow-copilot/
+site_url: https://thedatacarpenter.com/airflow-copilot/
 site_dir: site
 site_author: Nikhil Suthar
 use_directory_urls: true
