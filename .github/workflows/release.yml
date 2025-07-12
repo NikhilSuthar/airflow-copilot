@@ -74,7 +74,7 @@ jobs:
           pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin
 
       - name: Build Docs
-        run: mkdocs build
+        run: mkdocs build --site-dir site/airflow-copilot
 
       - name: Publish Docs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
