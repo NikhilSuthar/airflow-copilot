@@ -88,6 +88,30 @@ jobs:
           publish_branch: gh-pages
           cname: thedatacarpenter.com
 
+  update-dockerhub-doc:
+    needs: build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Copy docker.md to README.md
+        run: cp ./docker/docker.md README.md
+
+      - name: Update Docker Hub README
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          TOKEN=$(curl -s -H "Content-Type: application/json" \
+          -X POST -d '{"username": "'"$DOCKER_USERNAME"'", "password": "'"$DOCKER_PASSWORD"'"}' \
+          https://hub.docker.com/v2/users/login/ | jq -r .token)
+
+          curl -s -X PATCH \
+          -H "Authorization: JWT $TOKEN" \
+          -H "Content-Type: application/json" \
+          --data '{"full_description": "'"$(sed ':a;N;$!ba;s/\n/\\n/g' README.md)"'"}' \
+          https://hub.docker.com/v2/repositories/${DOCKER_USERNAME}/airflow-copilot/
+
+
   create-release:
     needs: release
     runs-on: ubuntu-latest
