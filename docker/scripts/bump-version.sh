@@ -26,7 +26,9 @@ git tag "$NEW_VERSION"
 git push origin "$NEW_VERSION"
 git checkout -b "$RELEASE_BRANCH"
 git push origin "$RELEASE_BRANCH"
-
+VERSION_NO_V=${NEW_VERSION#v}
 echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+echo "docker_version=$VERSION_NO_V" >> "$GITHUB_OUTPUT"
 echo "$NEW_VERSION" > VERSION
-echo "✅ Created tag $NEW_VERSION and branch $RELEASE_BRANCH"
+
+echo "✅ Created tag $NEW_VERSION for branch $RELEASE_BRANCH and Tag $VERSION_NO_V for Docker image."

@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.export.outputs.new_version }}
+      docker_version: ${{ steps.export.outputs.docker_version }}
 
     steps:
       - name: Checkout Code
@@ -54,7 +55,9 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/airflow-copilot:${{ needs.release.outputs.new_version }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/airflow-copilot:${{ needs.release.outputs.docker_version}}
+            ${{ secrets.DOCKER_USERNAME }}/airflow-copilot:latest
 
   deploy-docs:
     needs: build-docker
