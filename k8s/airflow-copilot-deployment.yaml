@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: airflow-copilot
-          image: thedatacarpenter/airflow-copilot:1.0.0
+          image: thedatacarpenter/airflow-copilot:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3978

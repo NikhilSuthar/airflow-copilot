@@ -24,7 +24,7 @@
 
 ## 🚀 Quick Start (local)
 
-> Full guide → **[`docs/quickstart/getting_started.md`](docs/quickstart/getting_started.md)**
+> Full guide → **[`Getting Started`](https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started)**
 
 ```bash
 # Clone & copy env template
@@ -47,7 +47,7 @@ docker compose -f docker-compose.local.yml up -d
 
 ![Architecture](docs/assets/quick-start-arch.svg)
 
-Read the deep dive → **[`docs/architecture/architecture.md`](docs/architecture/architecture.md)**
+Read the deep dive → **[`Architecture`](https://thedatacarpenter.com/airflow-copilot/architecture/architecture)**
 
 ---
 
@@ -55,9 +55,9 @@ Read the deep dive → **[`docs/architecture/architecture.md`](docs/architecture
 
 | Mode | Guide | Best For |
 |------|-------|----------|
-| Docker Compose (local) | [`docs/quickstart/getting_started.md`](docs/quickstart/getting_started.md) | Dev / PoC |
-| Docker Compose (prod)  | [`docs/deployment/deployment.md`](docs/deployment/deployment.md#docker) | Small teams |
-| Kubernetes             | [`docs/deployment/deployment.md`](docs/deployment/deployment.md#kubernetes) | Cloud & scale |
+| Docker Compose (local) | [`Local Deployment`](https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started) | Dev / PoC |
+| Docker Compose (prod)  | [`Docker based Deployment`](https://thedatacarpenter.com/airflow-copilot/deployment/deployment) | Small teams |
+| Kubernetes             | [`Kubernetes based Deployment`](https://thedatacarpenter.com/airflow-copilot/deployment/deployment) | Cloud & scale |
 
 Each mode uses the **same `.env`**. Bring your own DB & TLS.
 
@@ -66,15 +66,13 @@ Each mode uses the **same `.env`**. Bring your own DB & TLS.
 ## ⚙️ Configuration
 
 All runtime settings are environment variables.  
-See the reference → **[`docs/configuration/environment_variables.md`](docs/configuration/environment_variables.md)**
+See the reference → **[`Environment Variables`](https://thedatacarpenter.com/airflow-copilot/configuration/environment_variables)**
 
 
 ---
 
 ## 📄 License
 
-Licensed under the **MIT** License © 2025 Nikhil Suthar.
+[Licensed](./LICENSE) under the **MIT** License © 2025 Nikhil Suthar.
 
 ---
-
-_🚀 Automate smarter. Collaborate better. — **Copilot**_

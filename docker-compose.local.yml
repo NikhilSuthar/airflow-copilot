@@ -15,7 +15,7 @@ services:
   # 1)  Copilot – FastAPI + LangGraph agent
   ###########################################################################
   copilot:
-    image: ${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:1.0.0}
+    image: ${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:latest}
     <<: *envfile
     restart: unless-stopped
     ports:
@@ -98,7 +98,7 @@ services:
   # 4)  Bot updater – patches Azure Bot with ngrok URL
   ###########################################################################
   bot-updater:
-    image: ${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:1.0.0}
+    image: ${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:latest}
     <<: *envfile
     entrypoint: ["/usr/local/bin/update_bot.sh"]
     depends_on: [ngrok]

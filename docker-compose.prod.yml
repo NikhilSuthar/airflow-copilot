@@ -10,7 +10,8 @@ networks:
 
 services:
   copilot:
-    image: thedatacarpenter/airflow-copilot:1.0.0
+    image: thedatacarpenter/airflow-copilot:latest
+    container_name: airflow-copilot
     <<: *envfile
     ports:
       - "3978:3978"
