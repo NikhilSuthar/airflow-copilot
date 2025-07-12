@@ -24,8 +24,8 @@ services:
       # Provider‑specific keys (only one will be used by Copilot)
       OPENAI_API_KEY:          ${OPENAI_API_KEY}
       GOOGLE_GENAI_API_KEY:    ${GOOGLE_GENAI_API_KEY}
-      GROQ_API_KEY:            ${GROQ_API_KEY}
-      ANTHROPIC_API_KEY:       ${ANTHROPIC_API_KEY}
+      # GROQ_API_KEY:            ${GROQ_API_KEY}
+      # ANTHROPIC_API_KEY:       ${ANTHROPIC_API_KEY}
 
       # Summarisation (leave empty to let the app fall back internally)
       SUMMARIZATION_LLM_MODEL_PROVIDER_NAME: ${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}

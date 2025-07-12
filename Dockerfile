@@ -31,4 +31,4 @@ RUN chmod +x /usr/local/bin/*.sh
 
 # ---------- 6️⃣ Entrypoint ----------
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["uvicorn", "airflow_copilot.app.app:app", "--host", "0.0.0.0", "--port", "3978"]
+CMD ["uvicorn", "src.airflow_copilot.app.app:app", "--host", "0.0.0.0", "--port", "3978"]
