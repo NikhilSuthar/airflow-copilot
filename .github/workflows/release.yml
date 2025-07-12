@@ -31,9 +31,9 @@ jobs:
       - name: Bump Version and Create Tag/Branch
         id: export
         run: |
-            chmod +x docker/scripts/bump-version.sh
-            ./docker/scripts/bump-version.sh ${{ github.event.inputs.version_type }}
-
+          chmod +x docker/scripts/bump-version.sh
+          ./docker/scripts/bump-version.sh ${{ github.event.inputs.version_type }}
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
   build-docker:
     needs: release
@@ -57,7 +57,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/airflow-copilot:${{ needs.release.outputs.new_version }}
 
   deploy-docs:
-    needs: build-docker
+    needs: release
     runs-on: ubuntu-latest
 
     steps:
@@ -85,7 +85,7 @@ jobs:
           publish_branch: gh-pages
 
   create-release:
-    needs: release
+    needs: [build-docker, deploy-docs]  # ✅ Only runs after both complete
     runs-on: ubuntu-latest
 
     steps:
