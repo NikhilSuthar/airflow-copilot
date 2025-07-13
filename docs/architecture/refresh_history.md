@@ -50,7 +50,7 @@ the backend lean without touching shared data or credentials.
 * Only the requesting user can delete their own history.
 
 ##✅ Best Practice
-* Run the cleanup **Every day** when the conversation end. (e.g., after certain task).
+* Run the cleanup **Every time** when the conversation end. (e.g., after certain task).
 * Administrators can automate bulk purges with SQL if required. Truncate all tables except `user_credentials` table.
 * For long‑lived conversations, rely on **Summarization** to keep the LLM context short, and
 use **Refresh History** to manage storage footprint.

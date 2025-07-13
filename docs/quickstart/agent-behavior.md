@@ -14,7 +14,7 @@ This document outlines key behavior details, recommendations, and known limitati
   The Copilot supports **creating new users and assigning roles**. However, if a password is **not provided**, it generates one automatically. Depending on model behavior, the password **may or may not be returned** reliably in the response.
 
 - **First-Time Slowness & History Refresh:**
-  The assistant might respond slowly during initial use, especially without context. It is highly recommended to **refresh history** when starting a new session. Refer to [Refresh History](../architecture/refresh_history.md) for details.
+  The assistant might respond slowly during initial use, especially without context. It is highly recommended to **refresh history** when starting a new session. Refer to [**Refresh History**](../architecture/refresh_history.md) for details.
 
 - **Trust but Verify:**
   Occasionally, the AI may claim that an action (e.g., disabling a DAG) was performed, even if it wasn’t successful. Always **verify critical actions** by asking the Copilot for confirmation (e.g., "Is DAG `xyz` disabled?").

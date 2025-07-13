@@ -170,12 +170,3 @@ This document describes all the environment variables required for running **Air
 17. **`NGROK_AUTHTOKEN`**
     - **Description**: The Ngrok Token to deploy the Local Fast API to public Https endpoint.  
     - **Required**: ✅ Yes (for Local deployment) 
-
-
-
-## 📝 Notes
-
-- The `.env` file is auto-created if missing at `src/.env`.
-
-- You can dynamically update the environment file via:
-

@@ -18,11 +18,9 @@ Introduce **Redis** as an optional backend for storing Copilot state, checkpoint
 - Support distributed deployments with better scalability.
 - Serve as an alternative to PostgreSQL for ephemeral state tracking.
 
-> 💡 Redis will be especially useful in stateless serverless deployments or scenarios where conversation history doesn't need long-term persistence.
-
 
 ### 3. 📡 Multi-Channel Communication
-Expand Copilot’s availability to support other messaging platforms beyond Microsoft Teams (e.g., Slack, Discord, Webchat). This ensures greater accessibility for users across teams and infrastructures.
+Expand Copilot’s availability to support other messaging platforms beyond Microsoft Teams (e.g., Slack, WhatsApp, Webchat). This ensures greater accessibility for users across teams and infrastructures.
 
 ### 4. 🔔 Proactive Monitoring (User-Driven)
 Introduce intent-based monitoring. Example:

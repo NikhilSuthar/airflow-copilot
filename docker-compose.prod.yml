@@ -10,7 +10,7 @@ networks:
 
 services:
   copilot:
-    image: thedatacarpenter/airflow-copilot:0.1.4
+    image: thedatacarpenter/airflow-copilot:latest
     ports:
       - "3978:3978"
 
@@ -34,10 +34,10 @@ services:
       MIN_MSG_TO_RETAIN:    ${MIN_MSG_TO_RETAIN:-10}
 
       # -------- Airflow --------
-      AIRFLOW_AUTH_STRATEGY: ${AIRFLOW_AUTH_STRATEGY:-centralized}
+      AIRFLOW_AUTH_STRATEGY: ${AIRFLOW_AUTH_STRATEGY:-per_user}
       AIRFLOW_BASE_URL:      ${AIRFLOW_BASE_URL}
-      AIRFLOW_USER_NAME:     ${AIRFLOW_USER_NAME}
-      AIRFLOW_USER_PASSWORD: ${AIRFLOW_USER_PASSWORD}
+      AIRFLOW_USER_NAME:     ${AIRFLOW_USER_NAME:-airflow}
+      AIRFLOW_USER_PASSWORD: ${AIRFLOW_USER_PASSWORD:-airflow}
 
       # -------- Database --------
       DB_URI: ${DB_URI}

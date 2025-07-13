@@ -10,7 +10,7 @@
 
 ---
 
-The above diagram represents the **standard deployment architecture** of Airflow Copilot. All components inside the **dotted box** can be deployed locally or on the cloud.
+The above diagram represents the **standard deployment architecture** of Airflow Copilot. All components inside the **green dotted box** can be deployed locally or on the cloud.
 
 On cloud environments, the system can run as a single **Dockerized application** or be designed using **serverless architecture** principles.
 
@@ -55,30 +55,19 @@ Refer to the **Deployment section** for environment-specific setup details.
 
 ## 🔄 Deployment Flexibility
 
-- 💻 Local development supported via **ngrok** for HTTPS tunneling.
-- 🐳 One-step **Docker Compose** setup for FastAPI, PostgreSQL, and optional Airflow container.
-- ☁️ Compatible with **Azure**, **AWS**, **GCP**, or any **Kubernetes / VM** deployment model.
-- 📡 Easily extensible to Slack, Web App UIs, or other messaging platforms via the Bot Adapter.
+- Local development supported via **ngrok** for HTTPS tunneling.
+- One-step **Docker Compose** setup for FastAPI, PostgreSQL, and optional Airflow container.
+- Compatible with **Azure**, **AWS**, **GCP**, or any **Kubernetes / VM** deployment model.
+- Easily extensible to Slack, Web App UIs, or other messaging platforms via the Bot Adapter.
 
 ---
 
-## 📂 Project Structure
-
-| File/Module          | Description                                         |
-|----------------------|-----------------------------------------------------|
-| `docker-compose.yml` | Container-based deployment entry point              |
-| `settings.py`        | Central config manager with env + encryption logic |
-| `airflow_tools.py`   | Tool layer for interacting with Airflow API         |
-| `graph.py`           | LangGraph logic for chat orchestration              |
-| `README.md`          | Project documentation index                         |
-
----
 
 ## 🔗 Next Steps
 
-- **[Agent workflow](/architecture/agent)**: Understand the Agent workflow.
-- **[Message Summarization](/architecture/summarization)**: Understand the Agent workflow.
-- **[Supported Airflow Copilot Features](/architecture/supported_apis)**: List of activity Airflow copilot can do.
+- **[Agent workflow](../agent)**: Understand the Agent workflow.
+- **[Message Summarization](../summarization)**: Understand the Agent workflow.
+- **[Supported Airflow Copilot Features](../supported_apis)**: List of activity Airflow copilot can do.
 
 
 > 💡 **Pro Tip:** To fully unlock the agent's capabilities, pair it with summarization, memory retention, and message pruning for production-scale deployments.

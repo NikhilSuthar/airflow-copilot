@@ -29,8 +29,8 @@ It enables teams to:
 | 🛠️ Architecture          | [How it Works →](architecture/architecture.md)  | High-level design & component workflow    |
 | ⚙️ Configuration         | [Env Variables →](configuration/environment_variables.md) | All runtime settings at a glance  |
 | 📦 Deployment            | [Deploy Options →](deployment/deployment.md)  | Local, Docker Prod, Kubernetes, AWS       |
-| 🤖 Agent Behavior        | [Smart Logic →](quickstart/agent-behavior.md)  | Fallbacks, retries, limitations           |
-| ❤️ Contributing          | [Join Me →](contributing.md)                  | Help build the future of Copilot          |
+| 🤖 Agent Behavior        | [Agent Logic →](quickstart/agent-behavior.md)  | Fallbacks, retries, limitations           |
+
 
 ---
 

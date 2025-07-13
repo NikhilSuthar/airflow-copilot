@@ -1,7 +1,7 @@
 /* ───────── Brand colours via CSS variables ───────── */
 :root {
   /* Light mode overrides */
-  --md-primary-fg-color: #2C2C2C;  /* light mode primary */
+  --md-primary-fg-color: #101b20;  /* light mode primary */
   --md-accent-fg-color:  #DAA520;
  --md-code-font-size: 0.80rem;
    /* light mode accent */
@@ -27,7 +27,7 @@
 
 [data-md-color-scheme="slate"] {
   /* Dark mode overrides (slightly brighter so they pop) */
-  --md-primary-fg-color: #3c707c;  /* dark mode primary */
+  --md-primary-fg-color: #0867d2;  /* dark mode primary */
   --md-accent-fg-color:  #FF7565;  /* dark mode accent */
 }
 
@@ -106,4 +106,16 @@
   --md-typeset-font-size: 0.95rem;
 }
 
+.md-typeset blockquote {
+  background-color: #f1f5f9;  /* soft light blue-gray */
+  border-left: 4px solid #017CEE;  /* Airflow blue */
+  padding: 1em;
+  margin: 1.5em 0;
+  color: #1a1a1a;
+}
 
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  background-color: #1e293b;  /* dark slate */
+  border-left: 4px solid #017CEE;
+  color: #e2e8f0;
+}

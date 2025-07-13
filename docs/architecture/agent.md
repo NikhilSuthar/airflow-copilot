@@ -29,7 +29,8 @@ Every user message flows through the following loop:
 LangGraph maintains conversation history across sessions and redeployments using persistent checkpoints stored in PostgreSQL.
 
 - **Thread ID** — Each user conversation is tracked using their Microsoft Teams ID.
-- **Summarization** — Older messages are trimmed into concise summaries (3–4 lines) to reduce input length. Note: messages are logically removed from state, but still stored in the backend.
+- **Summarization** — Older messages are trimmed into concise summaries (3–4 lines) to reduce input length. > 
+   >Note: messages are logically removed from state (run time memory), but still stored in the backend.
 - **PostgreSQL Checkpointer** — Persists state transitions after every model/tool interaction, enabling recovery from crashes and safe concurrency.
 
 ---
@@ -56,6 +57,7 @@ Airflow Copilot is **LLM-agnostic** — just configure the appropriate environme
 | **OpenAI**      | `OPENAI_`           | `gpt-4o`           |
 | **Google GenAI**| `GOOGLE_GENAI_`     | `gemini-pro`       |
 | **Anthropic**   | `ANTHROPIC_`        | `claude-3-opus`    |
+| **Groq**   | `GROQ_`        | `llama-3.3-70b-versatile`    |
 
 > You can use one provider for core reasoning, and another for summarization or low-cost background tasks.
 
@@ -71,6 +73,6 @@ Airflow Copilot is **LLM-agnostic** — just configure the appropriate environme
 
 ## 🔗 Next Steps
 
-- **[Message Summarization](/architecture/summarization)**: Understand the Agent workflow.
-- **[Supported Airflow Copilot Features](/architecture/supported_apis)**: List of activity Airflow copilot can do.
-- **[Environment Variables](/configuration/environment_variables)**: Configration details of Airflow Copilot.
+- **[Message Summarization](../summarization)**: Understand the Agent workflow.
+- **[Supported Airflow Copilot Features](../supported_apis)**: List of activity Airflow copilot can do.
+- **[Environment Variables](../../configuration/environment_variables)**: Configration details of Airflow Copilot.

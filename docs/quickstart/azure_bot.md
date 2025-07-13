@@ -1,6 +1,6 @@
 # 👾 Create an **Azure Bot** (for Microsoft Teams)
 
-Airflow Copilot communicates through a **custom Microsoft Teams bot     ** hosted on **Azure Bot Service**. Follow these steps to register the bot, enable Teams, and wire the credentials into Copilot.
+**Airflow Copilot** communicates through a custom **Microsoft Teams App** hosted on **Azure Bot Service**. Follow these steps to register the bot, enable Teams, and wire the credentials into Copilot.
 
 ---
 
@@ -137,5 +137,5 @@ Once completed, you can use `MICROSOFT_APP_ID` as  `AZURE_CLIENT_ID` and `MICROS
 
 ## 🔗 Next Steps
 
-- **[Upload Airflow Copilot App to Microsoft Teams](quickstart/prerequisites.md#upload-to-teams)**  : Sideload or publish Copilot in your organisation.
-- **[Agent Behavior Notes & Known Limitations](quickstart/agent-behavior)**: Some know Airflow Copilot behaviour and Limitations.
+- **[Upload Airflow Copilot App to Microsoft Teams](../upload_app)**  : Sideload or publish Copilot in your organisation.
+- **[Agent Behavior Notes & Known Limitations](../agent-behavior)**: Some know Airflow Copilot behaviour and Limitations.

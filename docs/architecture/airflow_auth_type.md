@@ -53,8 +53,8 @@ With `per_user` auth type, each user can securely store their Airflow credential
 
 ```env
 AIRFLOW_AUTH_STRATEGY=per_user
-AIRFLOW_USER_NAME=
-AIRFLOW_USER_PASSWORD=
+AIRFLOW_USER_NAME=None
+AIRFLOW_USER_PASSWORD=None
 ```
 
 
@@ -77,7 +77,7 @@ Open **Microsoft Teams** and find the **Airflow Copilot** bot.
 
 Type the following command (case insensitive):
 
-`Update my Airflow Credential`
+**`Update my Airflow Credential`**
 
 
 The bot will display a secure input form asking for:
@@ -102,10 +102,10 @@ Upon submission, the bot:
 
 ## 🔗 Next Steps
 
-- **[Message Summarization](//architecture/summarization)**: Understand the Agent workflow.
-- **[Supported Airflow Copilot Features](/architecture/supported_apis)**: List of activity Airflow copilot can do.
-- **[Environment Variables](configuration/environment_variables)**: Configration details of Airflow Copilot.
-- **[Refresh History](/architecture/refresh_history)**: How to delete/purge user conversation with Airflow copilot from backend database(postgres)
-- **[Supported Airflow Copilot Features](/architecture/supported_apis)**: List of activity Airflow copilot can do.
+- **[Message Summarization](../summarization)**: Understand the Agent Message Summarization.
+- **[Supported Airflow Copilot Features](../supported_apis)**: List of activity Airflow copilot can do.
+- **[Environment Variables](../../configuration/environment_variables)**: Configration details of Airflow Copilot.
+- **[Refresh History](../refresh_history)**: How to delete/purge user conversation with Airflow copilot from backend database(postgres)
+- **[Supported Airflow Copilot Features](../supported_apis)**: List of activity Airflow copilot can do.
 
 

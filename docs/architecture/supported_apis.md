@@ -110,11 +110,11 @@ The following sections provide a categorized summary of what you can do with Air
 ## 🔗 Next Steps
 
 
-- **[Agent Behavior Notes & Known Limitations](quickstart/agent-behavior)**: Some know Airflow Copilot behaviour and Limitations.
+- **[Agent Behavior Notes & Known Limitations](../../quickstart/agent-behavior)**: Some know Airflow Copilot behaviour and Limitations.
 
 
 ## 🔗 Next Steps
 
-- **[Refresh History](/architecture/refresh_history)**: How to delete/purge user conversation with Airflow copilot from backend database(postgres)
-- **[Airflow Auth Type](/architecture/airflow_auth_type)**: Airflow Auth type supported to authentication.
-- **[Environment Variables](/configuration/environment_variables)**: Configration details of Airflow Copilot.
+- **[Refresh History](../refresh_history)**: How to delete/purge user conversation with Airflow copilot from backend database(postgres)
+- **[Airflow Auth Type](../airflow_auth_type)**: Airflow Auth type supported to authentication.
+- **[Environment Variables](../../configuration/environment_variables)**: Configration details of Airflow Copilot.

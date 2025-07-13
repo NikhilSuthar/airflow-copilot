@@ -85,7 +85,7 @@ nav:
       - Quick Start:   quickstart/getting_started.md
       - Agent Behaviour:   quickstart/agent-behavior.md
 
-  - 🏰 Architecture:
+  - 🏰 Design:
       - System Overview:          architecture/architecture.md
       - Agent Workflow:    architecture/agent.md
       - Summarization Logic:     architecture/summarization.md
@@ -106,7 +106,6 @@ nav:
       - Docker (Local & Prod): deployment/deployment.md
       - AWS(Serverless):        deployment/aws-deployment.md
 
-  - 🤝 Contribute: contributing.md
   - 🔭 Roadmap:   roadmap.md
 
 plugins:

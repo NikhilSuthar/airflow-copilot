@@ -105,7 +105,7 @@ services:
     restart: "no"
     environment:
       NGROK_API: http://ngrok:4040/api/tunnels
-      BOT_NAME: ${AZURE_BOT_NAME}
+      BOT_NAME: ${AZURE_BOT_NAME:-Airflow-Copilot}
       RESOURCE_GROUP: ${RESOURCE_GROUP}
       AZURE_CLIENT_ID:     ${AZURE_CLIENT_ID}
       AZURE_TENANT_ID:     ${AZURE_TENANT_ID}

@@ -18,7 +18,7 @@ After creating your Azure Bot, follow the steps below to connect it to the Airfl
 1. Locate the **Microsoft App ID** from the Azure Bot you created earlier.  
    *(See [Create Azure Bot](../quickstart/azure_bot.md) if you need a refresher.)*
 
-2. **Download** the Copilot Teams manifest ZIP.
+2. [**Download**](https://github.com/NikhilSuthar/airflow-copilot/blob/main/manifest/manifest.zip) the Copilot Teams manifest ZIP.
 
 3. **Extract** the ZIP and open `manifest.json`.
 
@@ -39,7 +39,7 @@ After creating your Azure Bot, follow the steps below to connect it to the Airfl
 
 > **Note:** Uploading custom apps may be disabled on tightly‑managed tenants. Check with your Teams admin if the options below are missing.
 
-> The custom app option is also not availble with community version of Microsoft Teams.
+> The custom app option is also not available with community version of Microsoft Teams.
 
 1. Open **Microsoft Teams**.
 

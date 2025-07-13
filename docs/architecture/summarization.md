@@ -29,11 +29,11 @@ Each time the message count exceeds a configured threshold, the earliest interac
 
 # 🛡️ Design Notes
 
-✅ Messages are not deleted from the database — only trimmed from in-memory state.  
-✨ Summaries are maintained in a separate key: `state["summary"]`.  
-🔁 Summarization is triggered automatically when the total message count exceeds  
+- ✅ Messages are not deleted from the database — only trimmed from in-memory state.  
+- ✨ Summaries are maintained in a separate key: `state["summary"]`.  
+- 🔁 Summarization is triggered automatically when the total message count exceeds  
 `MIN_MSG_TO_SUMMARIZE + MIN_MSG_TO_RETAIN`.  
-🔍 Last human message before the cutoff is preserved, ensuring summarization doesn't split active interactions or commands. 
+- 🔍 Last human message before the cutoff is preserved, ensuring summarization doesn't split active interactions or commands. 
 
 ---
 
@@ -46,9 +46,9 @@ Control summarization behavior through the following environment variables:
 | `MIN_MSG_TO_SUMMARIZE` | Minimum messages required before summarization kicks in  | `10`    |
 | `MIN_MSG_TO_RETAIN`    | Number of recent messages to retain without summarizing  | `10`    |
 
-> 💡 This only affects runtime memory. To fully delete stored messages, see the **Delete History** section.  
-> ⚠️ Avoid setting the values too low — this may lead to excessive summarization and increased LLM usage.  
-> ✅ Recommended: use a lightweight or cost-effective model for summarization.
+> - 💡 This only affects runtime memory. To fully delete stored messages, see the **Refresh History** section.  
+> - ⚠️ Avoid setting the values too low — this may lead to excessive summarization and increased LLM usage.  
+> - ✅ Recommended: use a lightweight or cost-effective model for summarization.
 
 ---
 
@@ -69,26 +69,19 @@ Let’s walk through a typical conversation and how it might be summarized:
 
 **Prior Summary:** None  
 
-**Human:**  
-Hello
+**Human:** Hello
 
-**AI:**  
-Calling greet tool...
+**AI:**  Calling greet tool...
 
-**Tool Call:**  
-`greet(user_name='John')`
+**Tool Call:**  `greet(user_name='John')`
 
-**AI:**  
-Hello John, how can I assist you with Airflow?
+**AI:**  Hello John, how can I assist you with Airflow?
 
-**Human:**  
-Can you show me the latest DAG runs for `load_sales_data`?
+**Human:**  Can you show me the latest DAG runs for `load_sales_data`?
 
-**AI:**  
-`call get_dag_runs tool with dag id 'load_sales_data'`
+**AI:**  `call get_dag_runs tool with dag id 'load_sales_data'`
 
-**Tool Call:**  
-`get_dag_runs(dag_id='load_sales_data')`
+**Tool Call:**  `get_dag_runs(dag_id='load_sales_data')`
 
 **AI:**  
 Here are the last 3 DAG runs:  
@@ -96,17 +89,13 @@ Here are the last 3 DAG runs:
 - `run_2024_06_02` – ❌ Failed  
 - `run_2024_06_03` – ✅ Success
 
-**Human:**  
-Please retry the failed run.
+**Human:**  Please retry the failed run.
 
-**AI:**  
-Retrying `run_2024_06_02` for DAG `load_sales_data`.
+**AI:**  Retrying `run_2024_06_02` for DAG `load_sales_data`.
 
-**Tool Call:**  
-`trigger_dag(dag_id='load_sales_data', dag_run_id='run_2024_06_02')`
+**Tool Call:**  `trigger_dag(dag_id='load_sales_data', dag_run_id='run_2024_06_02')`
 
-**AI:**  
-The failed DAG has been triggered.
+**AI:**  The failed DAG has been triggered.
 
 ---
 
@@ -122,11 +111,9 @@ The user, John, initiated a greeting and requested the latest DAG runs for `load
 **Prior Summary:**  
 The user, John, initiated a greeting and requested the latest DAG runs for `load_sales_data`. The assistant retrieved three recent runs, identifying `run_2024_06_02` as failed. Upon user request, that run was successfully re-triggered through the API.
 
-**Human:**  
-Can you tell me if the DAG ran successfully?
+**Human:**  Can you tell me if the DAG ran successfully?
 
-**AI:**  
-Yes, the DAG `load_sales_data` has run successfully. The current status is `Success`, and the run ID is `run_2024_06_02`.
+**AI:**  Yes, the DAG `load_sales_data` has run successfully. The current status is `Success`, and the run ID is `run_2024_06_02`.
 
 ---
 
@@ -150,8 +137,8 @@ Even across hundreds of exchanges, **Airflow Copilot** remains context-aware, me
 
 ## 🔗 Next Steps
 
-- **[Refresh History](/architecture/refresh_history)**: How to delete/purge user conversation with Airflow copilot from backend database(postgres)
-- **[Supported Airflow Copilot Features](/architecture/supported_apis)**: List of activity Airflow copilot can do.
-- **[Airflow Auth Type](/architecture/airflow_auth_type)**: Airflow Auth type supported to authentication.
-- **[Environment Variables](/configuration/environment_variables)**: Configration details of Airflow Copilot.
+- **[Refresh History](../refresh_history)**: How to delete/purge user conversation with Airflow copilot from backend database(postgres)
+- **[Supported Airflow Copilot Features](../supported_apis)**: List of activity Airflow copilot can do.
+- **[Airflow Auth Type](../airflow_auth_type)**: Airflow Auth type supported to authentication.
+- **[Environment Variables](../../configuration/environment_variables)**: Configration details of Airflow Copilot.
 
