@@ -13,13 +13,13 @@
         <meta name="author" content="Nikhil Suthar">
       
       
-        <link rel="canonical" href="https://thedatacarpenter.com/airflow-copilot/quickstart/before_we_start/">
+        <link rel="canonical" href="https://thedatacarpenter.com/airflow-copilot/deployment/build/">
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../deployment/">
       
       
-        <link rel="next" href="../azure_bot/">
+        <link rel="next" href="../../roadmap/">
       
       
       <link rel="icon" href="../../assets/favicon.png">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Before you begin - </title>
+        <title>Build & Publish - </title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prerequisites" class="md-skip">
+        <a href="#build-publish-docker-image-for-airflow-copilot" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Before you begin
+              Build & Publish
             
           </span>
         </div>
@@ -282,20 +282,20 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -311,7 +311,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             🚀 Getting Started
@@ -322,32 +322,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Before you begin
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../quickstart/before_we_start/" class="md-nav__link">
         
   
   
@@ -358,95 +336,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#more-context" class="md-nav__link">
-    <span class="md-ellipsis">
-      📝 More Context
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📝 More Context">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-apache-airflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Apache Airflow
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-azure-bot-service" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Azure Bot Service
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-microsoft-teams" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Microsoft Teams
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-postgresql" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. PostgreSQL
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-ngrok-authtoken-optional-use-for-local-deployment-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Ngrok Authtoken (optional – use for local deployment only)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔗 Next Steps
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -459,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_bot/" class="md-nav__link">
+      <a href="../../quickstart/azure_bot/" class="md-nav__link">
         
   
   
@@ -482,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upload_app/" class="md-nav__link">
+      <a href="../../quickstart/upload_app/" class="md-nav__link">
         
   
   
@@ -505,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../../quickstart/getting_started/" class="md-nav__link">
         
   
   
@@ -528,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../agent-behavior/" class="md-nav__link">
+      <a href="../../quickstart/agent-behavior/" class="md-nav__link">
         
   
   
@@ -949,20 +838,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -978,7 +867,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             🚢 Deployment
@@ -992,7 +881,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../deployment/deployment/" class="md-nav__link">
+      <a href="../deployment/" class="md-nav__link">
         
   
   
@@ -1012,10 +901,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../deployment/build/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Build & Publish
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1026,6 +937,122 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-in-the-docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 What's in the Docker Image?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🪜 Step-by-Step Instructions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🪜 Step-by-Step Instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clone-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      1️⃣ Clone the Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configure-the-env-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      2️⃣ Configure the .env File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-change-the-docker-composelocayml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      3️⃣ change the docker-compose.loca.yml file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-local-run-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      4️⃣ Local Run (Test)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      4️⃣ Stop
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Download
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#done" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Done!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1038,7 +1065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../deployment/aws-deployment.md" class="md-nav__link">
+      <a href="../aws-deployment.md" class="md-nav__link">
         
   
   
@@ -1110,55 +1137,73 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#more-context" class="md-nav__link">
+  <a href="#whats-in-the-docker-image" class="md-nav__link">
     <span class="md-ellipsis">
-      📝 More Context
+      📦 What's in the Docker Image?
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📝 More Context">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🪜 Step-by-Step Instructions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🪜 Step-by-Step Instructions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-apache-airflow" class="md-nav__link">
+  <a href="#1-clone-the-repository" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Apache Airflow
+      1️⃣ Clone the Repository
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-azure-bot-service" class="md-nav__link">
+  <a href="#2-configure-the-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Azure Bot Service
+      2️⃣ Configure the .env File
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-microsoft-teams" class="md-nav__link">
+  <a href="#3-change-the-docker-composelocayml-file" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Microsoft Teams
+      3️⃣ change the docker-compose.loca.yml file
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-postgresql" class="md-nav__link">
+  <a href="#4-local-run-test" class="md-nav__link">
     <span class="md-ellipsis">
-      4. PostgreSQL
+      4️⃣ Local Run (Test)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-ngrok-authtoken-optional-use-for-local-deployment-only" class="md-nav__link">
+  <a href="#4-stop" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Ngrok Authtoken (optional – use for local deployment only)
+      4️⃣ Stop
     </span>
   </a>
   
@@ -1170,9 +1215,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#download" class="md-nav__link">
     <span class="md-ellipsis">
-      🔗 Next Steps
+      📦 Download
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#done" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Done!
     </span>
   </a>
   
@@ -1197,95 +1251,87 @@
   
 
 
-<h1 id="prerequisites">🚦 Prerequisites</h1>
-<p>Before you spin‑up <strong>Airflow Copilot</strong>, make sure the following building blocks are in place.</p>
+<h1 id="build-publish-docker-image-for-airflow-copilot">🛠️ Build &amp; Publish Docker Image for Airflow Copilot</h1>
+<p>This guide explains how to build  <a href="https://thedatacarpenter.com/airflow-copilot">Airflow Copilot</a>, locally.</p>
+<hr />
+<h2 id="whats-in-the-docker-image">📦 What's in the Docker Image?</h2>
+<p>The Docker image includes:</p>
 <ul>
-<li>✅ Install <a href="https://docs.docker.com/engine/install/">Docker Community Edition (CE)</a> on your workstation (based on your OS).</li>
-<li>✅ Install <a href="https://docs.docker.com/compose/install/">Docker Compose</a> <strong>v2.14.0 or newer</strong>.</li>
+<li>A FastAPI web server that runs the Copilot agent</li>
+<li>LangGraph agent with integrated tools</li>
+<li>Optional SQL file for database bootstrapping</li>
+<li>Microsoft Teams bot integration</li>
+<li>Secure environment variable support</li>
 </ul>
 <hr />
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Requirement</th>
-<th>Why it’s needed</th>
-<th>Minimum Version / Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>1</strong></td>
-<td><strong>Apache Airflow</strong></td>
-<td>Target orchestrator Copilot queries (DAG runs, tasks, variables, etc.).</td>
-<td><strong>≥ 2.5.0</strong> <br>• REST API enabled</td>
-</tr>
-<tr>
-<td><strong>2</strong></td>
-<td><strong>Azure Bot Service</strong></td>
-<td>Secure webhook &amp; credentials so Microsoft Teams can talk to Copilot.</td>
-<td>Any Azure subscription <br>• Consumes Bot Service units</td>
-</tr>
-<tr>
-<td><strong>3</strong></td>
-<td><strong>Microsoft Teams</strong></td>
-<td>End‑user chat interface. Copilot is sideloaded as a custom Teams app.</td>
-<td>Desktop / Web <br>• <strong>Not</strong> free “Community” edition</td>
-</tr>
-<tr>
-<td><strong>4</strong></td>
-<td><strong>PostgreSQL</strong></td>
-<td>Persists conversation state &amp; checkpoints (LangGraph).</td>
-<td>v12 + <br>• Reuse Airflow DB <strong>or</strong> deploy fresh instance</td>
-</tr>
-</tbody>
-</table>
+<h2 id="prerequisites">🧰 Prerequisites</h2>
+<p>Ensure the following are installed on your system:</p>
+<ul>
+<li><a href="https://docs.docker.com/get-docker/">Docker</a></li>
+<li><a href="https://git-scm.com/downloads">Git</a></li>
+<li>DockerHub or any container registry account</li>
+</ul>
 <hr />
-<h2 id="more-context">📝 More Context</h2>
-<h3 id="1-apache-airflow">1. Apache Airflow</h3>
-<ul>
-<li>Copilot calls the native REST API (<code>/api/v1/...</code>).</li>
-<li>Airflow must be reachable from the Copilot container (or vice‑versa).</li>
-<li>Use a dedicated service account (<code>admin</code> or fine‑grained RBAC).</li>
-</ul>
-<h3 id="2-azure-bot-service">2. Azure Bot Service</h3>
-<ul>
-<li>Acts as a relay: Teams ⇄ Bot Service ⇄ Copilot.</li>
-<li>Register a <strong>Teams Channel</strong> and paste Copilot’s public webhook (ngrok / reverse proxy).</li>
-</ul>
-<h3 id="3-microsoft-teams">3. Microsoft Teams</h3>
-<ul>
-<li>Upload Copilot’s <code>manifest.zip</code> via Teams Admin Center or sideload (Developer Preview).</li>
-<li>Free “Community” tenants do <strong>not</strong> support custom bots.</li>
-</ul>
-<h3 id="4-postgresql">4. PostgreSQL</h3>
-<ul>
-<li>Stores every message, summary &amp; checkpoint so Copilot can resume after restarts.</li>
-<li>Point Copilot to your existing Airflow DB <strong>or</strong> use the Docker‑Compose Postgres service or any persistent server database (such as RDS).</li>
-<li>Schema is created automatically on first run.</li>
-</ul>
-<h3 id="5-ngrok-authtoken-optional-use-for-local-deployment-only">5. Ngrok Authtoken <em>(optional – use for local deployment only)</em></h3>
-<p>Need to expose Copilot’s local API URL to Azure Bot? Grab your personal Ngrok <strong>authtoken</strong>:</p>
-<ol>
-<li>Sign in—or create a free account—at <a href="https://dashboard.ngrok.com/login">ngrok.com</a>.</li>
-<li>Navigate to <strong>☰ → Auth → Your Authtoken</strong> in the sidebar.</li>
-<li>Copy the token and use it in your <code>docker-compose</code> file.</li>
-</ol>
+<h2 id="step-by-step-instructions">🪜 Step-by-Step Instructions</h2>
+<h3 id="1-clone-the-repository">1️⃣ Clone the Repository</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/NikhilSuthar/airflow-copilot.git
+<span class="nb">cd</span><span class="w"> </span>airflow-copilot
+</code></pre></div>
 <hr />
-<h2 id="next-steps">🔗 Next Steps</h2>
-<ul>
-<li>
-<p>➡️ <strong><a href="/quickstart/azure_bot/">Create an Azure Bot (for Microsoft Teams)</a></strong><br />
-  Step‑by‑step Portal &amp; CLI guide (single‑tenant vs multi‑tenant tips).</p>
-</li>
-<li>
-<p>➡️ <strong><a href="quickstart/prerequisites.md#upload-to-teams">Upload Airflow Copilot App to Microsoft Teams</a></strong><br />
-  Sideload or publish Copilot to your organisation.</p>
-</li>
-</ul>
+<h3 id="2-configure-the-env-file">2️⃣ Configure the <code>.env</code> File</h3>
+<p>Copy the example env file:</p>
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</code></pre></div>
+<p>Then edit <code>.env</code> with your values:</p>
+<div class="highlight"><pre><span></span><code>LLM_MODEL_PROVIDER_NAME=openai
+LLM_MODEL_NAME=gpt-4
+OPENAI_API_KEY=your_openai_key
+MICROSOFT_APP_ID=your_app_id
+MICROSOFT_APP_PASSWORD=your_password
+DB_URI=postgresql+psycopg2://user:pass@host:port/dbname
+FERNET_SECRET_KEY=your_fernet_key
+</code></pre></div>
+<hr />
+<h3 id="3-change-the-docker-composelocayml-file">3️⃣ change the <code>docker-compose.loca.yml</code> file</h3>
+<p>Update the image tag to build tag in <code>docker-compose.local.yml</code> file.
+Replace below </p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>image:<span class="w"> </span>thedatacarpenter/airflow-copilot:latest
+</code></pre></div>
+<p>with </p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>build:
+<span class="w">      </span>context:<span class="w"> </span>.
+<span class="w">      </span>dockerfile:<span class="w"> </span>Dockerfile
+</code></pre></div>
+<h3 id="4-local-run-test">4️⃣ Local Run (Test)</h3>
+<p>Use below command to build and run</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.local.yml<span class="w">  </span>up<span class="w"> </span>--build<span class="w"> </span>--force-recreate
+</code></pre></div>
+<h3 id="4-stop">4️⃣ Stop</h3>
+<p>Press <code>ctrl+c</code> and enter below command:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.local.yml<span class="w">  </span>down<span class="w"> </span>-v
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="download">📦 Download</h2>
+<p>To download the pre-built image:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>thedatacarpenter/airflow-copilot:latest
+</code></pre></div>
+<p>To use this image in Docker Compose:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3978:3978&quot;</span>
+<span class="w">    </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+</code></pre></div>
+<hr />
+<h2 id="done">✅ Done!</h2>
+<p>You now have a production-ready Docker image of Airflow Copilot.</p>
 <blockquote>
-<p>💡 <strong>Tip:</strong> Run everything locally with Docker Compose for testing, then move the same containers to Kubernetes / ECS for production — just keep the environment variables consistent.</p>
+<p>🔄 Rebuild &amp; re-push the image every time you make source code changes.</p>
 </blockquote>
+<p>For deployment options (Docker, AWS, Azure), see the full <a href="../deployment/">Deployment Guide</a>.</p>
+<hr />
 
 
 
@@ -1321,7 +1367,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: 🏠 Home">
+          <a href="../deployment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Docker (Local &amp; Prod)">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1331,20 +1377,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                🏠 Home
+                Docker (Local & Prod)
               </div>
             </div>
           </a>
         
         
           
-          <a href="../azure_bot/" class="md-footer__link md-footer__link--next" aria-label="Next: Create Azure Bot">
+          <a href="../../roadmap/" class="md-footer__link md-footer__link--next" aria-label="Next: 🔭 Roadmap">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Create Azure Bot
+                🔭 Roadmap
               </div>
             </div>
             <div class="md-footer__button md-icon">
