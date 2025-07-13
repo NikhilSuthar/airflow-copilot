@@ -465,7 +465,7 @@
   
   
   <span class="md-ellipsis">
-    🏰 Architecture
+    🏰 Design
     
   </span>
   
@@ -476,7 +476,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            🏰 Architecture
+            🏰 Design
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1069,28 +1069,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    🤝 Contribute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../roadmap/" class="md-nav__link">
         
   
@@ -1280,8 +1258,8 @@ AIRFLOW_USER_PASSWORD=&lt;airflow password&gt;
 <hr />
 <h3 id="configuration_1">🔧 Configuration</h3>
 <div class="highlight"><pre><span></span><code>AIRFLOW_AUTH_STRATEGY=per_user
-AIRFLOW_USER_NAME=
-AIRFLOW_USER_PASSWORD=
+AIRFLOW_USER_NAME=None
+AIRFLOW_USER_PASSWORD=None
 </code></pre></div>
 <p>📝 <strong>Note</strong>: Leave <code>AIRFLOW_USER_NAME</code> and <code>AIRFLOW_USER_PASSWORD</code> blank — credentials are set by each user individually through the Microsoft Teams UI.</p>
 <h3 id="design_1">Design</h3>
@@ -1293,7 +1271,7 @@ AIRFLOW_USER_PASSWORD=
 <h3 id="how-users-can-set-their-airflow-credentials">🧭 How Users Can Set Their Airflow Credentials</h3>
 <p>Open <strong>Microsoft Teams</strong> and find the <strong>Airflow Copilot</strong> bot.</p>
 <p>Type the following command (case insensitive):</p>
-<p><code>Update my Airflow Credential</code></p>
+<p><strong><code>Update my Airflow Credential</code></strong></p>
 <p>The bot will display a secure input form asking for:</p>
 <ul>
 <li><strong>Username</strong></li>
@@ -1310,11 +1288,11 @@ AIRFLOW_USER_PASSWORD=
 <p><img alt="Airflow_User_Credential" src="../../assets/Airflow_User_Credential.png" /></p>
 <h2 id="next-steps">🔗 Next Steps</h2>
 <ul>
-<li><strong><a href="//architecture/summarization">Message Summarization</a></strong>: Understand the Agent workflow.</li>
-<li><strong><a href="/architecture/supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
-<li><strong><a href="configuration/environment_variables">Environment Variables</a></strong>: Configration details of Airflow Copilot.</li>
-<li><strong><a href="/architecture/refresh_history">Refresh History</a></strong>: How to delete/purge user conversation with Airflow copilot from backend database(postgres)</li>
-<li><strong><a href="/architecture/supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
+<li><strong><a href="../summarization">Message Summarization</a></strong>: Understand the Agent Message Summarization.</li>
+<li><strong><a href="../supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
+<li><strong><a href="../../configuration/environment_variables">Environment Variables</a></strong>: Configration details of Airflow Copilot.</li>
+<li><strong><a href="../refresh_history">Refresh History</a></strong>: How to delete/purge user conversation with Airflow copilot from backend database(postgres)</li>
+<li><strong><a href="../supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
 </ul>
 
 

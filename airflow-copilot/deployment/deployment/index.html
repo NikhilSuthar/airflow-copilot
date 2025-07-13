@@ -19,7 +19,7 @@
         <link rel="prev" href="../../configuration/environment_variables/">
       
       
-        <link rel="next" href="../../contributing/">
+        <link rel="next" href="../../roadmap/">
       
       
       <link rel="icon" href="../../assets/favicon.png">
@@ -465,7 +465,7 @@
   
   
   <span class="md-ellipsis">
-    🏰 Architecture
+    🏰 Design
     
   </span>
   
@@ -476,7 +476,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            🏰 Architecture
+            🏰 Design
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -994,28 +994,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    🤝 Contribute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../roadmap/" class="md-nav__link">
         
   
@@ -1298,7 +1276,7 @@ Reference <a href="../../configuration/environment_variables/"><strong>Environme
 
 <span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:0.1.4</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3978:3978&quot;</span>
 
@@ -1322,10 +1300,10 @@ Reference <a href="../../configuration/environment_variables/"><strong>Environme
 <span class="w">      </span><span class="nt">MIN_MSG_TO_RETAIN</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_RETAIN:-10}</span>
 
 <span class="w">      </span><span class="c1"># -------- Airflow --------</span>
-<span class="w">      </span><span class="nt">AIRFLOW_AUTH_STRATEGY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_AUTH_STRATEGY:-centralized}</span>
+<span class="w">      </span><span class="nt">AIRFLOW_AUTH_STRATEGY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_AUTH_STRATEGY:-per_user}</span>
 <span class="w">      </span><span class="nt">AIRFLOW_BASE_URL</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_BASE_URL}</span>
-<span class="w">      </span><span class="nt">AIRFLOW_USER_NAME</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_NAME}</span>
-<span class="w">      </span><span class="nt">AIRFLOW_USER_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_PASSWORD}</span>
+<span class="w">      </span><span class="nt">AIRFLOW_USER_NAME</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_NAME:-airflow}</span>
+<span class="w">      </span><span class="nt">AIRFLOW_USER_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_PASSWORD:-airflow}</span>
 
 <span class="w">      </span><span class="c1"># -------- Database --------</span>
 <span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span>
@@ -1614,13 +1592,13 @@ See [**Azure Bot Setup**](../quickstart/azure_bot.md) for more details.
         
         
           
-          <a href="../../contributing/" class="md-footer__link md-footer__link--next" aria-label="Next: 🤝 Contribute">
+          <a href="../../roadmap/" class="md-footer__link md-footer__link--next" aria-label="Next: 🔭 Roadmap">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                🤝 Contribute
+                🔭 Roadmap
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -465,7 +465,7 @@
   
   
   <span class="md-ellipsis">
-    🏰 Architecture
+    🏰 Design
     
   </span>
   
@@ -476,7 +476,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            🏰 Architecture
+            🏰 Design
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1030,28 +1030,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    🤝 Contribute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../roadmap/" class="md-nav__link">
         
   
@@ -1215,7 +1193,10 @@
 <p>LangGraph maintains conversation history across sessions and redeployments using persistent checkpoints stored in PostgreSQL.</p>
 <ul>
 <li><strong>Thread ID</strong> — Each user conversation is tracked using their Microsoft Teams ID.</li>
-<li><strong>Summarization</strong> — Older messages are trimmed into concise summaries (3–4 lines) to reduce input length. Note: messages are logically removed from state, but still stored in the backend.</li>
+<li><strong>Summarization</strong> — Older messages are trimmed into concise summaries (3–4 lines) to reduce input length. &gt; <blockquote>
+<p>Note: messages are logically removed from state (run time memory), but still stored in the backend.</p>
+</blockquote>
+</li>
 <li><strong>PostgreSQL Checkpointer</strong> — Persists state transitions after every model/tool interaction, enabling recovery from crashes and safe concurrency.</li>
 </ul>
 <hr />
@@ -1256,6 +1237,11 @@
 <td><code>ANTHROPIC_</code></td>
 <td><code>claude-3-opus</code></td>
 </tr>
+<tr>
+<td><strong>Groq</strong></td>
+<td><code>GROQ_</code></td>
+<td><code>llama-3.3-70b-versatile</code></td>
+</tr>
 </tbody>
 </table>
 <blockquote>
@@ -1271,9 +1257,9 @@
 <hr />
 <h2 id="next-steps">🔗 Next Steps</h2>
 <ul>
-<li><strong><a href="/architecture/summarization">Message Summarization</a></strong>: Understand the Agent workflow.</li>
-<li><strong><a href="/architecture/supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
-<li><strong><a href="/configuration/environment_variables">Environment Variables</a></strong>: Configration details of Airflow Copilot.</li>
+<li><strong><a href="../summarization">Message Summarization</a></strong>: Understand the Agent workflow.</li>
+<li><strong><a href="../supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
+<li><strong><a href="../../configuration/environment_variables">Environment Variables</a></strong>: Configration details of Airflow Copilot.</li>
 </ul>
 
 

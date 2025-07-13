@@ -465,7 +465,7 @@
   
   
   <span class="md-ellipsis">
-    🏰 Architecture
+    🏰 Design
     
   </span>
   
@@ -476,7 +476,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            🏰 Architecture
+            🏰 Design
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -576,15 +576,6 @@
   <a href="#deployment-flexibility" class="md-nav__link">
     <span class="md-ellipsis">
       🔄 Deployment Flexibility
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      📂 Project Structure
     </span>
   </a>
   
@@ -1039,28 +1030,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    🤝 Contribute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../roadmap/" class="md-nav__link">
         
   
@@ -1148,15 +1117,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      📂 Project Structure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       🔗 Next Steps
@@ -1190,7 +1150,7 @@
 <hr />
 <p><img alt="Architecture Diagram" src="../../assets/Standard-Architecture.svg" /></p>
 <hr />
-<p>The above diagram represents the <strong>standard deployment architecture</strong> of Airflow Copilot. All components inside the <strong>dotted box</strong> can be deployed locally or on the cloud.</p>
+<p>The above diagram represents the <strong>standard deployment architecture</strong> of Airflow Copilot. All components inside the <strong>green dotted box</strong> can be deployed locally or on the cloud.</p>
 <p>On cloud environments, the system can run as a single <strong>Dockerized application</strong> or be designed using <strong>serverless architecture</strong> principles.</p>
 <p>Refer to the <strong>Deployment section</strong> for environment-specific setup details.</p>
 <hr />
@@ -1291,49 +1251,17 @@
 <hr />
 <h2 id="deployment-flexibility">🔄 Deployment Flexibility</h2>
 <ul>
-<li>💻 Local development supported via <strong>ngrok</strong> for HTTPS tunneling.</li>
-<li>🐳 One-step <strong>Docker Compose</strong> setup for FastAPI, PostgreSQL, and optional Airflow container.</li>
-<li>☁️ Compatible with <strong>Azure</strong>, <strong>AWS</strong>, <strong>GCP</strong>, or any <strong>Kubernetes / VM</strong> deployment model.</li>
-<li>📡 Easily extensible to Slack, Web App UIs, or other messaging platforms via the Bot Adapter.</li>
+<li>Local development supported via <strong>ngrok</strong> for HTTPS tunneling.</li>
+<li>One-step <strong>Docker Compose</strong> setup for FastAPI, PostgreSQL, and optional Airflow container.</li>
+<li>Compatible with <strong>Azure</strong>, <strong>AWS</strong>, <strong>GCP</strong>, or any <strong>Kubernetes / VM</strong> deployment model.</li>
+<li>Easily extensible to Slack, Web App UIs, or other messaging platforms via the Bot Adapter.</li>
 </ul>
-<hr />
-<h2 id="project-structure">📂 Project Structure</h2>
-<table>
-<thead>
-<tr>
-<th>File/Module</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>docker-compose.yml</code></td>
-<td>Container-based deployment entry point</td>
-</tr>
-<tr>
-<td><code>settings.py</code></td>
-<td>Central config manager with env + encryption logic</td>
-</tr>
-<tr>
-<td><code>airflow_tools.py</code></td>
-<td>Tool layer for interacting with Airflow API</td>
-</tr>
-<tr>
-<td><code>graph.py</code></td>
-<td>LangGraph logic for chat orchestration</td>
-</tr>
-<tr>
-<td><code>README.md</code></td>
-<td>Project documentation index</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <h2 id="next-steps">🔗 Next Steps</h2>
 <ul>
-<li><strong><a href="/architecture/agent">Agent workflow</a></strong>: Understand the Agent workflow.</li>
-<li><strong><a href="/architecture/summarization">Message Summarization</a></strong>: Understand the Agent workflow.</li>
-<li><strong><a href="/architecture/supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
+<li><strong><a href="../agent">Agent workflow</a></strong>: Understand the Agent workflow.</li>
+<li><strong><a href="../summarization">Message Summarization</a></strong>: Understand the Agent workflow.</li>
+<li><strong><a href="../supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
 </ul>
 <blockquote>
 <p>💡 <strong>Pro Tip:</strong> To fully unlock the agent's capabilities, pair it with summarization, memory retention, and message pruning for production-scale deployments.</p>

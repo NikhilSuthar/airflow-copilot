@@ -465,7 +465,7 @@
   
   
   <span class="md-ellipsis">
-    🏰 Architecture
+    🏰 Design
     
   </span>
   
@@ -476,7 +476,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            🏰 Architecture
+            🏰 Design
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -994,28 +994,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    🤝 Contribute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../roadmap/" class="md-nav__link">
         
   
@@ -1113,11 +1091,13 @@
 <p><em>Summarization replaces verbose chat history with a condensed version while keeping the latest messages intact.</em></p>
 <hr />
 <h1 id="design-notes">🛡️ Design Notes</h1>
-<p>✅ Messages are not deleted from the database — only trimmed from in-memory state.<br />
-✨ Summaries are maintained in a separate key: <code>state["summary"]</code>.<br />
-🔁 Summarization is triggered automatically when the total message count exceeds<br />
-<code>MIN_MSG_TO_SUMMARIZE + MIN_MSG_TO_RETAIN</code>.<br />
-🔍 Last human message before the cutoff is preserved, ensuring summarization doesn't split active interactions or commands. </p>
+<ul>
+<li>✅ Messages are not deleted from the database — only trimmed from in-memory state.  </li>
+<li>✨ Summaries are maintained in a separate key: <code>state["summary"]</code>.  </li>
+<li>🔁 Summarization is triggered automatically when the total message count exceeds<br />
+<code>MIN_MSG_TO_SUMMARIZE + MIN_MSG_TO_RETAIN</code>.  </li>
+<li>🔍 Last human message before the cutoff is preserved, ensuring summarization doesn't split active interactions or commands. </li>
+</ul>
 <hr />
 <h2 id="tuning-parameters">🧪 Tuning Parameters</h2>
 <p>Control summarization behavior through the following environment variables:</p>
@@ -1143,9 +1123,11 @@
 </tbody>
 </table>
 <blockquote>
-<p>💡 This only affects runtime memory. To fully delete stored messages, see the <strong>Delete History</strong> section.<br />
-⚠️ Avoid setting the values too low — this may lead to excessive summarization and increased LLM usage.<br />
-✅ Recommended: use a lightweight or cost-effective model for summarization.</p>
+<ul>
+<li>💡 This only affects runtime memory. To fully delete stored messages, see the <strong>Refresh History</strong> section.  </li>
+<li>⚠️ Avoid setting the values too low — this may lead to excessive summarization and increased LLM usage.  </li>
+<li>✅ Recommended: use a lightweight or cost-effective model for summarization.</li>
+</ul>
 </blockquote>
 <hr />
 <h2 id="benefits">🧠 Benefits</h2>
@@ -1160,33 +1142,22 @@
 <p>Let’s walk through a typical conversation and how it might be summarized:</p>
 <h3 id="full-interaction-before-summarization">🗨️ Full Interaction Before Summarization</h3>
 <p><strong>Prior Summary:</strong> None  </p>
-<p><strong>Human:</strong><br />
-Hello</p>
-<p><strong>AI:</strong><br />
-Calling greet tool...</p>
-<p><strong>Tool Call:</strong><br />
-<code>greet(user_name='John')</code></p>
-<p><strong>AI:</strong><br />
-Hello John, how can I assist you with Airflow?</p>
-<p><strong>Human:</strong><br />
-Can you show me the latest DAG runs for <code>load_sales_data</code>?</p>
-<p><strong>AI:</strong><br />
-<code>call get_dag_runs tool with dag id 'load_sales_data'</code></p>
-<p><strong>Tool Call:</strong><br />
-<code>get_dag_runs(dag_id='load_sales_data')</code></p>
+<p><strong>Human:</strong> Hello</p>
+<p><strong>AI:</strong>  Calling greet tool...</p>
+<p><strong>Tool Call:</strong>  <code>greet(user_name='John')</code></p>
+<p><strong>AI:</strong>  Hello John, how can I assist you with Airflow?</p>
+<p><strong>Human:</strong>  Can you show me the latest DAG runs for <code>load_sales_data</code>?</p>
+<p><strong>AI:</strong>  <code>call get_dag_runs tool with dag id 'load_sales_data'</code></p>
+<p><strong>Tool Call:</strong>  <code>get_dag_runs(dag_id='load_sales_data')</code></p>
 <p><strong>AI:</strong><br />
 Here are the last 3 DAG runs:<br />
 - <code>run_2024_06_01</code> – ✅ Success<br />
 - <code>run_2024_06_02</code> – ❌ Failed<br />
 - <code>run_2024_06_03</code> – ✅ Success</p>
-<p><strong>Human:</strong><br />
-Please retry the failed run.</p>
-<p><strong>AI:</strong><br />
-Retrying <code>run_2024_06_02</code> for DAG <code>load_sales_data</code>.</p>
-<p><strong>Tool Call:</strong><br />
-<code>trigger_dag(dag_id='load_sales_data', dag_run_id='run_2024_06_02')</code></p>
-<p><strong>AI:</strong><br />
-The failed DAG has been triggered.</p>
+<p><strong>Human:</strong>  Please retry the failed run.</p>
+<p><strong>AI:</strong>  Retrying <code>run_2024_06_02</code> for DAG <code>load_sales_data</code>.</p>
+<p><strong>Tool Call:</strong>  <code>trigger_dag(dag_id='load_sales_data', dag_run_id='run_2024_06_02')</code></p>
+<p><strong>AI:</strong>  The failed DAG has been triggered.</p>
 <hr />
 <h3 id="after-summarization">🧾 After Summarization</h3>
 <p><strong>Summarization:</strong><br />
@@ -1195,10 +1166,8 @@ The user, John, initiated a greeting and requested the latest DAG runs for <code
 <h3 id="interaction-after-summarization">🗨️ Interaction After Summarization</h3>
 <p><strong>Prior Summary:</strong><br />
 The user, John, initiated a greeting and requested the latest DAG runs for <code>load_sales_data</code>. The assistant retrieved three recent runs, identifying <code>run_2024_06_02</code> as failed. Upon user request, that run was successfully re-triggered through the API.</p>
-<p><strong>Human:</strong><br />
-Can you tell me if the DAG ran successfully?</p>
-<p><strong>AI:</strong><br />
-Yes, the DAG <code>load_sales_data</code> has run successfully. The current status is <code>Success</code>, and the run ID is <code>run_2024_06_02</code>.</p>
+<p><strong>Human:</strong>  Can you tell me if the DAG ran successfully?</p>
+<p><strong>AI:</strong>  Yes, the DAG <code>load_sales_data</code> has run successfully. The current status is <code>Success</code>, and the run ID is <code>run_2024_06_02</code>.</p>
 <hr />
 <blockquote>
 <p>💡 In the above conversation, the copilot did not ask for <code>dag_id</code> or <code>dag_run_id</code> again — it inferred those from the summary context.</p>
@@ -1216,10 +1185,10 @@ the summary and the new user message — resulting in a significant token and co
 <p>Even across hundreds of exchanges, <strong>Airflow Copilot</strong> remains context-aware, memory-efficient, and responsive.</p>
 <h2 id="next-steps">🔗 Next Steps</h2>
 <ul>
-<li><strong><a href="/architecture/refresh_history">Refresh History</a></strong>: How to delete/purge user conversation with Airflow copilot from backend database(postgres)</li>
-<li><strong><a href="/architecture/supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
-<li><strong><a href="/architecture/airflow_auth_type">Airflow Auth Type</a></strong>: Airflow Auth type supported to authentication.</li>
-<li><strong><a href="/configuration/environment_variables">Environment Variables</a></strong>: Configration details of Airflow Copilot.</li>
+<li><strong><a href="../refresh_history">Refresh History</a></strong>: How to delete/purge user conversation with Airflow copilot from backend database(postgres)</li>
+<li><strong><a href="../supported_apis">Supported Airflow Copilot Features</a></strong>: List of activity Airflow copilot can do.</li>
+<li><strong><a href="../airflow_auth_type">Airflow Auth Type</a></strong>: Airflow Auth type supported to authentication.</li>
+<li><strong><a href="../../configuration/environment_variables">Environment Variables</a></strong>: Configration details of Airflow Copilot.</li>
 </ul>
 
 

@@ -512,6 +512,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 Next Steps
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -576,7 +585,7 @@
   
   
   <span class="md-ellipsis">
-    🏰 Architecture
+    🏰 Design
     
   </span>
   
@@ -587,7 +596,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            🏰 Architecture
+            🏰 Design
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1045,28 +1054,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    🤝 Contribute
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../roadmap/" class="md-nav__link">
         
   
@@ -1177,6 +1164,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 Next Steps
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1199,19 +1195,23 @@
 <h1 id="getting-started-airflow-copilot">🚀 Getting Started — Airflow Copilot</h1>
 <p>This guide walks you through launching  <strong>Airflow Copilot</strong> using Docker Compose files.</p>
 <hr />
+<blockquote>
+<p><strong>Note:</strong> This Quick Start guide covers local deployment only. For production or cloud-based deployments, refer to the <a href="../../deployment/deployment/"><strong>Deployment</strong></a> section.</p>
+</blockquote>
 <h2 id="prerequisites">🧰 Prerequisites</h2>
 <p>Make sure you have the following ready:</p>
 <ul>
 <li><strong>Docker</strong> – Install from <a href="https://docs.docker.com/engine/install/"><strong>Docker Docs</strong></a></li>
-<li><strong>Apache Airflow</strong> – Version <code>2.5.0</code> to <code>&lt; 3.0.0</code><br />
-  Use the <a href="https://airflow.apache.org/docs/apache-airflow/2.11.0/howto/docker-compose/index.html">official Docker Compose setup</a></li>
+<li><strong>Apache Airflow</strong> – Version &gt; <code>2.5.0</code> 
+  Use the <a href="https://airflow.apache.org/docs/apache-airflow/2.11.0/howto/docker-compose/index.html"><strong>official Docker Compose setup</strong></a></li>
 <li><strong>PostgreSQL</strong> – Shared between Airflow and Copilot</li>
 <li><strong>Ngrok Authtoken</strong> – For public URL tunneling (local bot testing)</li>
 <li><strong>Azure Bot Credentials</strong> – follow <a href="/quickstart/azure_bot/">Create an Azure Bot</a> to obtain  <ul>
 <li>Microsoft App ID &amp; Password  </li>
-<li>Azure Service Principal (Client ID &amp; Secret)  </li>
+<li>Azure Service Principal (Client ID &amp; Secret)  - Usually same as above.</li>
 <li>Azure Resource Group  </li>
 <li>Azure Tenant ID</li>
+<li>Azure Bot Name</li>
 </ul>
 </li>
 <li><strong>Fernet Key</strong> (32‑byte secret): create using below script (if not)</li>
@@ -1219,16 +1219,13 @@
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())&quot;</span>
 </code></pre></div>
 <ul>
-<li>
-<p><strong>LLM Provider &amp; API Keys</strong><br />
-    Supported: <code>OpenAI</code>, <code>Google_GenAI</code>,  <code>Anthropic</code>, <code>Groq</code></p>
-<p>To get started with Google Gemini, <a href="https://ai.google.dev/"><strong>create a free API key</strong></a> and use the <code>gemini-2.5-flash</code> model.</p>
-</li>
+<li><strong>LLM Provider &amp; API Keys</strong><br />
+    Supported: <code>OpenAI</code>, <code>Google_GenAI</code>,  <code>Anthropic</code>, <code>Groq</code></li>
 </ul>
-<hr />
 <blockquote>
-<p><strong>Note:</strong> This Quick Start guide covers local deployment only. For production or cloud-based deployments, refer to the <a href="/deployment/docker-deployment"><strong>Deployment</strong></a> section.</p>
+<p>To get started free go with Google Gemini, <a href="https://ai.google.dev/"><strong>create a free API key</strong></a> and use the <code>gemini-2.5-flash</code> model.</p>
 </blockquote>
+<hr />
 <h2 id="designconceptual">🧪 Design(conceptual)</h2>
 <p>Below design reflect the local deployment of the <strong>Airflow Copilot</strong>.</p>
 <p><img alt="Local Deployment" src="../../assets/quick-start-arch.svg" /></p>
@@ -1419,7 +1416,7 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">NGROK_API</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ngrok:4040/api/tunnels</span>
-<span class="w">      </span><span class="nt">BOT_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_BOT_NAME}</span>
+<span class="w">      </span><span class="nt">BOT_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_BOT_NAME:-Airflow-Copilot}</span>
 <span class="w">      </span><span class="nt">RESOURCE_GROUP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${RESOURCE_GROUP}</span>
 <span class="w">      </span><span class="nt">AZURE_CLIENT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_ID}</span>
 <span class="w">      </span><span class="nt">AZURE_TENANT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_TENANT_ID}</span>
@@ -1447,10 +1444,17 @@ docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> 
 <h3 id="what-happens-next">What Happens Next 🎉</h3>
 <ul>
 <li>Copilot launches on <strong><code>http://localhost:3978</code></strong>  </li>
-<li>Ngrok exposes a public URL and the Azure bot endpoint is patched automatically  </li>
-<li>Chat with <strong>Airflow Copilot</strong> directly in Microsoft Teams! Login to Azure Portal and validate the same.</li>
+<li>Ngrok exposes a public URL and the Azure bot endpoint is patched automatically. Confirm it by login to Azure and check the endpoint corresponding to Airflow-Copilot Bot created.</li>
 </ul>
 <p><img alt="Azure Bot Message Endpoint" src="../../assets/Message-Endpoint-Bot.png" /></p>
+<ul>
+<li>Chat with <strong>Airflow Copilot</strong> directly in Microsoft Teams! Login to Azure Portal and validate the same. Update the Airflow Credential if the deployment is with <code>per_user</code><strong>AIRFLOW_AUTH_STRATEGY</strong></li>
+</ul>
+<h2 id="next-steps">🔗 Next Steps</h2>
+<ul>
+<li><strong><a href="../../architecture/airflow_auth_type">How to Update the Airflow Credential?</a></strong> </li>
+<li><strong><a href="../agent-behavior">Agent Behavior Notes &amp; Known Limitations</a></strong>: Some know Airflow Copilot behaviour and Limitations.</li>
+</ul>
 
 
 
