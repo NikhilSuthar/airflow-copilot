@@ -1390,7 +1390,7 @@
 <tr>
 <td><code>AZURE_BOT_NAME</code></td>
 <td>Name of the Bot that you have created. e.g Airflow-Copilot</td>
-<td>✅</td>
+<td>❌</td>
 </tr>
 <tr>
 <td><code>NGROK_AUTHTOKEN</code></td>
@@ -1535,20 +1535,18 @@
 <li><strong>Required</strong>: ✅ Yes (if <code>per_user</code>) </li>
 <li><strong>Command</strong>: Run below command to generate the key.</li>
 </ul>
-</li>
-</ol>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())&quot;</span>
 </code></pre></div>
 <blockquote>
 <p><em>Do not change the Farnet key in every deployment otherwise the backend credentials will not be decrypt and every user have to update their cred again.</em></p>
 </blockquote>
-<ol>
+</li>
 <li>
 <p><strong><code>AZURE_BOT_NAME</code></strong></p>
 <ul>
 <li><strong>Description</strong>: The Azure Bot Name to automatically update the endpoint while Local Deployment.  </li>
 <li><strong>Default</strong>: Airflow-Copilot </li>
-<li><strong>Required</strong>: No </li>
+<li><strong>Required</strong>: ❌ Optional </li>
 </ul>
 </li>
 <li>
