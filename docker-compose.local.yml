@@ -98,7 +98,9 @@ services:
   # 4) Bot updater – patches Azure Bot with ngrok URL
   ###########################################################################
   bot-updater:
-    image: ${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:latest}
+    build:
+      context: .
+      dockerfile: Dockerfile.local
     <<: *envfile
     entrypoint: ["/usr/local/bin/update_bot.sh"]
     depends_on: [ngrok]
