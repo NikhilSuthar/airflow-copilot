@@ -15,6 +15,7 @@ This document describes all the environment variables required for running **Air
 | `MICROSOFT_APP_ID`              | Azure Bot App registration ID                                              | ✅       | –       |
 | `MICROSOFT_APP_PASSWORD`        | Secret/password for the registered bot                                     | ✅       | –       |
 
+
 ---
 * `{PROVIDER}_API_KEY`- Replace the *{PROVIDER}* with the  **LLM_MODEL_PROVIDER_NAME** (in Uppercase). For example , OPENAI_API_KEY or GOOGLE_GENAI_API_KEY etc.
 
@@ -50,8 +51,17 @@ This document describes all the environment variables required for running **Air
 |----------------------|-----------------------------------------------------------|----------|
 | `FERNET_SECRET_KEY`  | Secret key used for encrypting user credentials in the DB | ✅       |
 
----
 
+
+
+### Variable for Local Deployment
+
+| Variable              | Description                                               | Required |
+|----------------------|-----------------------------------------------------------|----------|
+| `AZURE_BOT_NAME`        | Name of the Bot that you have created. e.g Airflow-Copilot                                     | ✅       | –       |
+| `NGROK_AUTHTOKEN`        |NGROK Auth Token                                     | ✅       | –       |
+
+---
 
 
 ## 🔍 Environment Variable Details
@@ -151,6 +161,15 @@ This document describes all the environment variables required for running **Air
   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
   ``` 
   > *Do not change the Farnet key in every deployment otherwise the backend credentials will not be decrypt and every user have to update their cred again.*
+
+16. **`AZURE_BOT_NAME`**
+    - **Description**: The Azure Bot Name to automatically update the endpoint while Local Deployment.  
+    - **Default**: Airflow-Copilot 
+    - **Required**: No 
+
+17. **`NGROK_AUTHTOKEN`**
+    - **Description**: The Ngrok Token to deploy the Local Fast API to public Https endpoint.  
+    - **Required**: ✅ Yes (for Local deployment) 
 
 
 

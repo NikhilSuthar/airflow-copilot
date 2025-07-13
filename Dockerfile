@@ -1,5 +1,5 @@
 # ---------- 1️⃣ Base Image ----------
-FROM python:3.11-slim-bookworm
+FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN apt-get update && \
       https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" \
       > /etc/apt/sources.list.d/azure-cli.list && \
     apt-get update && apt-get install -y --no-install-recommends azure-cli && \
-    apt-get purge --auto-remove -y curl gnupg lsb-release && \
+    apt-get purge --auto-remove -y gnupg lsb-release && \
     rm -rf /var/lib/apt/lists/*
 
 # ---------- 3️⃣ Python Deps ----------
@@ -28,6 +28,7 @@ ENV PYTHONPATH="/app/src:${PYTHONPATH}"
 # ---------- 5️⃣ Support Scripts ----------
 COPY docker/scripts/ /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
+RUN chmod +x /usr/local/bin/wait-for-copilot.sh
 
 # ---------- 6️⃣ Entrypoint ----------
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

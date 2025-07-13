@@ -48,6 +48,7 @@ class Settings:
 
         # Airflow Auth Strategy
         self.auth_strategy = os.getenv("AIRFLOW_AUTH_STRATEGY", "per_user").strip().lower()
+        self.bot_name = os.getenv("AZURE_BOT_NAME", "Airflow‑Copilot").strip().lower()
 
         # Airflow Centralized Auth
         self.airflow_base_url = os.getenv("AIRFLOW_BASE_URL", "").rstrip("/")

@@ -26,7 +26,7 @@ Airflow Copilot communicates through a **custom Microsoft Teams bot     ** h
 
    | Field | Example / Notes |
    |-------|-----------------|
-   | **Bot handle** | `airflow‑copilot` |
+   | **Bot handle** | `Airflow‑Copilot` |
    | **Subscription** | Your active subscription |
    | **Resource group** | Create or reuse one |
    | **Data residency** | *Global* (or preferred region) |

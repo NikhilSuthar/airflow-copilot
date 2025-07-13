@@ -11,24 +11,20 @@ case "${LLM_MODEL_PROVIDER_NAME}" in
   Google_Genai)
     : "${GOOGLE_GENAI_API_KEY?GOOGLE_GENAI_API_KEY must be set for Google_Genai}"
     ;;
-
   OpenAI)
     : "${OPENAI_API_KEY?OPENAI_API_KEY must be set for OpenAI}"
     ;;
-
   Anthropic)
     : "${ANTHROPIC_API_KEY?ANTHROPIC_API_KEY must be set for Anthropic}"
     ;;
-
   Groq)
     : "${GROQ_API_KEY?GROQ_API_KEY must be set for Groq}"
     ;;
-
   *)
     echo "❌ Unsupported LLM_MODEL_PROVIDER_NAME: ${LLM_MODEL_PROVIDER_NAME}" >&2
     exit 1
     ;;
 esac
 
-echo "✅ All required env vars present. Starting Copilot..."
-exec uvicorn app.main:app --host 0.0.0.0 --port 3978
+# ---------- launch uvicorn ----------
+exec "$@"

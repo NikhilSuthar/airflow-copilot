@@ -2,6 +2,11 @@ from fastapi import FastAPI, Request, Header, Response
 from airflow_copilot.bot.bot import TeamsBot
 from botbuilder.schema import Activity, ActivityTypes, Attachment
 import logging as logs
+from fastapi.responses import JSONResponse
+
+logs.basicConfig(level=logs.INFO)
+logger = logs.getLogger(__name__)
+logger.info("🚀 FastAPI app is starting up")
 
 
 app = FastAPI()
@@ -9,6 +14,10 @@ logs.basicConfig(
     level=logs.INFO,  # <-- ensures info-level and above are shown
     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
 )
+
+@app.get("/health")
+def health_check():
+    return JSONResponse(content={"status": "ok"})
 
 @app.post("/api/messages")
 async def messages(request: Request, authorization: str = Header(default="")):
