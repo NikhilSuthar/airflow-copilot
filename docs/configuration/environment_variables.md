@@ -58,7 +58,7 @@ This document describes all the environment variables required for running **Air
 
 | Variable              | Description                                               | Required |
 |----------------------|-----------------------------------------------------------|----------|
-| `AZURE_BOT_NAME`        | Name of the Bot that you have created. e.g Airflow-Copilot                                     | ✅       | –       |
+| `AZURE_BOT_NAME`        | Name of the Bot that you have created. e.g Airflow-Copilot                                     | ❌       | –       |
 | `NGROK_AUTHTOKEN`        |NGROK Auth Token                                     | ✅       | –       |
 
 ---
@@ -157,15 +157,15 @@ This document describes all the environment variables required for running **Air
     - **Required**: ✅ Yes (if `per_user`) 
     - **Command**: Run below command to generate the key.
     
-  ```bash
-  python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-  ``` 
-  > *Do not change the Farnet key in every deployment otherwise the backend credentials will not be decrypt and every user have to update their cred again.*
+    ```bash
+    python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+    ``` 
+    > *Do not change the Farnet key in every deployment otherwise the backend credentials will not be decrypt and every user have to update their cred again.*
 
 16. **`AZURE_BOT_NAME`**
     - **Description**: The Azure Bot Name to automatically update the endpoint while Local Deployment.  
     - **Default**: Airflow-Copilot 
-    - **Required**: No 
+    - **Required**: ❌ Optional 
 
 17. **`NGROK_AUTHTOKEN`**
     - **Description**: The Ngrok Token to deploy the Local Fast API to public Https endpoint.  

@@ -84,33 +84,16 @@ services:
   ###########################################################################
   # 3) Ngrok – expose local FastAPI endpoint
   ###########################################################################
+
   ngrok:
-    image: alpine:latest
-    <<: *envfile
-    restart: unless-stopped
+    image: ngrok/ngrok:latest
     depends_on: [copilot]
-    entrypoint: sh
-    command: -c "
-      apk add --no-cache curl && \
-      echo '🔁 Waiting for Copilot...' && \
-      until curl -sf http://copilot:3978/health > /dev/null; do echo '⏳ Waiting...'; sleep 3; done && \
-      echo '✅ Copilot is ready. Starting ngrok...' && \
-      curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apk/keys/ngrok.asc && \
-      echo 'https://ngrok-agent.s3.amazonaws.com/alpine edge main' >> /etc/apk/repositories && \
-      apk add --no-cache ngrok && \
-      ngrok config add-authtoken $NGROK_AUTHTOKEN && \
-      ngrok http copilot:3978 --log stdout"
+    command: http copilot:3978 --log stdout
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
     ports:
       - "4040:4040"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4040/api/tunnels"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
     networks: [airflow]
-
-
-
   ###########################################################################
   # 4) Bot updater – patches Azure Bot with ngrok URL
   ###########################################################################
@@ -118,9 +101,7 @@ services:
     image: ${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:latest}
     <<: *envfile
     entrypoint: ["/usr/local/bin/update_bot.sh"]
-    depends_on:
-      ngrok:
-        condition: service_healthy
+    depends_on: [ngrok]
     restart: "no"
     environment:
       NGROK_API: http://ngrok:4040/api/tunnels

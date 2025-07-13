@@ -15,7 +15,7 @@ logs.basicConfig(
 
 # --- Constants ---
 ENV_PATH = Path(__file__).resolve().parent.parent.parent / ".env"
-logs.info(f"✅ Loaded .env from: {ENV_PATH}")
+logs.info(f"✅ Loaded .env from path is: {ENV_PATH}")
 
 
 # --- Ensure .env file exists ---
@@ -93,6 +93,8 @@ class Settings:
 
         if missing:
             raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+        else:
+            logs.info(f"✅ All the require environment variables get.....")
     
     def encrypt_password(self, password: str) -> str:
         if not self._fernet:
