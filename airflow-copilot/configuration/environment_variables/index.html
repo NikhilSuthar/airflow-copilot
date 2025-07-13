@@ -767,6 +767,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#variable-for-local-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variable for Local Deployment
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1154,6 +1163,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#variable-for-local-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variable for Local Deployment
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1359,6 +1377,28 @@
 </tr>
 </tbody>
 </table>
+<h3 id="variable-for-local-deployment">Variable for Local Deployment</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AZURE_BOT_NAME</code></td>
+<td>Name of the Bot that you have created. e.g Airflow-Copilot</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>NGROK_AUTHTOKEN</code></td>
+<td>NGROK Auth Token</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="environment-variable-details">🔍 Environment Variable Details</h2>
 <ol>
@@ -1502,6 +1542,23 @@
 <blockquote>
 <p><em>Do not change the Farnet key in every deployment otherwise the backend credentials will not be decrypt and every user have to update their cred again.</em></p>
 </blockquote>
+<ol>
+<li>
+<p><strong><code>AZURE_BOT_NAME</code></strong></p>
+<ul>
+<li><strong>Description</strong>: The Azure Bot Name to automatically update the endpoint while Local Deployment.  </li>
+<li><strong>Default</strong>: Airflow-Copilot </li>
+<li><strong>Required</strong>: No </li>
+</ul>
+</li>
+<li>
+<p><strong><code>NGROK_AUTHTOKEN</code></strong></p>
+<ul>
+<li><strong>Description</strong>: The Ngrok Token to deploy the Local Fast API to public Https endpoint.  </li>
+<li><strong>Required</strong>: ✅ Yes (for Local deployment) </li>
+</ul>
+</li>
+</ol>
 <h2 id="notes">📝 Notes</h2>
 <ul>
 <li>

@@ -1196,9 +1196,11 @@ OPENAI_API_KEY=your-openai-api-key
 MICROSOFT_APP_ID=your-bot-id
 MICROSOFT_APP_PASSWORD=bot-secret
 AZURE_CLIENT_ID=your-client-id
+AZURE_BOT_NAME=your-bot-name # e.g., Airflow-Copilot
 AZURE_CLIENT_SECRET=your-spn-secret
 AZURE_TENANT_ID=your-tenant-id
 RESOURCE_GROUP=your-resource-group
+
 
 # ───────── Airflow REST API ─────────
 AIRFLOW_BASE_URL=your-airflow-url # e.g., http://localhost:8080/
@@ -1297,7 +1299,7 @@ Reference <a href="../../configuration/environment_variables/"><strong>Environme
 <span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airflow-copilot</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">copilot</span>
 <span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*envfile</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3978:3978&quot;</span>
