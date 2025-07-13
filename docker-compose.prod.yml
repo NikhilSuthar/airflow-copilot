@@ -11,7 +11,6 @@ networks:
 services:
   copilot:
     image: thedatacarpenter/airflow-copilot:0.1.4
-    <<: *envfile
     ports:
       - "3978:3978"
 
@@ -49,10 +48,8 @@ services:
 
       # -------- Security --------
       FERNET_SECRET_KEY: ${FERNET_SECRET_KEY}
-
     volumes:
-      - ./.env:/app/src/.env:ro
-
+      - .env:/app/src/.env:ro
     depends_on: [db-init]
     networks: [airflow]
 

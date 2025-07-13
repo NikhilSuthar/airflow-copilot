@@ -14,20 +14,18 @@ services:
   # 1) Copilot – FastAPI + LangGraph agent
   ###########################################################################
   copilot:
-    image: ${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:latest}
+    image: thedatacarpenter/airflow-copilot:latest
     container_name: copilot
-    <<: *envfile
     restart: unless-stopped
     ports:
       - "3978:3978"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3978/health"]
-      interval: 10s
-      timeout: 3s
+      interval: 30s
+      timeout: 60s
       retries: 5
     environment:
+      USE_DOTENV: false
       # LLM / model
       LLM_MODEL_PROVIDER_NAME: ${LLM_MODEL_PROVIDER_NAME}
       LLM_MODEL_NAME:          ${LLM_MODEL_NAME}
@@ -59,6 +57,8 @@ services:
 
       # Security
       FERNET_SECRET_KEY: ${FERNET_SECRET_KEY}
+    volumes:
+      - .env:/app/src/.env:ro
     depends_on:
       db-init:
         condition: service_completed_successfully
@@ -98,18 +98,18 @@ services:
   # 4) Bot updater – patches Azure Bot with ngrok URL
   ###########################################################################
   bot-updater:
-    build:
-      context: .
-      dockerfile: Dockerfile.local
+    image: thedatacarpenter/airflow-copilot:latest
     <<: *envfile
     entrypoint: ["/usr/local/bin/update_bot.sh"]
     depends_on: [ngrok]
     restart: "no"
     environment:
       NGROK_API: http://ngrok:4040/api/tunnels
-      BOT_NAME: ${AZURE_BOT_NAME:-Airflow-Copilot}
+      BOT_NAME: ${AZURE_BOT_NAME}
       RESOURCE_GROUP: ${RESOURCE_GROUP}
-      AZURE_CLIENT_ID:     ${AZURE_CLIENT_ID:-${MICROSOFT_APP_ID}}
+      AZURE_CLIENT_ID:     ${AZURE_CLIENT_ID}
       AZURE_TENANT_ID:     ${AZURE_TENANT_ID}
-      AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET:-${MICROSOFT_APP_PASSWORD}}
+      AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET}
+    volumes:
+      - .env:/app/src/.env:ro
     networks: [airflow]

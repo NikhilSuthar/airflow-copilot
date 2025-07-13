@@ -5,26 +5,23 @@ ENV PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
 WORKDIR /app
 
 # ---------- 2️⃣ Optional Azure CLI ----------
-ARG INSTALL_AZURE_CLI=false
+ARG INSTALL_AZURE_CLI=true
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      curl ca-certificates && \
-    if [ "$INSTALL_AZURE_CLI" = "true" ]; then \
-      apt-get install -y --no-install-recommends gnupg2 software-properties-common && \
-      curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | \
-        gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg && \
-      echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] \
-        https://packages.microsoft.com/repos/azure-cli/ bullseye main" \
-        > /etc/apt/sources.list.d/azure-cli.list && \
-      apt-get update && \
-      apt-get install -y --no-install-recommends azure-cli && \
-      apt-get purge --auto-remove -y gnupg2 software-properties-common && \
-      rm -rf /var/lib/apt/lists/*; \
-    else \
-      echo "⏭️ Skipping Azure CLI install"; \
-    fi
-
+      ca-certificates \
+      curl \
+      apt-transport-https \
+      lsb-release \
+      gnupg && \
+    curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null && \
+    AZ_REPO=$(lsb_release -cs) && \
+    echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" \
+      > /etc/apt/sources.list.d/azure-cli.list && \
+    apt-get update && \
+    apt-get install -y azure-cli && \
+    apt-get upgrade -y && \
+    rm -rf /var/lib/apt/lists/*
 # ---------- 3️⃣ Python Deps ----------
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
