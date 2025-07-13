@@ -44,6 +44,8 @@ This document outlines key behavior details, recommendations, and known limitati
 - **Partial Compatibility with Older Versions:**
   While Copilot works well with versions **2.5 to 2.11**, some features may behave differently or be **partially supported** on older versions.
 
+- **Work well with Specific Information:**
+  While Copilot works well most of the cases but still if the volume of your Airflow  is high such total number of dags are more than 50 then it will be good to provide the proper name such as dag_id or run time etc to make it more effective.
 ---
 
 > 📝 If you encounter inconsistent behavior, especially on older Airflow versions or with custom setups, consider submitting feedback or filing an issue to help us improve.

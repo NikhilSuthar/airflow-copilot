@@ -104,6 +104,7 @@ nav:
 
   - 🚢 Deployment:
       - Docker (Local & Prod): deployment/deployment.md
+      - Build & Publish:   deployment/build.md
       - AWS(Serverless):        deployment/aws-deployment.md
 
   - 🔭 Roadmap:   roadmap.md
