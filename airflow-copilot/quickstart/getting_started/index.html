@@ -1412,7 +1412,9 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">  </span><span class="c1"># 4) Bot updater – patches Azure Bot with ngrok URL</span>
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">bot-updater</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:latest}</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile.local</span>
 <span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*envfile</span>
 <span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/usr/local/bin/update_bot.sh&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ngrok</span><span class="p p-Indicator">]</span>
