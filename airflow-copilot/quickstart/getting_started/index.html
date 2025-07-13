@@ -1328,20 +1328,18 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">  </span><span class="c1"># 1) Copilot – FastAPI + LangGraph agent</span>
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${COPILOT_IMAGE:-thedatacarpenter/airflow-copilot:latest}</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
 <span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">copilot</span>
-<span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*envfile</span>
 <span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3978:3978&quot;</span>
-<span class="w">    </span><span class="nt">extra_hosts</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;host.docker.internal:host-gateway&quot;</span>
 <span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;curl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-f&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;http://localhost:3978/health&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
-<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3s</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 <span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">USE_DOTENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">      </span><span class="c1"># LLM / model</span>
 <span class="w">      </span><span class="nt">LLM_MODEL_PROVIDER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_PROVIDER_NAME}</span>
 <span class="w">      </span><span class="nt">LLM_MODEL_NAME</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_NAME}</span>
@@ -1373,6 +1371,8 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 
 <span class="w">      </span><span class="c1"># Security</span>
 <span class="w">      </span><span class="nt">FERNET_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${FERNET_SECRET_KEY}</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env:/app/src/.env:ro</span>
 <span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">db-init</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_completed_successfully</span>
@@ -1412,20 +1412,20 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">  </span><span class="c1"># 4) Bot updater – patches Azure Bot with ngrok URL</span>
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">bot-updater</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
-<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile.local</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
 <span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*envfile</span>
 <span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/usr/local/bin/update_bot.sh&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ngrok</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">NGROK_API</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ngrok:4040/api/tunnels</span>
-<span class="w">      </span><span class="nt">BOT_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_BOT_NAME:-Airflow-Copilot}</span>
+<span class="w">      </span><span class="nt">BOT_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_BOT_NAME}</span>
 <span class="w">      </span><span class="nt">RESOURCE_GROUP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${RESOURCE_GROUP}</span>
-<span class="w">      </span><span class="nt">AZURE_CLIENT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_ID:-${MICROSOFT_APP_ID}}</span>
+<span class="w">      </span><span class="nt">AZURE_CLIENT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_ID}</span>
 <span class="w">      </span><span class="nt">AZURE_TENANT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_TENANT_ID}</span>
-<span class="w">      </span><span class="nt">AZURE_CLIENT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_SECRET:-${MICROSOFT_APP_PASSWORD}}</span>
+<span class="w">      </span><span class="nt">AZURE_CLIENT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_SECRET}</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env:/app/src/.env:ro</span>
 <span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 </details></p>
