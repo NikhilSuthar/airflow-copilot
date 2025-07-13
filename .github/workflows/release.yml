@@ -55,6 +55,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
+          no-cache: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/airflow-copilot:${{ needs.release.outputs.docker_version}}
             ${{ secrets.DOCKER_USERNAME }}/airflow-copilot:latest

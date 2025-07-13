@@ -1,5 +1,5 @@
 # Dockerfile.bot-updater
-FROM thedatacarpenter/airflow-copilot:latest
+FROM thedatacarpenter/airflow-copilot:0.1.4
 
 # Install Azure CLI (same logic as before)
 RUN apt-get update && \
