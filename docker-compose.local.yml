@@ -2,7 +2,7 @@ version: "3.9"
 
 # ──────────────── Common env-file anchor ────────────────
 x-env: &envfile
-  env_file: .env  # Loaded from .env or .env.local
+  env_file: .env
 
 networks:
   airflow:
@@ -14,17 +14,17 @@ services:
   # 1) Copilot – FastAPI + LangGraph agent (handles DB init internally)
   ###########################################################################
   copilot:
-    # image: thedatacarpenter/airflow-copilot:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: thedatacarpenter/airflow-copilot:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     container_name: copilot
     restart: unless-stopped
     ports:
       - "3978:3978"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3978/health"]
-      interval: 30s
+      interval: 5s
       timeout: 60s
       retries: 5
     environment:
@@ -70,7 +70,9 @@ services:
   ###########################################################################
   ngrok:
     image: ngrok/ngrok:latest
-    depends_on: [copilot]
+    depends_on:
+      copilot:
+        condition: service_healthy
     command: http copilot:3978 --log stdout
     environment:
       NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
@@ -82,10 +84,10 @@ services:
   # 3) Bot updater – patches Azure Bot with ngrok URL
   ###########################################################################
   bot-updater:
-    # image: thedatacarpenter/airflow-copilot:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: thedatacarpenter/airflow-copilot:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     <<: *envfile
     entrypoint: ["/usr/local/bin/update_bot.sh"]
     depends_on: [ngrok]

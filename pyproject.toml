@@ -6,7 +6,7 @@ authors = [
     {name = "Nikhil Suthar",email = "n.suthar.online@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.11,<3.12"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "mkdocs-material (>=9.6.14,<10.0.0)",
     "langgraph (>=0.4.8,<0.5.0)",
