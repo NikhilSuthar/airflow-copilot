@@ -10,6 +10,12 @@ import os
 
 
 env = get_environment()
+log_level = str(env.log_level).upper()
+logs.basicConfig(
+level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
+format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 
 def get_connection():
@@ -31,7 +37,7 @@ async def get_user_credentials(thread_id: str) -> Optional[Tuple[str, str]]:
                     decrypted_password = env.decrypt_password(encrypted_password)
                     return username, decrypted_password
                 else:
-                    logs.warning(f"No credentials found for thread_id={thread_id}")
+                    logs.warning(f"No credentials found for User ={thread_id}")
                     return None,None
     except Exception as e:
         logs.error(f"❌ Error fetching credentials: {e}")
@@ -55,7 +61,7 @@ async def save_user_credentials(thread_id: str, username: str, password: str) ->
                     """,
                     (thread_id, username, encrypted)
                 )
-        logs.info(f"Saved credentials for thread_id={thread_id}")
+        logs.debug(f"Saved credentials for thread_id={thread_id}")
         return True
     except Exception as e:
         logs.error(f"Error saving credentials for thread_id={thread_id}: {e}")
@@ -69,10 +75,12 @@ async def test_credential(user_id:str) -> str:
         async with httpx.AsyncClient() as client:
             url = f"{env.airflow_base_url}/dags"
             response = await client.get(url, auth=(username, password))
-            logs.info(f"Testing Response - {response}")
+            logs.debug(f"Credential Testing Response - {response}")
             if response.status_code == 200:
+                logs.info(f"User {user_id} credential are valid.")
                 return f"Success"
             else:
+                logs.warning(f"User {user_id} credential are Invalid.")
                 return f"Failed|{response}"
     except Exception as e:
         logs.error(e)

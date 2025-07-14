@@ -14,6 +14,14 @@ import logging as logs
 from airflow_copilot.config.settings import get_environment
 from airflow_copilot.config.settings import user_id_context
 
+env = get_environment()
+log_level = str(env.log_level).upper()
+logs.info(f"Log Level is {log_level}")
+logs.basicConfig(
+level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
+format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 class airflow_agent(object):
     """
@@ -21,12 +29,8 @@ class airflow_agent(object):
     It is designed to handle tasks such as executing workflows, managing tasks,
     and interacting with the Airflow API.
     """
-    logs.basicConfig(
-    level=logs.INFO,  # <-- ensures info-level and above are shown
-    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-    )
 
-
+    
     @staticmethod
     async def airflow_connect(user_id: str, user_input: str, user_name: str) -> str:
         """
@@ -46,8 +50,8 @@ class airflow_agent(object):
                     summary = state.get("summary", "")
                     messages = state["messages"]
                     if str(summary).strip() != "":
-                        logs.info(f"Summary got:-- {summary}")
-                        logs.info(f"Model Input Message are {messages}")
+                        logs.debug(f"Summary got:-- {summary}")
+                        logs.debug(f"Model Input Message are {messages}")
                         return {
                         "messages": [
                             await llm_with_tools.ainvoke(
@@ -58,8 +62,8 @@ class airflow_agent(object):
                             ] 
                         }
                     else:
-                        logs.info(f"No summmary found")
-                        logs.info(f"message are {messages}")
+                        logs.debug(f"No summmary found")
+                        logs.debug(f"message are {messages}")
                         return {
                         "messages": [
                             await llm_with_tools.ainvoke(
@@ -72,7 +76,7 @@ class airflow_agent(object):
                 # This node will invoke the tool and return the result
                 async def tool_node(state: dict):
                     """Performs the tool call"""
-                    logs.info("At Tool Node")
+                    logs.debug("At Tool Node")
                     result = []
 
                     for tool_call in state["messages"][-1].tool_calls:
@@ -87,7 +91,7 @@ class airflow_agent(object):
 
                     messages = state["messages"]
                     last_message = messages[-1]
-                    logs.info(f"Last Message at Check --> {last_message}")
+                    logs.debug(f"Last Message at Check --> {last_message}")
                     # If the LLM makes a tool call, then perform an action
                     if last_message.tool_calls:
                         return "Action"
@@ -128,7 +132,7 @@ class airflow_agent(object):
                 response = await app.ainvoke({"messages": [HumanMessage(content=user_input)]},config=config, debug=False)
                 llm_response = response["messages"][-1]
                 llm_response = llm_response.content
-                logs.info(f"llm_response -- {llm_response}")
+                logs.debug(f"llm_response -- {llm_response}")
                 return llm_response
         except Exception as e:
             import traceback

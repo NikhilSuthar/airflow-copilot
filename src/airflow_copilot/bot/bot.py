@@ -12,15 +12,20 @@ from airflow_copilot.bot.card import delete_card, airflow_credential
 from airflow_copilot.config.settings import get_environment
 from airflow_copilot.config.CredentialStore import save_user_credentials,test_credential
 import time
+from botbuilder.core.teams import TeamsInfo
+
+env = get_environment()
+log_level = str(env.log_level).upper()
+logs.basicConfig(
+level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
+format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 
 
 class TeamsBot(object):
     
-    logs.basicConfig(
-        level=logs.INFO,  # <-- ensures info-level and above are shown
-        format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-    )
 
     @staticmethod
     def get_adapter():
@@ -40,10 +45,8 @@ class TeamsBot(object):
         await context.send_activity("To continue to run this bot, please fix the bot source code.")
     
     @staticmethod
-    async def on_teams_card_action_invoke(turn_context: TurnContext):
+    async def on_teams_card_action_invoke(turn_context: TurnContext, user_id: str):
         payload = turn_context.activity.value
-        user_id = turn_context.activity.from_property.id
-
         if payload.get("type") == "delete_history":
             await TeamsBot.delete_langgraph_user_data(user_id=user_id)
             msg = "🌿 **History cleaned!**\n*Thanks for keeping things green and speedy!*"
@@ -98,17 +101,16 @@ class TeamsBot(object):
    
     @staticmethod
     async def on_turn(turn_context: TurnContext):
-
-        user_id = turn_context.activity.from_property.id
         user_name = turn_context.activity.from_property.name
+        teams_user = await TeamsInfo.get_member(turn_context, turn_context.activity.from_property.id)
+        user_id = teams_user.email
+
         user_input = turn_context.activity.text
         msg_value = turn_context.activity.value
-        logs.info(f"user_input is {user_input}")
-        logs.info(f"type of user input is {type(user_input)}")
-        logs.info(f"Message Value is {msg_value}")
+        logs.info(f"**Processing Msg {user_input} from user {user_id}")
         await turn_context.send_activity(Activity(type=ActivityTypes.typing))
         if msg_value is not None:
-            await TeamsBot.on_teams_card_action_invoke(turn_context=turn_context)
+            await TeamsBot.on_teams_card_action_invoke(turn_context=turn_context,user_id = user_id)
             return
 
         if str(user_input).strip().replace(' ','').lower() == 'refreshhistory':
@@ -124,10 +126,10 @@ class TeamsBot(object):
             )
             return
         elif (user_input is not None):
-            logs.info(f"executing msg {user_input}")
             await turn_context.send_activity(Activity(type=ActivityTypes.typing))
             response = await agt.airflow_connect(user_id=user_id, user_input=user_input, user_name=user_name)
-            logs.info(f"Response get {response}")
+            logs.debug(f"Response get {response}")
+            logs.info(f"Response sent to user {user_id}")
             message = Activity(
                 type=ActivityTypes.message,
                 text=response,

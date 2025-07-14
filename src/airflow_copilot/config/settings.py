@@ -21,6 +21,11 @@ logs.info(f"✅ Loading .env from {ENV_PATH}")
 # ────────────────────────── App Settings ──────────────────────────
 class Settings:
     def __init__(self):
+
+        # Log Level
+        self.log_level = os.getenv("LOG_LEVEL", "INFO").strip().upper()
+        logs.info(f"Logging Level set to {self.log_level}")
+
         # LLM Details
         self.provider_name = os.getenv("LLM_MODEL_PROVIDER_NAME")
         self.model_name = os.getenv("LLM_MODEL_NAME")
@@ -43,6 +48,7 @@ class Settings:
         # Airflow Auth Strategy
         self.auth_strategy = os.getenv("AIRFLOW_AUTH_STRATEGY", "per_user").strip().lower()
         self.bot_name = os.getenv("AZURE_BOT_NAME", "Airflow‑Copilot").strip().lower()
+
 
         # Airflow Centralized Auth
         self.airflow_base_url = os.getenv("AIRFLOW_BASE_URL", "").rstrip("/")

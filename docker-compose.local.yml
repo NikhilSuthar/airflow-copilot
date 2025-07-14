@@ -14,7 +14,10 @@ services:
   # 1) Copilot – FastAPI + LangGraph agent (handles DB init internally)
   ###########################################################################
   copilot:
-    image: thedatacarpenter/airflow-copilot:latest
+    # image: thedatacarpenter/airflow-copilot:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: copilot
     restart: unless-stopped
     ports:
@@ -79,7 +82,10 @@ services:
   # 3) Bot updater – patches Azure Bot with ngrok URL
   ###########################################################################
   bot-updater:
-    image: thedatacarpenter/airflow-copilot:latest
+    # image: thedatacarpenter/airflow-copilot:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     <<: *envfile
     entrypoint: ["/usr/local/bin/update_bot.sh"]
     depends_on: [ngrok]
