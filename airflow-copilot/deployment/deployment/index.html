@@ -1287,72 +1287,68 @@ Reference <a href="../../configuration/environment_variables/"><strong>Environme
 <p>Create <code>docker-compose.prod.yml</code></p>
 <p><details>
 <summary><code>docker-compose.prod.yml</code></summary>
-<div class="highlight"><span class="filename">docker-compose.prod.yml</span><pre><span></span><code><span class="c1"># docker-compose.prod.yml  – production stack</span>
-<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span>
+<div class="highlight"><span class="filename">docker-compose.prod.yml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span>
 
-<span class="c1"># ───── reusable anchor that mounts the real secrets file ─────</span>
+<span class="c1"># ──────────────── Common env-file anchor ────────────────</span>
 <span class="nt">x-env</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;envfile</span>
-<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w">            </span><span class="c1"># ← use your populated .env (not .env.example)</span>
+<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w">  </span><span class="c1"># Loaded from .env or .env.local</span>
 
 <span class="nt">networks</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">airflow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">airflow</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
 
 <span class="nt">services</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1">###########################################################################</span>
+<span class="w">  </span><span class="c1"># 1) Copilot – FastAPI + LangGraph agent (handles DB init internally)</span>
+<span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">copilot</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3978:3978&quot;</span>
-
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;curl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-f&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;http://localhost:3978/health&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># -------- LLM (choose ONE provider in .env) --------</span>
+<span class="w">      </span><span class="nt">USE_DOTENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="w">      </span><span class="c1"># LLM / model</span>
 <span class="w">      </span><span class="nt">LLM_MODEL_PROVIDER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_PROVIDER_NAME}</span>
-<span class="w">      </span><span class="nt">LLM_MODEL_NAME</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_NAME}</span>
+<span class="w">      </span><span class="nt">LLM_MODEL_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_NAME}</span>
 
-<span class="w">      </span><span class="c1"># Provider‑specific keys (only one will be used by Copilot)</span>
-<span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
-<span class="w">      </span><span class="nt">GOOGLE_GENAI_API_KEY</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${GOOGLE_GENAI_API_KEY}</span>
-<span class="w">      </span><span class="c1"># GROQ_API_KEY:            ${GROQ_API_KEY}</span>
-<span class="w">      </span><span class="c1"># ANTHROPIC_API_KEY:       ${ANTHROPIC_API_KEY}</span>
+<span class="w">      </span><span class="c1"># Provider keys</span>
+<span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
+<span class="w">      </span><span class="nt">GOOGLE_GENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${GOOGLE_GENAI_API_KEY}</span>
+<span class="w">      </span><span class="c1"># GROQ_API_KEY: ${GROQ_API_KEY}</span>
+<span class="w">      </span><span class="c1"># ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}</span>
 
-<span class="w">      </span><span class="c1"># Summarisation (leave empty to let the app fall back internally)</span>
-<span class="w">      </span><span class="nt">SUMMARIZATION_LLM_MODEL_PROVIDER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}</span>
-<span class="w">      </span><span class="nt">SUMMARIZATION_LLM_MODEL_NAME</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${SUMMARIZATION_LLM_MODEL_NAME}</span>
-
-<span class="w">      </span><span class="c1"># -------- Thresholds --------</span>
+<span class="w">      </span><span class="c1"># Summarization thresholds</span>
 <span class="w">      </span><span class="nt">MIN_MSG_TO_SUMMARIZE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_SUMMARIZE:-10}</span>
-<span class="w">      </span><span class="nt">MIN_MSG_TO_RETAIN</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_RETAIN:-10}</span>
+<span class="w">      </span><span class="nt">MIN_MSG_TO_RETAIN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_RETAIN:-10}</span>
 
-<span class="w">      </span><span class="c1"># -------- Airflow --------</span>
+<span class="w">      </span><span class="c1"># Airflow connection</span>
 <span class="w">      </span><span class="nt">AIRFLOW_AUTH_STRATEGY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_AUTH_STRATEGY:-per_user}</span>
-<span class="w">      </span><span class="nt">AIRFLOW_BASE_URL</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_BASE_URL}</span>
-<span class="w">      </span><span class="nt">AIRFLOW_USER_NAME</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_NAME:-airflow}</span>
+<span class="w">      </span><span class="nt">AIRFLOW_USER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_NAME:-airflow}</span>
 <span class="w">      </span><span class="nt">AIRFLOW_USER_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_PASSWORD:-airflow}</span>
+<span class="w">      </span><span class="nt">AIRFLOW_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_BASE_URL}</span>
 
-<span class="w">      </span><span class="c1"># -------- Database --------</span>
+<span class="w">      </span><span class="c1"># Summarization model</span>
+<span class="w">      </span><span class="nt">SUMMARIZATION_LLM_MODEL_PROVIDER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}</span>
+<span class="w">      </span><span class="nt">SUMMARIZATION_LLM_MODEL_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${SUMMARIZATION_LLM_MODEL_NAME}</span>
+
+<span class="w">      </span><span class="c1"># Database &amp; Bot</span>
 <span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span>
-
-<span class="w">      </span><span class="c1"># -------- Azure Bot --------</span>
-<span class="w">      </span><span class="nt">MICROSOFT_APP_ID</span><span class="p">:</span><span class="w">       </span><span class="l l-Scalar l-Scalar-Plain">${MICROSOFT_APP_ID}</span>
+<span class="w">      </span><span class="nt">MICROSOFT_APP_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MICROSOFT_APP_ID}</span>
 <span class="w">      </span><span class="nt">MICROSOFT_APP_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MICROSOFT_APP_PASSWORD}</span>
 
-<span class="w">      </span><span class="c1"># -------- Security --------</span>
+<span class="w">      </span><span class="c1"># Encryption</span>
 <span class="w">      </span><span class="nt">FERNET_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${FERNET_SECRET_KEY}</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env:/app/src/.env:ro</span>
-<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">db-init</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span>
-
-<span class="w">  </span><span class="c1"># one‑shot Postgres schema bootstrap</span>
-<span class="w">  </span><span class="nt">db-init</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
-<span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*envfile</span>
-<span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;/init_db.sh&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./docker/scripts/init_db.sh:/init_db.sh:ro</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./docker/scripts/init.sql:/init.sql:ro</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span>
 <span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 </details></p>

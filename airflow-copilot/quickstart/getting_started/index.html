@@ -1336,7 +1336,7 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 
 <span class="c1"># ──────────────── Common env-file anchor ────────────────</span>
 <span class="nt">x-env</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;envfile</span>
-<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w">  </span><span class="c1"># Populate from .env or .env.local</span>
+<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w">  </span><span class="c1"># Loaded from .env or .env.local</span>
 
 <span class="nt">networks</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">airflow</span><span class="p">:</span>
@@ -1345,7 +1345,7 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="nt">services</span><span class="p">:</span>
 
 <span class="w">  </span><span class="c1">###########################################################################</span>
-<span class="w">  </span><span class="c1"># 1) Copilot – FastAPI + LangGraph agent</span>
+<span class="w">  </span><span class="c1"># 1) Copilot – FastAPI + LangGraph agent (handles DB init internally)</span>
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
@@ -1360,65 +1360,45 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">USE_DOTENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
 <span class="w">      </span><span class="c1"># LLM / model</span>
 <span class="w">      </span><span class="nt">LLM_MODEL_PROVIDER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_PROVIDER_NAME}</span>
-<span class="w">      </span><span class="nt">LLM_MODEL_NAME</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_NAME}</span>
+<span class="w">      </span><span class="nt">LLM_MODEL_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_NAME}</span>
 
 <span class="w">      </span><span class="c1"># Provider keys</span>
-<span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
-<span class="w">      </span><span class="nt">GOOGLE_GENAI_API_KEY</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${GOOGLE_GENAI_API_KEY}</span>
-<span class="w">      </span><span class="c1"># GROQ_API_KEY:          ${GROQ_API_KEY}</span>
-<span class="w">      </span><span class="c1"># ANTHROPIC_API_KEY:     ${ANTHROPIC_API_KEY}</span>
+<span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
+<span class="w">      </span><span class="nt">GOOGLE_GENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${GOOGLE_GENAI_API_KEY}</span>
+<span class="w">      </span><span class="c1"># GROQ_API_KEY: ${GROQ_API_KEY}</span>
+<span class="w">      </span><span class="c1"># ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}</span>
 
-<span class="w">      </span><span class="c1"># Thresholds</span>
+<span class="w">      </span><span class="c1"># Summarization thresholds</span>
 <span class="w">      </span><span class="nt">MIN_MSG_TO_SUMMARIZE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_SUMMARIZE:-10}</span>
-<span class="w">      </span><span class="nt">MIN_MSG_TO_RETAIN</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_RETAIN:-10}</span>
+<span class="w">      </span><span class="nt">MIN_MSG_TO_RETAIN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MIN_MSG_TO_RETAIN:-10}</span>
 
-<span class="w">      </span><span class="c1"># Airflow</span>
+<span class="w">      </span><span class="c1"># Airflow connection</span>
 <span class="w">      </span><span class="nt">AIRFLOW_AUTH_STRATEGY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_AUTH_STRATEGY:-per_user}</span>
-<span class="w">      </span><span class="nt">AIRFLOW_USER_NAME</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_NAME:-airflow}</span>
+<span class="w">      </span><span class="nt">AIRFLOW_USER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_NAME:-airflow}</span>
 <span class="w">      </span><span class="nt">AIRFLOW_USER_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_USER_PASSWORD:-airflow}</span>
-<span class="w">      </span><span class="nt">AIRFLOW_BASE_URL</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_BASE_URL}</span>
+<span class="w">      </span><span class="nt">AIRFLOW_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_BASE_URL}</span>
 
 <span class="w">      </span><span class="c1"># Summarization model</span>
 <span class="w">      </span><span class="nt">SUMMARIZATION_LLM_MODEL_PROVIDER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}</span>
-<span class="w">      </span><span class="nt">SUMMARIZATION_LLM_MODEL_NAME</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${SUMMARIZATION_LLM_MODEL_NAME}</span>
+<span class="w">      </span><span class="nt">SUMMARIZATION_LLM_MODEL_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${SUMMARIZATION_LLM_MODEL_NAME}</span>
 
-<span class="w">      </span><span class="c1"># Database &amp; Bot creds</span>
-<span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w">                 </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span>
-<span class="w">      </span><span class="nt">MICROSOFT_APP_ID</span><span class="p">:</span><span class="w">       </span><span class="l l-Scalar l-Scalar-Plain">${MICROSOFT_APP_ID}</span>
+<span class="w">      </span><span class="c1"># Database &amp; Bot</span>
+<span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span>
+<span class="w">      </span><span class="nt">MICROSOFT_APP_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MICROSOFT_APP_ID}</span>
 <span class="w">      </span><span class="nt">MICROSOFT_APP_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MICROSOFT_APP_PASSWORD}</span>
 
-<span class="w">      </span><span class="c1"># Security</span>
+<span class="w">      </span><span class="c1"># Encryption</span>
 <span class="w">      </span><span class="nt">FERNET_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${FERNET_SECRET_KEY}</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env:/app/src/.env:ro</span>
-<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">db-init</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_completed_successfully</span>
 <span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span>
 
 <span class="w">  </span><span class="c1">###########################################################################</span>
-<span class="w">  </span><span class="c1"># 2) One‑shot schema init (external Postgres or host DB)</span>
+<span class="w">  </span><span class="c1"># 2) Ngrok – expose local FastAPI endpoint</span>
 <span class="w">  </span><span class="c1">###########################################################################</span>
-<span class="w">  </span><span class="nt">db-init</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
-<span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*envfile</span>
-<span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;/init_db.sh&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span>
-<span class="w">    </span><span class="nt">extra_hosts</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;host.docker.internal:host-gateway&quot;</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">DB_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_URI}</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./docker/scripts/init_db.sh:/init_db.sh:ro</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./docker/scripts/init.sql:/init.sql:ro</span>
-<span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span>
-
-<span class="w">  </span><span class="c1">###########################################################################</span>
-<span class="w">  </span><span class="c1"># 3) Ngrok – expose local FastAPI endpoint</span>
-<span class="w">  </span><span class="c1">###########################################################################</span>
-
 <span class="w">  </span><span class="nt">ngrok</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ngrok/ngrok:latest</span>
 <span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">copilot</span><span class="p p-Indicator">]</span>
@@ -1428,8 +1408,9 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;4040:4040&quot;</span>
 <span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">airflow</span><span class="p p-Indicator">]</span>
+
 <span class="w">  </span><span class="c1">###########################################################################</span>
-<span class="w">  </span><span class="c1"># 4) Bot updater – patches Azure Bot with ngrok URL</span>
+<span class="w">  </span><span class="c1"># 3) Bot updater – patches Azure Bot with ngrok URL</span>
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">bot-updater</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
@@ -1441,8 +1422,8 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">      </span><span class="nt">NGROK_API</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ngrok:4040/api/tunnels</span>
 <span class="w">      </span><span class="nt">BOT_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_BOT_NAME:-Airflow-Copilot}</span>
 <span class="w">      </span><span class="nt">RESOURCE_GROUP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${RESOURCE_GROUP}</span>
-<span class="w">      </span><span class="nt">AZURE_CLIENT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_ID}</span>
-<span class="w">      </span><span class="nt">AZURE_TENANT_ID</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_TENANT_ID}</span>
+<span class="w">      </span><span class="nt">AZURE_CLIENT_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_ID}</span>
+<span class="w">      </span><span class="nt">AZURE_TENANT_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_TENANT_ID}</span>
 <span class="w">      </span><span class="nt">AZURE_CLIENT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AZURE_CLIENT_SECRET}</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env:/app/src/.env:ro</span>
