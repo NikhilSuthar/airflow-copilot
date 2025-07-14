@@ -26,5 +26,17 @@ case "${LLM_MODEL_PROVIDER_NAME}" in
     ;;
 esac
 
+
+# ---------- Optional: Bootstrap DB schema if DB_URI is provided ----------
+if [[ -n "${DB_URI:-}" && -f "/usr/local/bin/init_db.sh" && -f "/usr/local/bin/init.sql" ]]; then
+  echo "🔁 Running DB initialization script ..."
+  bash /usr/local/bin/init_db.sh
+else
+  echo "ℹ️  Skipping DB bootstrap – missing DB_URI or schema scripts."
+fi
+
+
+
+
 # ---------- launch uvicorn ----------
 exec "$@"

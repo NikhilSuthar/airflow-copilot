@@ -1,67 +1,63 @@
-# docker-compose.prod.yml  – production stack
 version: "3.9"
 
-# ───── reusable anchor that mounts the real secrets file ─────
+# ──────────────── Common env-file anchor ────────────────
 x-env: &envfile
-  env_file: .env            # ← use your populated .env (not .env.example)
+  env_file: .env  # Loaded from .env or .env.local
 
 networks:
-  airflow: {}
+  airflow:
+    driver: bridge
 
 services:
+
+  ###########################################################################
+  # 1) Copilot – FastAPI + LangGraph agent (handles DB init internally)
+  ###########################################################################
   copilot:
     image: thedatacarpenter/airflow-copilot:latest
+    container_name: copilot
+    restart: unless-stopped
     ports:
       - "3978:3978"
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3978/health"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
     environment:
-      # -------- LLM (choose ONE provider in .env) --------
+      USE_DOTENV: false
+
+      # LLM / model
       LLM_MODEL_PROVIDER_NAME: ${LLM_MODEL_PROVIDER_NAME}
-      LLM_MODEL_NAME:          ${LLM_MODEL_NAME}
+      LLM_MODEL_NAME: ${LLM_MODEL_NAME}
 
-      # Provider‑specific keys (only one will be used by Copilot)
-      OPENAI_API_KEY:          ${OPENAI_API_KEY}
-      GOOGLE_GENAI_API_KEY:    ${GOOGLE_GENAI_API_KEY}
-      # GROQ_API_KEY:            ${GROQ_API_KEY}
-      # ANTHROPIC_API_KEY:       ${ANTHROPIC_API_KEY}
+      # Provider keys
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_GENAI_API_KEY: ${GOOGLE_GENAI_API_KEY}
+      # GROQ_API_KEY: ${GROQ_API_KEY}
+      # ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
 
-      # Summarisation (leave empty to let the app fall back internally)
-      SUMMARIZATION_LLM_MODEL_PROVIDER_NAME: ${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}
-      SUMMARIZATION_LLM_MODEL_NAME:          ${SUMMARIZATION_LLM_MODEL_NAME}
-
-      # -------- Thresholds --------
+      # Summarization thresholds
       MIN_MSG_TO_SUMMARIZE: ${MIN_MSG_TO_SUMMARIZE:-10}
-      MIN_MSG_TO_RETAIN:    ${MIN_MSG_TO_RETAIN:-10}
+      MIN_MSG_TO_RETAIN: ${MIN_MSG_TO_RETAIN:-10}
 
-      # -------- Airflow --------
+      # Airflow connection
       AIRFLOW_AUTH_STRATEGY: ${AIRFLOW_AUTH_STRATEGY:-per_user}
-      AIRFLOW_BASE_URL:      ${AIRFLOW_BASE_URL}
-      AIRFLOW_USER_NAME:     ${AIRFLOW_USER_NAME:-airflow}
+      AIRFLOW_USER_NAME: ${AIRFLOW_USER_NAME:-airflow}
       AIRFLOW_USER_PASSWORD: ${AIRFLOW_USER_PASSWORD:-airflow}
+      AIRFLOW_BASE_URL: ${AIRFLOW_BASE_URL}
 
-      # -------- Database --------
+      # Summarization model
+      SUMMARIZATION_LLM_MODEL_PROVIDER_NAME: ${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}
+      SUMMARIZATION_LLM_MODEL_NAME: ${SUMMARIZATION_LLM_MODEL_NAME}
+
+      # Database & Bot
       DB_URI: ${DB_URI}
-
-      # -------- Azure Bot --------
-      MICROSOFT_APP_ID:       ${MICROSOFT_APP_ID}
+      MICROSOFT_APP_ID: ${MICROSOFT_APP_ID}
       MICROSOFT_APP_PASSWORD: ${MICROSOFT_APP_PASSWORD}
 
-      # -------- Security --------
+      # Encryption
       FERNET_SECRET_KEY: ${FERNET_SECRET_KEY}
     volumes:
       - .env:/app/src/.env:ro
-    depends_on: [db-init]
-    networks: [airflow]
-
-  # one‑shot Postgres schema bootstrap
-  db-init:
-    image: postgres:16
-    <<: *envfile
-    entrypoint: ["/bin/bash", "/init_db.sh"]
-    environment:
-      DB_URI: ${DB_URI}
-    volumes:
-      - ./docker/scripts/init_db.sh:/init_db.sh:ro
-      - ./docker/scripts/init.sql:/init.sql:ro
-    restart: "no"
     networks: [airflow]

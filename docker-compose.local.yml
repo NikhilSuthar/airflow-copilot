@@ -2,7 +2,7 @@ version: "3.9"
 
 # ──────────────── Common env-file anchor ────────────────
 x-env: &envfile
-  env_file: .env  # Populate from .env or .env.local
+  env_file: .env  # Loaded from .env or .env.local
 
 networks:
   airflow:
@@ -11,7 +11,7 @@ networks:
 services:
 
   ###########################################################################
-  # 1) Copilot – FastAPI + LangGraph agent
+  # 1) Copilot – FastAPI + LangGraph agent (handles DB init internally)
   ###########################################################################
   copilot:
     image: thedatacarpenter/airflow-copilot:latest
@@ -26,65 +26,45 @@ services:
       retries: 5
     environment:
       USE_DOTENV: false
+
       # LLM / model
       LLM_MODEL_PROVIDER_NAME: ${LLM_MODEL_PROVIDER_NAME}
-      LLM_MODEL_NAME:          ${LLM_MODEL_NAME}
+      LLM_MODEL_NAME: ${LLM_MODEL_NAME}
 
       # Provider keys
-      OPENAI_API_KEY:          ${OPENAI_API_KEY}
-      GOOGLE_GENAI_API_KEY:    ${GOOGLE_GENAI_API_KEY}
-      # GROQ_API_KEY:          ${GROQ_API_KEY}
-      # ANTHROPIC_API_KEY:     ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_GENAI_API_KEY: ${GOOGLE_GENAI_API_KEY}
+      # GROQ_API_KEY: ${GROQ_API_KEY}
+      # ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
 
-      # Thresholds
+      # Summarization thresholds
       MIN_MSG_TO_SUMMARIZE: ${MIN_MSG_TO_SUMMARIZE:-10}
-      MIN_MSG_TO_RETAIN:    ${MIN_MSG_TO_RETAIN:-10}
+      MIN_MSG_TO_RETAIN: ${MIN_MSG_TO_RETAIN:-10}
 
-      # Airflow
+      # Airflow connection
       AIRFLOW_AUTH_STRATEGY: ${AIRFLOW_AUTH_STRATEGY:-per_user}
-      AIRFLOW_USER_NAME:     ${AIRFLOW_USER_NAME:-airflow}
+      AIRFLOW_USER_NAME: ${AIRFLOW_USER_NAME:-airflow}
       AIRFLOW_USER_PASSWORD: ${AIRFLOW_USER_PASSWORD:-airflow}
-      AIRFLOW_BASE_URL:      ${AIRFLOW_BASE_URL}
+      AIRFLOW_BASE_URL: ${AIRFLOW_BASE_URL}
 
       # Summarization model
       SUMMARIZATION_LLM_MODEL_PROVIDER_NAME: ${SUMMARIZATION_LLM_MODEL_PROVIDER_NAME}
-      SUMMARIZATION_LLM_MODEL_NAME:          ${SUMMARIZATION_LLM_MODEL_NAME}
+      SUMMARIZATION_LLM_MODEL_NAME: ${SUMMARIZATION_LLM_MODEL_NAME}
 
-      # Database & Bot creds
-      DB_URI:                 ${DB_URI}
-      MICROSOFT_APP_ID:       ${MICROSOFT_APP_ID}
+      # Database & Bot
+      DB_URI: ${DB_URI}
+      MICROSOFT_APP_ID: ${MICROSOFT_APP_ID}
       MICROSOFT_APP_PASSWORD: ${MICROSOFT_APP_PASSWORD}
 
-      # Security
+      # Encryption
       FERNET_SECRET_KEY: ${FERNET_SECRET_KEY}
     volumes:
       - .env:/app/src/.env:ro
-    depends_on:
-      db-init:
-        condition: service_completed_successfully
     networks: [airflow]
 
   ###########################################################################
-  # 2) One‑shot schema init (external Postgres or host DB)
+  # 2) Ngrok – expose local FastAPI endpoint
   ###########################################################################
-  db-init:
-    image: postgres:16
-    <<: *envfile
-    entrypoint: ["/bin/bash", "/init_db.sh"]
-    restart: "no"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    environment:
-      DB_URI: ${DB_URI}
-    volumes:
-      - ./docker/scripts/init_db.sh:/init_db.sh:ro
-      - ./docker/scripts/init.sql:/init.sql:ro
-    networks: [airflow]
-
-  ###########################################################################
-  # 3) Ngrok – expose local FastAPI endpoint
-  ###########################################################################
-
   ngrok:
     image: ngrok/ngrok:latest
     depends_on: [copilot]
@@ -94,8 +74,9 @@ services:
     ports:
       - "4040:4040"
     networks: [airflow]
+
   ###########################################################################
-  # 4) Bot updater – patches Azure Bot with ngrok URL
+  # 3) Bot updater – patches Azure Bot with ngrok URL
   ###########################################################################
   bot-updater:
     image: thedatacarpenter/airflow-copilot:latest
@@ -107,8 +88,8 @@ services:
       NGROK_API: http://ngrok:4040/api/tunnels
       BOT_NAME: ${AZURE_BOT_NAME:-Airflow-Copilot}
       RESOURCE_GROUP: ${RESOURCE_GROUP}
-      AZURE_CLIENT_ID:     ${AZURE_CLIENT_ID}
-      AZURE_TENANT_ID:     ${AZURE_TENANT_ID}
+      AZURE_CLIENT_ID: ${AZURE_CLIENT_ID}
+      AZURE_TENANT_ID: ${AZURE_TENANT_ID}
       AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET}
     volumes:
       - .env:/app/src/.env:ro

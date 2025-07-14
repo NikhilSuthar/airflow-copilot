@@ -15,11 +15,11 @@ until psql "$DB_URI" -c 'SELECT 1;' >/dev/null 2>&1; do
 done
 echo "✅ Postgres is reachable."
 
-if [[ ! -f /init.sql ]]; then
-  echo "❌ /init.sql not found inside the image. Abort."
+if [[ ! -f /usr/local/bin/init.sql ]]; then
+  echo "❌ /usr/local/bin/init.sql not found inside the image. Abort."
   exit 1
 fi
 
-echo "▶️  Applying schema from /init.sql"
-psql "$DB_URI" -v ON_ERROR_STOP=1 -f /init.sql
+echo "▶️  Applying schema from /usr/local/bin/init.sql"
+psql "$DB_URI" -v ON_ERROR_STOP=1 -f /usr/local/bin/init.sql
 echo "🎉 Database bootstrap complete."
