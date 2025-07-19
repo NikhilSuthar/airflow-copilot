@@ -61,7 +61,7 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/airflow-copilot:latest
 
   deploy-docs:
-    needs: build-docker
+    needs: ${{ github.event.inputs.only_docs == 'true' && fromJSON('[]') || fromJSON('["build-docker"]') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -75,7 +75,7 @@ jobs:
       - name: Install MkDocs
         run: |
           pip install --upgrade pip
-          pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin
+          pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin pymdown-extensions
 
       - name: Build MkDocs Site
         run: mkdocs build

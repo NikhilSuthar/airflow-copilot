@@ -98,7 +98,7 @@ nav:
   - ⚙️ Configuration:
       - Environment Variables: configuration/environment_variables.md
 
-  - 📘 Common Examples: example.md
+  - 📘 In Action: example.md
   - 🚢 Deployment:
       - Docker (Local & Prod): deployment/deployment.md
       - Build & Publish:   deployment/build.md
