@@ -1,0 +1,33 @@
+name: Deploy Docs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install MkDocs
+        run: |
+          pip install --upgrade pip
+          pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin pymdown-extensions
+
+      - name: Build MkDocs Site
+        run: mkdocs build
+
+      - name: Publish Docs to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          enable_jekyll: false
+          publish_branch: gh-pages
+          cname: thedatacarpenter.com
