@@ -7,16 +7,14 @@ from functools import lru_cache
 from typing import Optional
 import contextvars
 
-# ────────────────────────── Logging Setup ──────────────────────────
-logs.basicConfig(
-    level=logs.INFO,
-    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-)
+logs = logs.getLogger(__name__)
 
 # ────────────────────────── Optional .env Loading ──────────────────────────
 ENV_PATH = "/app/src/.env"
+
 load_dotenv(dotenv_path=ENV_PATH, override=True)
 logs.info(f"✅ Loading .env from {ENV_PATH}")
+
 
 # ────────────────────────── App Settings ──────────────────────────
 class Settings:

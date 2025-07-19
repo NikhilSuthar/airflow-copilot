@@ -4,7 +4,7 @@
 PORT=3978
 NGROK_LOG_FILE=ngrok.log
 FASTAPI_FILE="airflow_copilot.app.app"
-BOT_NAME="AirflowCopilot"
+BOT_NAME="Airflow-Copilot"
 RESOURCE_GROUP="my-rg"
 
 echo "⚠️ Force kill anything on that port (optional, not recommended for production)"

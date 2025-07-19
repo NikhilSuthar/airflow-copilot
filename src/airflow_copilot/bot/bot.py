@@ -13,18 +13,35 @@ from airflow_copilot.config.settings import get_environment
 from airflow_copilot.config.CredentialStore import save_user_credentials,test_credential
 import time
 from botbuilder.core.teams import TeamsInfo
-
-env = get_environment()
-log_level = str(env.log_level).upper()
-logs.basicConfig(
-level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
-format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-datefmt="%Y-%m-%d %H:%M:%S"
-)
+import re
+from typing import Union
 
 
+logs = logs.getLogger(__name__)
 
 class TeamsBot(object):
+
+
+    @staticmethod
+    def extract_clean_code(response: Union[str, list]) -> str:
+        # If the response is a list (e.g., multiple lines), join into a single string
+        if isinstance(response, list):
+            response = "\n".join(response)
+
+        # Safety: Ensure it's now a string
+        if not isinstance(response, str):
+            raise TypeError(f"Expected string or list of strings, got {type(response)}")
+
+        # Try to extract the first Python code block
+        match = re.search(r"```python\s*(.*?)```", response, re.DOTALL)
+        if match:
+            # Return the cleaned code block
+            code = match.group(1).strip()
+            return f"```python\n{code}\n```"
+
+        # If no code block found, return raw response
+        return response.strip()
+
     
 
     @staticmethod
@@ -98,6 +115,8 @@ class TeamsBot(object):
         env = get_environment()
         with PostgresSaver.from_conn_string(env.db_uri) as checkpointer:
             checkpointer.delete_thread(user_id)
+
+
    
     @staticmethod
     async def on_turn(turn_context: TurnContext):
@@ -128,6 +147,7 @@ class TeamsBot(object):
         elif (user_input is not None):
             await turn_context.send_activity(Activity(type=ActivityTypes.typing))
             response = await agt.airflow_connect(user_id=user_id, user_input=user_input, user_name=user_name)
+            response = TeamsBot.extract_clean_code(response)
             logs.debug(f"Response get {response}")
             logs.info(f"Response sent to user {user_id}")
             message = Activity(
@@ -138,8 +158,5 @@ class TeamsBot(object):
             await turn_context.send_activity(message)
             return
         
-    
-
-
 
         

@@ -2,8 +2,8 @@
 import requests
 import logging as logs
 
-# Setup logging to show INFO level logs
-logs.basicConfig(level=logs.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+
+logs = logs.getLogger(__name__)
 
 def get_ngrok_url():
     try:

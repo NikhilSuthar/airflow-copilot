@@ -6,16 +6,20 @@ from fastapi.responses import JSONResponse
 from airflow_copilot.config.settings import get_environment
 
 
-app = FastAPI()
+
 env = get_environment()
 log_level = str(env.log_level).upper()
 logs.info(f"Log Level for API Call is {log_level}")
 logs.basicConfig(
-level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
-format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-datefmt="%Y-%m-%d %H:%M:%S"
+    level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
 )
+logs.getLogger().setLevel(getattr(logs, log_level, logs.INFO))
+for handler in logs.root.handlers:
+    handler.setLevel(getattr(logs, log_level, logs.INFO))
 
+app = FastAPI()
 logs.info("🚀 FastAPI app is starting up")
 @app.get("/health")
 def health_check():
