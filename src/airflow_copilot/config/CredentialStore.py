@@ -9,13 +9,9 @@ import datetime
 import os
 
 
+logs = logs.getLogger(__name__)
 env = get_environment()
-log_level = str(env.log_level).upper()
-logs.basicConfig(
-level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
-format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-datefmt="%Y-%m-%d %H:%M:%S"
-)
+
 
 
 def get_connection():

@@ -11,7 +11,7 @@ from airflow_copilot.config.settings import user_id_context
 import logging as logs
 
 
-
+logs = logs.getLogger(__name__)
 
 class AirflowTools:
     _env = get_environment()

@@ -7,13 +7,8 @@ from airflow_copilot.reducer.GraphState import GraphState
 import logging as logs
 from airflow_copilot.config.settings import get_environment
 
-env = get_environment()
-log_level = str(env.log_level).upper()
-logs.basicConfig(
-level=getattr(logs, log_level, logs.INFO),  # <-- ensures info-level and above are shown
-format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-datefmt="%Y-%m-%d %H:%M:%S"
-)
+
+logs = logs.getLogger(__name__)
 
 
 class AsyncSummarization(object):

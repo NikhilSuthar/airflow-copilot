@@ -30,7 +30,7 @@ services:
     environment:
       USE_DOTENV: false
 
-      # LLM / model
+      # LLM / model 
       LLM_MODEL_PROVIDER_NAME: ${LLM_MODEL_PROVIDER_NAME}
       LLM_MODEL_NAME: ${LLM_MODEL_NAME}
 

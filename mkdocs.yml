@@ -68,11 +68,13 @@ extra_css:
 
 # ── Markdown extensions ─────────────────────────────────
 markdown_extensions:
+  - md_in_html 
   - pymdownx.snippets
   - pymdownx.superfences
   - admonition
   - attr_list
   - def_list
+ 
 
 # ── Navigation ──────────────────────────────────────────
 nav:
@@ -96,12 +98,7 @@ nav:
   - ⚙️ Configuration:
       - Environment Variables: configuration/environment_variables.md
 
-  - 📘 User Guide:
-      - Chat Basics:       howto/chat.md
-      - DAG / Task Ops:    howto/task_management.md
-      - Alerts & Notify:   howto/notifications.md
-      - User Mgmt:         howto/user_management.md
-
+  - 📘 Common Examples: example.md
   - 🚢 Deployment:
       - Docker (Local & Prod): deployment/deployment.md
       - Build & Publish:   deployment/build.md
