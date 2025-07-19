@@ -13,28 +13,28 @@
         <meta name="author" content="Nikhil Suthar">
       
       
-        <link rel="canonical" href="https://thedatacarpenter.com/airflow-copilot/quickstart/azure_bot/">
+        <link rel="canonical" href="https://thedatacarpenter.com/airflow-copilot/example/">
       
       
-        <link rel="prev" href="../before_we_start/">
+        <link rel="prev" href="../configuration/environment_variables/">
       
       
-        <link rel="next" href="../upload_app/">
+        <link rel="next" href="../deployment/deployment/">
       
       
-      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Create Azure Bot - </title>
+        <title>📘 Common Examples - </title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/extra.css">
+      <link rel="stylesheet" href="../assets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#create-an-azure-bot-for-microsoft-teams" class="md-skip">
+        <a href="#airflow-copilot-in-action-common-chat-examples" class="md-skip">
           Skip to content
         </a>
       
@@ -97,9 +97,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="" class="md-header__button md-logo" aria-label="" data-md-component="logo">
+    <a href=".." title="" class="md-header__button md-logo" aria-label="" data-md-component="logo">
       
-  <img src="../../assets/AirflowCopilotLogoThumb.svg" alt="logo">
+  <img src="../assets/AirflowCopilotLogoThumb.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Create Azure Bot
+              📘 Common Examples
             
           </span>
         </div>
@@ -234,9 +234,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="" class="md-nav__button md-logo" aria-label="" data-md-component="logo">
+    <a href=".." title="" class="md-nav__button md-logo" aria-label="" data-md-component="logo">
       
-  <img src="../../assets/AirflowCopilotLogoThumb.svg" alt="logo">
+  <img src="../assets/AirflowCopilotLogoThumb.svg" alt="logo">
 
     </a>
     
@@ -263,7 +263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -282,20 +282,20 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -311,7 +311,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             🚀 Getting Started
@@ -325,7 +325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../before_we_start/" class="md-nav__link">
+      <a href="../quickstart/before_we_start/" class="md-nav__link">
         
   
   
@@ -345,32 +345,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Create Azure Bot
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../quickstart/azure_bot/" class="md-nav__link">
         
   
   
@@ -381,137 +359,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#process-at-a-glance" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧭 Process at a Glance
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stepbystep-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      🛠️ Step‑by‑Step Guide
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🛠️ Step‑by‑Step Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-register-the-bot" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Register the Bot
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-grab-app-credentials" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Grab App Credentials
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-enable-the-teams-channel" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Enable the Teams Channel
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-configure-the-messaging-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Configure the Messaging Endpoint
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-required-only-for-local-deployment" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔐 Optional: Required Only for Local Deployment
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔐 Optional: Required Only for Local Deployment">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#steps-to-create-a-service-principal" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧭 Steps to Create a Service Principal
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recap" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Recap
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security-best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔐 Security Best Practices
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔗 Next Steps
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -524,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upload_app/" class="md-nav__link">
+      <a href="../quickstart/upload_app/" class="md-nav__link">
         
   
   
@@ -547,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../quickstart/getting_started/" class="md-nav__link">
         
   
   
@@ -570,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../agent-behavior/" class="md-nav__link">
+      <a href="../quickstart/agent-behavior/" class="md-nav__link">
         
   
   
@@ -640,7 +487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/architecture/" class="md-nav__link">
+      <a href="../architecture/architecture/" class="md-nav__link">
         
   
   
@@ -663,7 +510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/agent/" class="md-nav__link">
+      <a href="../architecture/agent/" class="md-nav__link">
         
   
   
@@ -686,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/summarization/" class="md-nav__link">
+      <a href="../architecture/summarization/" class="md-nav__link">
         
   
   
@@ -709,7 +556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/supported_apis/" class="md-nav__link">
+      <a href="../architecture/supported_apis/" class="md-nav__link">
         
   
   
@@ -732,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/airflow_auth_type/" class="md-nav__link">
+      <a href="../architecture/airflow_auth_type/" class="md-nav__link">
         
   
   
@@ -755,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/refresh_history/" class="md-nav__link">
+      <a href="../architecture/refresh_history/" class="md-nav__link">
         
   
   
@@ -825,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configuration/environment_variables/" class="md-nav__link">
+      <a href="../configuration/environment_variables/" class="md-nav__link">
         
   
   
@@ -852,10 +699,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../example/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    📘 Common Examples
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -866,6 +735,122 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-basic-configuration-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 🔧 Basic Configuration &amp; Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-basic-dag-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 📊 Basic DAG Interaction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-update-dag-schedule-or-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. ⏱️ Update DAG Schedule or Tags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. ⏱️ Update DAG Schedule or Tags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-define-the-dynamic-schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to define the dynamic Schedule?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-get-task-failure-logs-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 🐞 Get Task Failure Logs &amp; Resolution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-view-dag-source-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 📄 View DAG Source Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-view-the-import-failure-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 🧱 View the Import Failure DAG
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-create-user-with-custom-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 👤 Create User with Custom Roles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-chat-anywhere" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 💬 Chat Anywhere
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-other-supported-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 🧰 Other Supported Operations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -917,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../deployment/deployment/" class="md-nav__link">
+      <a href="../deployment/deployment/" class="md-nav__link">
         
   
   
@@ -940,7 +925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../deployment/build/" class="md-nav__link">
+      <a href="../deployment/build/" class="md-nav__link">
         
   
   
@@ -963,7 +948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../deployment/aws-deployment.md" class="md-nav__link">
+      <a href="../deployment/aws-deployment.md" class="md-nav__link">
         
   
   
@@ -993,7 +978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../roadmap/" class="md-nav__link">
+      <a href="../roadmap/" class="md-nav__link">
         
   
   
@@ -1035,55 +1020,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#process-at-a-glance" class="md-nav__link">
+  <a href="#1-basic-configuration-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      🧭 Process at a Glance
+      1. 🔧 Basic Configuration &amp; Setup
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#stepbystep-guide" class="md-nav__link">
+  <a href="#2-basic-dag-interaction" class="md-nav__link">
     <span class="md-ellipsis">
-      🛠️ Step‑by‑Step Guide
+      2. 📊 Basic DAG Interaction
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🛠️ Step‑by‑Step Guide">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-update-dag-schedule-or-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. ⏱️ Update DAG Schedule or Tags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. ⏱️ Update DAG Schedule or Tags">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-register-the-bot" class="md-nav__link">
+  <a href="#how-to-define-the-dynamic-schedule" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Register the Bot
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-grab-app-credentials" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Grab App Credentials
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-enable-the-teams-channel" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Enable the Teams Channel
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-configure-the-messaging-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Configure the Messaging Endpoint
+      How to define the dynamic Schedule?
     </span>
   </a>
   
@@ -1095,51 +1062,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#optional-required-only-for-local-deployment" class="md-nav__link">
+  <a href="#4-get-task-failure-logs-resolution" class="md-nav__link">
     <span class="md-ellipsis">
-      🔐 Optional: Required Only for Local Deployment
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔐 Optional: Required Only for Local Deployment">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#steps-to-create-a-service-principal" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧭 Steps to Create a Service Principal
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recap" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Recap
+      4. 🐞 Get Task Failure Logs &amp; Resolution
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#security-best-practices" class="md-nav__link">
+  <a href="#5-view-dag-source-code" class="md-nav__link">
     <span class="md-ellipsis">
-      🔐 Security Best Practices
+      5. 📄 View DAG Source Code
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#6-view-the-import-failure-dag" class="md-nav__link">
     <span class="md-ellipsis">
-      🔗 Next Steps
+      6. 🧱 View the Import Failure DAG
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-create-user-with-custom-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 👤 Create User with Custom Roles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-chat-anywhere" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 💬 Chat Anywhere
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-other-supported-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 🧰 Other Supported Operations
     </span>
   </a>
   
@@ -1164,198 +1134,144 @@
   
 
 
-<h1 id="create-an-azure-bot-for-microsoft-teams">👾 Create an <strong>Azure Bot</strong> (for Microsoft Teams)</h1>
-<p><strong>Airflow Copilot</strong> communicates through a custom <strong>Microsoft Teams App</strong> hosted on <strong>Azure Bot Service</strong>. Follow these steps to register the bot, enable Teams, and wire the credentials into Copilot.</p>
-<hr />
-<h2 id="process-at-a-glance">🧭 Process at a Glance</h2>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Action</th>
-<th>Outcome</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1️⃣</td>
-<td><strong>Register Bot</strong> in Azure Portal</td>
-<td>Generates <em>Microsoft App ID</em> &amp; <em>Client Secret</em></td>
-</tr>
-<tr>
-<td>2️⃣</td>
-<td><strong>Enable Teams Channel</strong></td>
-<td>Allows Teams users to message the bot</td>
-</tr>
-<tr>
-<td>3️⃣</td>
-<td><strong>Set Messaging Endpoint</strong></td>
-<td>Points Azure Bot → <code>https://…/api/messages</code></td>
-</tr>
-<tr>
-<td>4️⃣</td>
-<td><strong>Add Credentials to Copilot</strong></td>
-<td>Copilot verifies every incoming request</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="stepbystep-guide">🛠️ Step‑by‑Step Guide</h2>
-<h3 id="1-register-the-bot">1. Register the Bot</h3>
-<ol>
-<li>Sign in to the <strong><a href="https://portal.azure.com/#home">Azure Portal</a></strong> (a free‑tier account works fine).  </li>
-<li>Click <strong>➕ Create a resource</strong> → search <strong>“Azure Bot”</strong> → <strong>Create</strong>.  </li>
-<li>Fill in the form and Click <strong>Review + Create</strong> → <strong>Create</strong>.</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Example / Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bot handle</strong></td>
-<td><code>Airflow‑Copilot</code></td>
-</tr>
-<tr>
-<td><strong>Subscription</strong></td>
-<td>Your active subscription</td>
-</tr>
-<tr>
-<td><strong>Resource group</strong></td>
-<td>Create or reuse one</td>
-</tr>
-<tr>
-<td><strong>Data residency</strong></td>
-<td><em>Global</em> (or preferred region)</td>
-</tr>
-<tr>
-<td><strong>Pricing tier</strong></td>
-<td><code>F0   Free</code> (dev) or <code>S1</code> (prod)</td>
-</tr>
-<tr>
-<td><strong>Messaging endpoint</strong></td>
-<td><em>Leave blank for now</em></td>
-</tr>
-</tbody>
-</table>
-<p><img alt="Azure Bot" src="../../assets/Airflow_Bot_Config.png" /></p>
-<hr />
-<h3 id="2-grab-app-credentials">2. Grab App Credentials</h3>
-<ol>
-<li>Open the newly‑created <strong>Bot Resource</strong>.  </li>
-<li>Go to <strong>Settings → Configuration</strong>.  </li>
-<li>Copy the values below <em>(store them securely!)</em>:</li>
-</ol>
-<div class="highlight"><pre><span></span><code>MICROSOFT_APP_ID= 1da6ff2a-xxx-xxxx-xxxx-xxxxxxxxxxxx
-MICROSOFT_APP_PASSWORD= Csc**************************
-</code></pre></div>
-<p><img alt="Azure Bot Secret" src="../../assets/Azure-Bot-Config-2.png" /></p>
+<h1 id="airflow-copilot-in-action-common-chat-examples">Airflow Copilot in Action: Common Chat Examples</h1>
+<p>This document showcases some practical examples of how you can interact with <strong>Airflow Copilot</strong> using natural language. From basic queries to advanced DAG operations, the assistant simplifies your Airflow operations through Microsoft Teams.</p>
 <blockquote>
-<p><strong>Note:</strong> the client secret is shown <strong>only once</strong> after creation. Keep it safe.</p>
+<p>💬 All conversations shown here are examples — you can talk to Copilot naturally, and it will try to interpret your intent intelligently.</p>
 </blockquote>
-<p><img alt="Azure Bot Secret" src="../../assets/Azure-Bot-Config-3.png" /></p>
 <hr />
-<h3 id="3-enable-the-teams-channel">3. Enable the Teams Channel</h3>
-<ol>
-<li>In the left panel, choose <strong>Channels</strong>.  </li>
-<li>Click <strong>Microsoft Teams</strong> → <strong>Save</strong>.  </li>
-</ol>
-<p>Your bot is now reachable from Microsoft Teams 🎉</p>
-<p><img alt="Azure Bot Secret" src="../../assets/Azure-Bot-Config-4.png" /></p>
+<h2 id="1-basic-configuration-setup">1. 🔧 Basic Configuration &amp; Setup</h2>
+<p>You can start the conversation with a simple greeting like <code>Hello</code>. If everything is configured correctly, the assistant will greet you back using your name. If not, this may indicate a setup issue.</p>
+<p>If your environment uses <strong>per-user authentication</strong>, you’ll be prompted to update your Airflow credentials. This is only required <strong>once</strong> (or again if your password changes). Use a command like:</p>
+<p><img alt="Basic Configuration &amp; Setup" src="../assets/example/1.%20Introduction.png" /></p>
 <hr />
-<h3 id="4-configure-the-messaging-endpoint">4. Configure the Messaging Endpoint</h3>
-<table>
-<thead>
-<tr>
-<th>Environment</th>
-<th>What to do</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Development / Local</strong></td>
-<td>Nothing – the Docker Compose stack auto‑patches the endpoint with the current <strong>ngrok</strong> URL.</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>Production</strong></td>
-<td>Paste your stable HTTPS URL (e.g. <code>https://&lt;copilot.your‑domain.com&gt;/api/messages</code>) into <strong>Settings → Configuration → Messaging endpoint</strong> and click <strong>Save</strong>.</td>
-<td>Do this once after deployment or DNS cut‑over.</td>
-</tr>
-</tbody>
-</table>
-<p><img alt="Azure Bot Message Endpoint" src="../../assets/Message-Endpoint-Bot.png" /></p>
+<h2 id="2-basic-dag-interaction">2. 📊 Basic DAG Interaction</h2>
+<p>You can ask Copilot to <strong>retrieve information</strong> or <strong>take actions</strong> on your DAGs. It also supports <strong>fuzzy matching</strong>, so even if the DAG name isn’t exact, it will try to infer the closest match.</p>
+<p>Example flow: <code>Give me list of dags</code>. After reviewing the list, you can act on a specific DAG: <code>enable the dag conditional_dataset_and_time_based_timetable</code></p>
+<div class="scroll-container">
+<img src="/airflow-copilot/assets/example/2.List_Of_Dags.png" alt="Airflow Copilot Journey">
+</div>
+
+<blockquote>
+<p>⚠️ Frequent listing of DAGs consumes your LLM quota. Prefer calling DAGs by name directly once you're familiar.</p>
+</blockquote>
 <hr />
-<h2 id="optional-required-only-for-local-deployment">🔐 Optional: Required Only for Local Deployment</h2>
-<p>When deploying Airflow Copilot locally, the bot’s <strong>Messaging Endpoint (NGROK URL)</strong> get update during deployment script. This update requires authentication to Azure using a <strong>Service Principal (SPN)</strong>.</p>
-<p>If you already have a separate service principal with <strong>Contributor</strong> access to the Azure Bot resource group, you can skip this step and use same in <em>AZURE_CLIENT_ID</em> and <em>AZURE_CLIENT_SECRET</em> in <code>docker-compose.yml</code> file. Otherwise, follow the instructions below to create one for the existing Azure Bot.</p>
+<h2 id="3-update-dag-schedule-or-tags">3. ⏱️ Update DAG Schedule or Tags</h2>
+<p>Airflow’s REST API doesn’t allow modifying DAG schedules, tags, or owners if defined in code. But here’s a workaround:</p>
+<p>You can <strong>store the schedule as a Variable</strong> and ask Copilot to update that variable. For example:</p>
+<p>Ensure your DAG code reads the schedule from the variable. This pattern enables dynamic scheduling via chat.</p>
+<h3 id="how-to-define-the-dynamic-schedule">How to define the dynamic Schedule?</h3>
+<p>You simply need to create an Airflow variable first and pass the value (Cron or Airflow-supported Schedule), then use the same in code. Below is a sample code snippet.</p>
+<details>
+<summary><code>dynamic_schedule_dag.py</code></summary>
+
+<div class="highlight"><span class="filename">dynamic_schedule_dag.py</span><pre><span></span><code><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">from airflow import DAG</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">from airflow.operators.python import PythonOperator</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">from airflow.models import Variable</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">from datetime import datetime</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">import logging</span>
+
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">default_args = {</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&quot;owner&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;airflow&quot;</span><span class="err">,</span>
+<span class="w">      </span><span class="s">&quot;retries&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1,</span>
+<span class="w">  </span><span class="err">}</span>
+
+<span class="w">  </span><span class="nt">def download_file()</span><span class="p">:</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">logging.info(&quot;📥 Simulating file download...&quot;)</span>
+
+<span class="w">  </span><span class="nt">def process_file()</span><span class="p">:</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">logging.info(&quot;🧪 Processing file</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parsing, cleaning...&quot;)</span>
+
+<span class="w">  </span><span class="nt">def load_to_db()</span><span class="p">:</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">logging.info(&quot;📦 File loaded to database successfully.&quot;)</span>
+
+<span class="w">  </span><span class="c1"># ✅ Fetch schedule interval from Airflow Variable (defaulting to None if not set)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">schedule = Variable.get(&quot;dynamic_schedule_dag&quot;, default_var=None)</span>
+
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">with DAG(</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">dag_id=&quot;dynamic_schedule_dag&quot;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">description=&quot;Simulates downloading and loading file to DB&quot;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">start_date=datetime(2024, 1, 1),</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">schedule_interval=schedule,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">default_args=default_args,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">catchup=False,</span>
+<span class="w">  </span><span class="nt">) as dag</span><span class="p">:</span>
+
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">t1 = PythonOperator(task_id=&quot;download_file&quot;, python_callable=download_file)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">t2 = PythonOperator(task_id=&quot;process_file&quot;, python_callable=process_file)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">t3 = PythonOperator(task_id=&quot;load_to_db&quot;, python_callable=load_to_db)</span>
+
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">t1 &gt;&gt; t2 &gt;&gt; t3</span>
+</code></pre></div>
+</details>
+
+<p>Initially, the schedule is <code>30 1 * * *</code></p>
+<p><img alt="Before Schedule Change" src="../assets/example/3.Before_Schedule_Change.png" /></p>
+<p>Let's ask Copilot to change the schedule:</p>
+<p><img alt="Ask to Schedule Change" src="../assets/example/3.Chat.png" /></p>
+<p>Let's validate the same on the Airflow UI</p>
+<blockquote>
+<p>Note: Airflow may take some time to reflect the schedule change. This depends on your scheduler's DAG refresh interval.</p>
+</blockquote>
+<p><img alt="After Schedule Change" src="../assets/example/3.After_Schedule_Change.png" /></p>
 <hr />
-<h3 id="steps-to-create-a-service-principal">🧭 Steps to Create a Service Principal</h3>
-<ol>
-<li>Navigate to <strong>Microsoft Entra ID</strong> in the Azure portal.</li>
-<li>
-<p>In the left panel, select <strong>App registrations</strong>, then switch to the <strong>All applications</strong> tab.</p>
-<p><img alt="App Registrations 1" src="../../assets/Service-Principal-1.png" /></p>
-</li>
-<li>
-<p>Select your Azure Bot app from the list, then click on <strong>Create service principal</strong>.</p>
-<p><img alt="App Registrations 2" src="../../assets/Service-Principal-2.png" /></p>
-</li>
-<li>
-<p>After creating the SPN, go to <strong>Subscriptions</strong> and open the subscription associated with your Azure Bot.</p>
-</li>
-<li>Click on <strong>Access control (IAM)</strong> → <strong>➕ Add</strong> → <strong>Add role assignment</strong>.</li>
-<li>Choose <strong>Contributor</strong> from the list of roles under <strong>Privileged administrator roles</strong>.</li>
-<li>In the <strong>Members</strong> step, choose <strong>User, group, or service principal</strong>, then click <strong>➕ Select members</strong>.</li>
-<li>Search for and select your Bot’s app registration name.</li>
-<li>Click <strong>Review + assign</strong> to complete the setup.</li>
-</ol>
+<h2 id="4-get-task-failure-logs-resolution">4. 🐞 Get Task Failure Logs &amp; Resolution</h2>
+<p>Want to debug a failed task?</p>
+<p>If you don't have the run ID handy, ask:</p>
+<p>After receiving logs, you can also request resolution suggestions:</p>
+<div class="scroll-container">
+<img src="/airflow-copilot/assets/example/4.Get_Task_Logs.png" alt="Airflow Copilot Journey">
+</div>
+
+<blockquote>
+<p>Copilot can <strong>analyze logs</strong>, but <strong>won’t modify code</strong>.</p>
+</blockquote>
 <hr />
-<p>Once completed, you can use <code>MICROSOFT_APP_ID</code> as  <code>AZURE_CLIENT_ID</code> and <code>MICROSOFT_APP_PASSWORD</code> as  <code>AZURE_CLIENT_SECRET</code>, and <code>AZURE_TENANT_ID</code> in your deployment environment.</p>
-<h2 id="recap">✅ Recap</h2>
-<table>
-<thead>
-<tr>
-<th>Azure output</th>
-<th>Copilot variable</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>App ID</strong></td>
-<td><code>MICROSOFT_APP_ID</code></td>
-<td>Bot identity verification</td>
-</tr>
-<tr>
-<td><strong>Client Secret</strong></td>
-<td><code>MICROSOFT_APP_PASSWORD</code></td>
-<td>JWT signing for incoming messages</td>
-</tr>
-<tr>
-<td><strong>Teams channel</strong> ✔️</td>
-<td>—</td>
-<td>Enables chat from Teams to Copilot</td>
-</tr>
-</tbody>
-</table>
+<h2 id="5-view-dag-source-code">5. 📄 View DAG Source Code</h2>
+<p>Need to verify the DAG's implementation?</p>
+<p>Just ask:</p>
+<div class="highlight"><pre><span></span><code>provide me source code of the DAG &lt;your dag id&gt;
+</code></pre></div>
+<p>You’ll receive the currently deployed code. <strong>However, editing this code via chat is not yet supported — that’s planned for future updates.</strong></p>
+<div class="scroll-container">
+<img src="/airflow-copilot/assets/example/5.Source_Code.png" alt="Airflow Copilot Journey">
+</div>
+
 <hr />
-<h2 id="security-best-practices">🔐 Security Best Practices</h2>
+<h2 id="6-view-the-import-failure-dag">6. 🧱 View the Import Failure DAG</h2>
+<p>If you have uploaded a DAG and it failed during compilation, you can confirm that using Airflow Copilot.<br />
+Simply ask the Copilot to provide any <strong>import failure DAGs</strong>, and it will return the details, including the <strong>error logs</strong> and possible reasons for failure.</p>
+<p><img alt="View the import failure DAG" src="../assets/example/6.Import%20Error%20Dag.png" /></p>
+<hr />
+<h2 id="7-create-user-with-custom-roles">7. 👤 Create User with Custom Roles</h2>
+<p>Creating users with fine-grained DAG permissions is usually complex. Copilot simplifies this:</p>
+<p>You can also assign roles or generate passwords. If no password is provided, Copilot will attempt to create one — but due to security, the password returned may or may not always be shown.</p>
+<blockquote>
+<p>Always try to <strong>specify the password</strong> explicitly.</p>
+</blockquote>
+<p><img alt="Create_User_Role" src="../assets/example/7.Create_User_and_Role.png" /></p>
+<p>Let's validate on the Airflow UI: It has done the job...</p>
+<p><img alt="Airflow_UI" src="../assets/example/7.1Airflow-Login.png" /></p>
+<hr />
+<h2 id="8-chat-anywhere">8. 💬 Chat Anywhere</h2>
+<p>Airflow Copilot is designed so that you can ask it from any Teams or chat conversation. You just have to mentioned it as <strong><code>@Airflow-Copilot</code></strong> in chat start.</p>
+<p>For example, In below we have mentioned Airflow Copilot directly in a conversation with <strong>John</strong> instead of opening a separate <strong>Airflow-Copilot</strong> chat.</p>
+<p><img alt="Inline Chat" src="../assets/example/8.InlineChat.png" /></p>
+<hr />
+<h2 id="9-other-supported-operations">9. 🧰 Other Supported Operations</h2>
+<p>Airflow Copilot can help you with many other actions, including:</p>
 <ul>
-<li><strong>Never</strong> hard‑code secrets – inject them via environment variables, Docker Secrets, or a secrets manager.  </li>
-<li>Rotate the <strong>Client Secret</strong> regularly (e.g. every 90 days).  </li>
-<li>Apply least‑privilege RBAC to the bot’s resource group.</li>
+<li>Checking connections</li>
+<li>Managing pools</li>
+<li>Viewing XCom values</li>
+<li>Triggering backfills</li>
+<li>And more...</li>
 </ul>
+<p>Refer to the <a href="../architecture/supported_apis"><strong>Capabilities Section</strong></a> for the full list.</p>
 <hr />
-<h2 id="next-steps">🔗 Next Steps</h2>
-<ul>
-<li><strong><a href="../upload_app">Upload Airflow Copilot App to Microsoft Teams</a></strong>  : Sideload or publish Copilot in your organisation.</li>
-<li><strong><a href="../agent-behavior">Agent Behavior Notes &amp; Known Limitations</a></strong>: Some know Airflow Copilot behaviour and Limitations.</li>
-</ul>
+<blockquote>
+<p>🌀 <strong>Tip:</strong> Regularly use <strong>Refresh History</strong> to clear long conversation chains and keep your session lightweight and responsive.</p>
+</blockquote>
 
 
 
@@ -1391,7 +1307,7 @@ MICROSOFT_APP_PASSWORD= Csc**************************
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../before_we_start/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Before you begin">
+          <a href="../configuration/environment_variables/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Environment Variables">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1401,20 +1317,20 @@ MICROSOFT_APP_PASSWORD= Csc**************************
                 Previous
               </span>
               <div class="md-ellipsis">
-                Before you begin
+                Environment Variables
               </div>
             </div>
           </a>
         
         
           
-          <a href="../upload_app/" class="md-footer__link md-footer__link--next" aria-label="Next: Install App in Teams">
+          <a href="../deployment/deployment/" class="md-footer__link md-footer__link--next" aria-label="Next: Docker (Local &amp; Prod)">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Install App in Teams
+                Docker (Local & Prod)
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1480,10 +1396,10 @@ MICROSOFT_APP_PASSWORD= Csc**************************
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.top", "navigation.footer", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.top", "navigation.footer", "search.highlight", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
     
   </body>

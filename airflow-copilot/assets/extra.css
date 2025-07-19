@@ -119,3 +119,61 @@
   border-left: 4px solid #017CEE;
   color: #e2e8f0;
 }
+
+/* Custom CSS for scrollable image containers */
+.scroll-container {
+  max-height: 500px; /* Adjust this value based on your preference */
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 20px 0;
+  background-color: #fafafa;
+}
+
+.scroll-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Dark mode support */
+[data-md-color-scheme="slate"] .scroll-container {
+  border-color: #404040;
+  background-color: #2d2d2d;
+}
+
+/* Optional: Add scrollbar styling for webkit browsers */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark mode scrollbar */
+[data-md-color-scheme="slate"] .scroll-container::-webkit-scrollbar-track {
+  background: #404040;
+}
+
+[data-md-color-scheme="slate"] .scroll-container::-webkit-scrollbar-thumb {
+  background: #666666;
+}
+
+[data-md-color-scheme="slate"] .scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}

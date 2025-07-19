@@ -761,135 +761,18 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    📘 User Guide
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            📘 User Guide
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
-      <a href="../../howto/chat.md" class="md-nav__link">
+      <a href="../../example/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Chat Basics
+    📘 Common Examples
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/task_management.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    DAG / Task Ops
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/notifications.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Alerts & Notify
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/user_management.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    User Mgmt
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1112,8 +995,15 @@
   The Copilot supports <strong>creating new users and assigning roles</strong>. However, if a password is <strong>not provided</strong>, it generates one automatically. Depending on model behavior, the password <strong>may or may not be returned</strong> reliably in the response.</p>
 </li>
 <li>
-<p><strong>First-Time Slowness &amp; History Refresh:</strong>
-  The assistant might respond slowly during initial use, especially without context. It is highly recommended to <strong>refresh history</strong> when starting a new session. Refer to <a href="../../architecture/refresh_history/"><strong>Refresh History</strong></a> for details.</p>
+<p><strong>First-Time Slowness &amp; History Refresh:</strong><br />
+  The assistant might respond slowly in some cases, especially when multiple backend API calls are involved.<br />
+  It is highly recommended to give tasks <strong>one by one</strong> instead of combining them.  </p>
+<p><strong>For example:</strong> Instead of asking <em>"Create a user named as Matt and assign a role with only permission to X DAG"</em> in a single prompt, break it down into steps:</p>
+<ol>
+<li>Ask it to <strong>create the user Matt with email .... and password ....</strong>  </li>
+<li>Then ask it to <strong>create a custom role</strong>  </li>
+<li>Finally, ask it to <strong>assign that role to the user</strong></li>
+</ol>
 </li>
 <li>
 <p><strong>Trust but Verify:</strong>

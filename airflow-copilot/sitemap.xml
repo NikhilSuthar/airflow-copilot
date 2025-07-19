@@ -2,70 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/contributing/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
+    </url>
+    <url>
+         <loc>https://thedatacarpenter.com/airflow-copilot/example/</loc>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/roadmap/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/architecture/agent/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/architecture/airflow_auth_type/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/architecture/architecture/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/architecture/refresh_history/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/architecture/summarization/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/architecture/supported_apis/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/configuration/environment_variables/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/deployment/build/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/deployment/deployment/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/agent-behavior/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/azure_bot/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/before_we_start/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
     <url>
          <loc>https://thedatacarpenter.com/airflow-copilot/quickstart/upload_app/</loc>
-         <lastmod>2025-07-14</lastmod>
+         <lastmod>2025-07-19</lastmod>
     </url>
 </urlset>

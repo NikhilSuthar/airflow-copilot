@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://thedatacarpenter.com/airflow-copilot/deployment/deployment/">
       
       
-        <link rel="prev" href="../../configuration/environment_variables/">
+        <link rel="prev" href="../../example/">
       
       
         <link rel="next" href="../build/">
@@ -701,135 +701,18 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    📘 User Guide
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            📘 User Guide
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
-      <a href="../../howto/chat.md" class="md-nav__link">
+      <a href="../../example/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Chat Basics
+    📘 Common Examples
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/task_management.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    DAG / Task Ops
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/notifications.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Alerts & Notify
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/user_management.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    User Mgmt
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1173,7 +1056,13 @@
 <p>All deployment types rely on a single <code>.env</code> file. </p>
 <details>
 <summary><code>.env</code></summary>
-<div class="highlight"><pre><span></span><code># ───────── LLM (pick ONE provider) ─────────
+<div class="highlight"><pre><span></span><code># ───────── Airflow Copilot Environment Variables ─────────
+
+# LOG LEVEL: Set the logging level for Airflow Copilot, # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+LOG_LEVEL=INFO 
+
+
+# ───────── LLM (pick ONE provider) ─────────
 LLM_MODEL_PROVIDER_NAME=OpenAI
 LLM_MODEL_NAME=gpt-4o
 OPENAI_API_KEY=your-openai-api-key
@@ -1291,7 +1180,7 @@ Reference <a href="../../configuration/environment_variables/"><strong>Environme
 
 <span class="c1"># ──────────────── Common env-file anchor ────────────────</span>
 <span class="nt">x-env</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;envfile</span>
-<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w">  </span><span class="c1"># Loaded from .env or .env.local</span>
+<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
 
 <span class="nt">networks</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">airflow</span><span class="p">:</span>
@@ -1304,13 +1193,16 @@ Reference <a href="../../configuration/environment_variables/"><strong>Environme
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
+<span class="w">    </span><span class="c1"># build:</span>
+<span class="w">    </span><span class="c1">#   context: .</span>
+<span class="w">    </span><span class="c1">#   dockerfile: Dockerfile</span>
 <span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">copilot</span>
 <span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3978:3978&quot;</span>
 <span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;curl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-f&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;http://localhost:3978/health&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;curl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-f&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;http://&lt;your</span><span class="nv"> </span><span class="s">url&gt;:3978/health&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
 <span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 <span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
@@ -1594,7 +1486,7 @@ See [**Azure Bot Setup**](../quickstart/azure_bot.md) for more details.
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../configuration/environment_variables/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Environment Variables">
+          <a href="../../example/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 📘 Common Examples">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1604,7 +1496,7 @@ See [**Azure Bot Setup**](../quickstart/azure_bot.md) for more details.
                 Previous
               </span>
               <div class="md-ellipsis">
-                Environment Variables
+                📘 Common Examples
               </div>
             </div>
           </a>

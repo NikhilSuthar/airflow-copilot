@@ -821,135 +821,18 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    📘 User Guide
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            📘 User Guide
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
-      <a href="../../howto/chat.md" class="md-nav__link">
+      <a href="../../example/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Chat Basics
+    📘 Common Examples
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/task_management.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    DAG / Task Ops
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/notifications.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Alerts & Notify
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../howto/user_management.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    User Mgmt
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1268,7 +1151,13 @@
 <p>For detailed descriptions of each variable, refer to the <a href="../../configuration/environment_variables/"><strong>Environment Variables</strong></a> section.</p>
 <p><details>
 <summary><code>.env</code></summary>
-<div class="highlight"><pre><span></span><code># ───────── LLM (pick ONE provider) ─────────
+<div class="highlight"><pre><span></span><code># ───────── Airflow Copilot Environment Variables ─────────
+
+# LOG LEVEL: Set the logging level for Airflow Copilot, # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+LOG_LEVEL=INFO 
+
+
+# ───────── LLM (pick ONE provider) ─────────
 LLM_MODEL_PROVIDER_NAME=OpenAI
 LLM_MODEL_NAME=gpt-4o
 OPENAI_API_KEY=your-openai-api-key
@@ -1336,7 +1225,7 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 
 <span class="c1"># ──────────────── Common env-file anchor ────────────────</span>
 <span class="nt">x-env</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;envfile</span>
-<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w">  </span><span class="c1"># Loaded from .env or .env.local</span>
+<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
 
 <span class="nt">networks</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">airflow</span><span class="p">:</span>
@@ -1349,19 +1238,22 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">copilot</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
+<span class="w">    </span><span class="c1"># build:</span>
+<span class="w">    </span><span class="c1">#   context: .</span>
+<span class="w">    </span><span class="c1">#   dockerfile: Dockerfile</span>
 <span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">copilot</span>
 <span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3978:3978&quot;</span>
 <span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;curl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-f&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;http://localhost:3978/health&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
 <span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 <span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">USE_DOTENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 
-<span class="w">      </span><span class="c1"># LLM / model</span>
+<span class="w">      </span><span class="c1"># LLM / model </span>
 <span class="w">      </span><span class="nt">LLM_MODEL_PROVIDER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_PROVIDER_NAME}</span>
 <span class="w">      </span><span class="nt">LLM_MODEL_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LLM_MODEL_NAME}</span>
 
@@ -1401,7 +1293,9 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">ngrok</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ngrok/ngrok:latest</span>
-<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">copilot</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">copilot</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
 <span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http copilot:3978 --log stdout</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">NGROK_AUTHTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${NGROK_AUTHTOKEN}</span>
@@ -1414,6 +1308,9 @@ NGROK_AUTHTOKEN=your-ngrok-authtoken # Optional, if you want to use ngrok for lo
 <span class="w">  </span><span class="c1">###########################################################################</span>
 <span class="w">  </span><span class="nt">bot-updater</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thedatacarpenter/airflow-copilot:latest</span>
+<span class="w">    </span><span class="c1"># build:</span>
+<span class="w">    </span><span class="c1">#   context: .</span>
+<span class="w">    </span><span class="c1">#   dockerfile: Dockerfile</span>
 <span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*envfile</span>
 <span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/usr/local/bin/update_bot.sh&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ngrok</span><span class="p p-Indicator">]</span>
