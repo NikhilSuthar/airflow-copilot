@@ -59,7 +59,7 @@ It enables teams to:
 
 ## 🧪 Try It Out
 
-> 🛠️ Follow the [**Quick Start →**](quickstart/getting_started.md)
+> 🛠️ Follow the [**Quick Start**](quickstart/getting_started.md)
 
 ---
 
