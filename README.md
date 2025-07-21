@@ -46,7 +46,11 @@ docker compose -f docker-compose.local.yml up -d
 
 > 🚀 See **Airflow Copilot in action** inside Microsoft Teams — from updating credentials to triggering DAGs and viewing logs.
 
-📺 **Watch Now** → [Airflow Copilot Walkthrough (YouTube)](https://youtu.be/dKz1hLJnMUA)
+
+<h3>📺 Watch the Demo</h3>
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/dKz1hLJnMUA" frameborder="0" allowfullscreen></iframe>
+
 
 🧾 Or explore the same examples → [**Chat Examples**](https://airflow-copilot.thedatacarpenter.com/examples/chat_examples)
 
