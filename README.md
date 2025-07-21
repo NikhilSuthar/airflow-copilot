@@ -49,7 +49,7 @@ docker compose -f docker-compose.local.yml up -d
 
 <h3>📺 Watch the Demo</h3>
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/dKz1hLJnMUA" frameborder="0" allowfullscreen></iframe>
+[![Watch the demo](https://img.youtube.com/vi/dKz1hLJnMUA/hqdefault.jpg)](https://youtu.be/dKz1hLJnMUA)
 
 
 🧾 Or explore the same examples → [**Chat Examples**](https://airflow-copilot.thedatacarpenter.com/examples/chat_examples)
