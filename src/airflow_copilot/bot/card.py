@@ -54,7 +54,7 @@ delete_card = {
     },
     {
       "type": "TextBlock",
-      "text": "Help keep the system clean and green 🌿 — ready to refresh backend chat?",
+      "text": "Help to keep the system clean and green 🌿 — ready to refresh backend chat?",
       "weight": "Bolder",
       "spacing": "Medium",
       "wrap": True

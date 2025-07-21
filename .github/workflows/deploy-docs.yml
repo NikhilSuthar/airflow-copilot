@@ -30,4 +30,4 @@ jobs:
           publish_dir: ./site
           enable_jekyll: false
           publish_branch: gh-pages
-          cname: thedatacarpenter.com
+          cname: airflow-copilot.thedatacarpenter.com
