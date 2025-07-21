@@ -1,7 +1,5 @@
 site_name: ''
-site_url: https://thedatacarpenter.com/airflow-copilot/
-
-site_dir: site/airflow-copilot
+site_url: https://airflow-copilot.thedatacarpenter.com
 site_author: Nikhil Suthar
 use_directory_urls: true
 site_description: >
