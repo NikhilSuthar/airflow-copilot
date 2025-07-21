@@ -42,20 +42,30 @@ It enables teams to:
 - 🧩 **Persistent memory** stored via LangGraph + PostgreSQL
 - 🌍 **Unified deployment**: Docker Compose → Kubernetes → ECS
 
+
+---
+## 🎬 Demo
+
+> 🚀 See **Airflow Copilot in action** inside Microsoft Teams — from updating credentials to triggering DAGs and viewing logs.
+
+📺 **Watch Now** → [Airflow Copilot Walkthrough (YouTube)](https://youtu.be/dKz1hLJnMUA)
+
+🧾 Or explore the same examples → [**Chat Examples**](example.md)
+
 ---
 
 ## 🧪 Try It Out
 
-> 🛠️ Follow the Quick Start → chat with your DAGs in Microsoft Teams.  
+> 🛠️ Follow the [**Quick Start →**](quickstart/getting_started.md)
 
 ---
 
-## 🤝 Let’s Build Together
+## 🚀  Roadmap
 
 Airflow Copilot is fully open source.  
 We welcome your ideas, tools, feedback, and pull requests.
 
-👉 [View the Roadmap](roadmap.md) · [Contribute](contributing.md)
+👉 [View the Roadmap](roadmap.md) 
 
 ---
 
