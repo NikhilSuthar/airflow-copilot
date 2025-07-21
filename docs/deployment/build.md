@@ -1,6 +1,6 @@
 # 🛠️ Build & Publish Docker Image for Airflow Copilot
 
-This guide explains how to build  [Airflow Copilot](https://thedatacarpenter.com/airflow-copilot), locally.
+This guide explains how to build  [Airflow Copilot](https://airflow-copilot.thedatacarpenter.com), locally.
 
 ---
 

@@ -24,7 +24,7 @@
 
 ## 🚀 Quick Start (local)
 
-> Full guide → **[`Getting Started`](https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started)**
+> Full guide → **[`Getting Started`](https://airflow-copilot.thedatacarpenter.com/quickstart/getting_started)**
 
 ```bash
 # Clone & copy env template
@@ -42,12 +42,20 @@ docker compose -f docker-compose.local.yml up -d
 4. Open **Microsoft Teams** → chat with **Airflow Copilot** 🚀
 
 ---
+## 🎬 Demo
 
+> 🚀 See **Airflow Copilot in action** inside Microsoft Teams — from updating credentials to triggering DAGs and viewing logs.
+
+📺 **Watch Now** → [Airflow Copilot Walkthrough (YouTube)](https://youtu.be/dKz1hLJnMUA)
+
+🧾 Or explore the same examples → [**Chat Examples**](https://airflow-copilot.thedatacarpenter.com/examples/chat_examples)
+
+---
 ## 🧠 Architecture
 
 ![Architecture](docs/assets/quick-start-arch.svg)
 
-Read the deep dive → **[`Architecture`](https://thedatacarpenter.com/airflow-copilot/architecture/architecture)**
+Read the deep dive → **[`Architecture`](https://airflow-copilot.thedatacarpenter.com/architecture/architecture)**
 
 ---
 
@@ -55,9 +63,9 @@ Read the deep dive → **[`Architecture`](https://thedatacarpenter.com/airflow-c
 
 | Mode | Guide | Best For |
 |------|-------|----------|
-| Docker Compose (local) | [`Local Deployment`](https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started) | Dev / PoC |
-| Docker Compose (prod)  | [`Docker based Deployment`](https://thedatacarpenter.com/airflow-copilot/deployment/deployment) | Small teams |
-| Kubernetes             | [`Kubernetes based Deployment`](https://thedatacarpenter.com/airflow-copilot/deployment/deployment) | Cloud & scale |
+| Docker Compose (local) | [`Local Deployment`](https://airflow-copilot.thedatacarpenter.com/quickstart/getting_started) | Dev / PoC |
+| Docker Compose (prod)  | [`Docker based Deployment`](https://airflow-copilot.thedatacarpenter.com/deployment/deployment) | Small teams |
+| Kubernetes             | [`Kubernetes based Deployment`](https://airflow-copilot.thedatacarpenter.com/deployment/deployment) | Cloud & scale |
 
 Each mode uses the **same `.env`**. Bring your own DB & TLS.
 
@@ -66,7 +74,7 @@ Each mode uses the **same `.env`**. Bring your own DB & TLS.
 ## ⚙️ Configuration
 
 All runtime settings are environment variables.  
-See the reference → **[`Environment Variables`](https://thedatacarpenter.com/airflow-copilot/configuration/environment_variables)**
+See the reference → **[`Environment Variables`](https://airflow-copilot.thedatacarpenter.com/configuration/environment_variables)**
 
 
 ---

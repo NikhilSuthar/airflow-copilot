@@ -6,8 +6,8 @@ This guide explains how to run the **Airflow Copilot** using Docker.
 The **Airflow Copilot** is a GenAI-powered assistant that interacts with Apache Airflow environments. You can run it easily using Docker, either locally or in the cloud.
 
 For in-depth configuration and deployment instructions, refer to:
-- 📘 [Getting Started Guide](https://thedatacarpenter.com/airflow-copilot/quickstart/getting_started)
-- 🛠️ [Deployment Guide](https://thedatacarpenter.com/airflow-copilot/deployment/deployment)
+- 📘 [Getting Started Guide](https://airflow-copilot.thedatacarpenter.com/quickstart/getting_started)
+- 🛠️ [Deployment Guide](https://airflow-copilot.thedatacarpenter.com/deployment/deployment)
 
 ---
 
@@ -112,12 +112,12 @@ docker run -p 3978:3978   -e LLM_MODEL_PROVIDER_NAME=OpenAI   -e LLM_MODEL_NAME=
 
 ## 📍 Hosting the Docs
 
-👉 [https://thedatacarpenter.com/airflow-copilot](https://thedatacarpenter.com/airflow-copilot/)
+👉 [https://airflow-copilot.thedatacarpenter.com](https://airflow-copilot.thedatacarpenter.com/)
 
 ---
 
 ## ✅ Next Steps
 
-- [Explore Deployment Options](https://thedatacarpenter.com/airflow-copilot/deployment/deployment)
-- [Understand Auth Config](https://thedatacarpenter.com/airflow-copilot/architecture/airflow_auth_type)
-- [Add Your Own Tools](https://thedatacarpenter.com/airflow-copilot/architecture/supported_apis)
+- [Explore Deployment Options](https://airflow-copilot.thedatacarpenter.com/deployment/deployment)
+- [Understand Auth Config](https://airflow-copilot.thedatacarpenter.com/architecture/airflow_auth_type)
+- [Add Your Own Tools](https://airflow-copilot.thedatacarpenter.com/architecture/supported_apis)
