@@ -3,6 +3,9 @@ name: Deploy Docs
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write  # ✅ Required to push tags and branches
+
 jobs:
   deploy-docs:
     runs-on: ubuntu-latest
